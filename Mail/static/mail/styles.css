@@ -1,0 +1,79 @@
+textarea {
+    min-height: 200px;
+}
+#email{
+    border :  thin solid #aeb7cc;
+    border-radius: 5px;
+    /*border-collapse : collapse;*/
+    /*box-shadow: 10px 10px;*/
+    cursor: pointer;
+   /* display:inline;*/
+    /*padding-top:100px;*/
+    padding: 10px 0 10px 0 ;
+    margin-bottom: -25px;
+    position:relative;
+              
+}
+#email:hover {
+  /*  border :  solid #363636 ;
+    width: 101%;
+    position: relative;*/
+    font-size: 109%;
+  }
+/*
+.inbox_class div, .archived_class div{
+    padding-bottom: 10px;
+}
+
+
+.inbox_class div p, .archived_class div p{
+    margin-bottom: 7px;
+}*/
+#first_column{
+    width: 15%;
+    margin-left: 10px;
+    /*margin-left: 5px; */
+    display: inline-block;
+}
+#second_column{
+    width: 40%;
+    margin-left: 70px;  
+    padding-left: 50px;
+    display: inline-block;
+}
+#third_column{ 
+    width: 25%;
+    margin-left: 55px;
+    padding-left: 55px;
+    display: inline-block;
+}
+
+.email_view{
+    display: inline-block;
+    margin-right:90px;
+    width: 65%;
+}
+.email_view2{
+    float:right;
+    /*display: inline-block;*/
+    margin-left:5%;
+    padding-top:-20%;
+}
+th{
+    text-align:right;
+}
+td{
+    padding-left:10px;
+}
+
+.buttons{
+    margin-top:8%;
+}
+#reply{
+    margin-left:15%;
+    margin-right:15%;
+}
+
+.email_view3{
+    white-space: pre-wrap;
+}
