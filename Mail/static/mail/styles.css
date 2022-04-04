@@ -77,3 +77,22 @@ td{
 .email_view3{
     white-space: pre-wrap;
 }
+
+
+
+/* ***********************  New Style  **************************** */
+
+/**************************CustomProperties**********************/
+:root{
+  --first-color: #001A83;
+  --first-alpha-color: rgba(0, 26, 131, 0.75);
+
+}
+.header{
+  background-color: var(--first-color);
+}
+
+
+
+
+
