@@ -86,11 +86,168 @@ td{
 :root{
   --first-color: #001A83;
   --first-alpha-color: rgba(0, 26, 131, 0.75);
+  --white-color: #FFFFFF;
+  --black-color: #000000;
+  --white-alpha-color: rgba(255, 255, 255, 0.5);
+  --black-alpha-color: rgba(0, 0, 0, 0.5);
+  --gray-color: #ccc;
+  --gray-dark-color: #555;
+  --gray-light-color: #F3F3F3;
+  --link-color: #509ee3;
+  --title-color: #333;
+  --text-color: #222;
+  --font: "Raleway", sans-serif;
+
+  --max-width: 1200px;
+  --header-height: 4rem;
+
 
 }
-.header{
-  background-color: var(--first-color);
+
+/*****************************Reset*****************************/
+html{
+  box-sizing: border-box;
+  font-family: var(--font);
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
+
+*,
+*::after,
+*::before{
+  box-sizing: inherit;
+}
+
+body{
+  margin: 0;
+  overflow-x: hidden;
+  color: var(--text-color);
+}
+
+a{
+  color: var(--link-color);
+  text-decoration: none;
+  transition: all 0.5s ease-out;
+}
+
+a:hover{
+  opacity: 0.75;
+}
+
+h1{
+  margin: 0;
+  font-size: 2.9rem;
+}
+
+h2{
+  margin: 0;
+  font-size: 2rem;
+}
+
+h3{
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+h4{
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+h5{
+  margin: 0;
+  font-size: 1rem;
+}
+
+h6{
+  margin: 0;
+  font-size: 0.85rem;
+}
+
+img{
+  max-width: 100%;
+  height: auto;
+}
+
+p{
+  line-height: 1.6;
+  font-size: 1.3rem;
+}
+
+
+
+.header{
+  position: sticky;
+  padding: 13px 1rem;
+  width:100%;
+  height: var(--header-height);
+  background-color: var(--first-color);
+  color: var(--white-color);
+  border-radius: 0 0 10px 10px;
+}
+
+.header .logo{
+  /* display: block; */
+  width: 150px;
+}
+
+.container{
+  padding: 0 25px;
+  background-color: var(--gray-light-color);
+  height: 100%;
+}
+
+.container >h2{
+  text-align: center;
+  padding: 25px;
+}
+
+.container .form-group{
+  text-align: center;
+  padding-bottom: 25px;
+}
+.container .form-control{
+  text-align: center;
+  width: 16rem;
+  height: 2rem;
+  font-family: var(--font);
+  font-size: 1rem;
+  font-weight: bold;
+  background-color: var(--white-color);
+  /* color: var(--gray-color); */
+  border-radius: 15px;
+  border-style: none;
+  
+}
+
+.container .form-control:focus{
+  place-content: none;
+}
+
+
+
+menu{ 
+  margin:0;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  z-index: 999;
+  padding: 1rem;
+  width:100%;
+  height: var(--header-height);
+  background-color: var(--first-alpha-color);
+  color: var(--gray-light-color);
+  display: flex;
+  justify-content: space-between;
+}
+
+/* 
+.header > .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+} */
 
 
 
