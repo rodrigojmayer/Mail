@@ -9,6 +9,9 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('click', event => {
     //event.stopPropagation();
     const element = event.target;
+    // document.querySelector(".menu").style.backgroundImage =
+    //   "url('/mail/static/assets/Backgroup1.png')";
+    // alert("probando probando");
     //document.currentScript.getAttribute('one');
     if(element.id === 'archive_email'){
       //alert("vamopototo");

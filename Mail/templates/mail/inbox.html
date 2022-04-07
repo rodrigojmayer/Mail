@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block body %}
-    <h2 id="user_email">{{ request.user.email }}</h2>
+    <!-- <h2 id="user_email">{{ request.user.email }}</h2> -->
 
-    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
-    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
-    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
-    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <!-- <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button> -->
+    <!-- <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button> -->
+    <!-- <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button> -->
+    <!-- <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button> -->
     <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
     <hr>
     <div id="inbox-view" class="inbox_class">
@@ -43,29 +43,35 @@
         <h3></h3>
     </div>
 
-    <menu class="menu">
-      <a href="envelope.html"><svg width="40" height="40" viewBox="0 0 40 40" fill="none"
-          xmlns="http://www.w3.org/2000/svg">
+    <menu class="menu" style="background-image: url({% static '/mail/Backgroup1.png' %});">
+    <!-- <menu class="menu"> -->
+      <!-- href="{% static 'mail/styles.css' %}" -->
+      <!-- <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button> -->
+
+      <a id="inbox" ><svg width="40" height="40" viewBox="0 0 40 40" fill="none"
+          xmlns="http://www.w3.org/2000/svg" >
           <path
             d="M33.3333 6.66675H6.66659C4.82825 6.66675 3.33325 8.16175 3.33325 10.0001V30.0001C3.33325 31.8384 4.82825 33.3334 6.66659 33.3334H33.3333C35.1716 33.3334 36.6666 31.8384 36.6666 30.0001V10.0001C36.6666 8.16175 35.1716 6.66675 33.3333 6.66675ZM33.3333 10.0001V10.8517L19.9999 21.2234L6.66659 10.8534V10.0001H33.3333ZM6.66659 30.0001V15.0734L18.9766 24.6484C19.2684 24.8777 19.6288 25.0023 19.9999 25.0023C20.371 25.0023 20.7314 24.8777 21.0233 24.6484L33.3333 15.0734L33.3366 30.0001H6.66659Z"
             fill="#F3F3F3" />
         </svg>
       </a>
-      <a href="bookmark.html">
-        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- <a id="compose"> -->
+        <!-- <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button> -->
+        <a   id="archived">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" >
           <path
             d="M30.0001 3.33325H10.0001C8.16175 3.33325 6.66675 4.82825 6.66675 6.66659V36.6666L20.0001 29.0466L33.3334 36.6666V6.66659C33.3334 4.82825 31.8384 3.33325 30.0001 3.33325ZM30.0001 30.9216L20.0001 25.2083L10.0001 30.9216V6.66659H30.0001V30.9216Z"
             fill="#F3F3F3" />
         </svg>
       </a>
-      <a href="send.html">
+      <a id="sent">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M35.71 18.4916L7.37668 5.15825C7.0914 5.02327 6.77364 4.97216 6.46042 5.01086C6.14721 5.04956 5.85144 5.17648 5.6076 5.37683C5.36375 5.57718 5.18187 5.84271 5.08315 6.14247C4.98443 6.44223 4.97294 6.76387 5.05001 7.06991L8.28168 19.9999L5.05001 32.9299C4.97222 33.2361 4.98321 33.558 5.0817 33.8582C5.18019 34.1583 5.36211 34.4242 5.60617 34.6247C5.85024 34.8253 6.14636 34.9521 6.4599 34.9905C6.77344 35.029 7.09143 34.9773 7.37668 34.8416L35.71 21.5082C35.9963 21.3737 36.2384 21.1603 36.408 20.8932C36.5776 20.6261 36.6677 20.3163 36.6677 19.9999C36.6677 19.6835 36.5776 19.3737 36.408 19.1066C36.2384 18.8395 35.9963 18.6262 35.71 18.4916V18.4916ZM9.13501 30.3282L10.5333 24.7332L20 19.9999L10.5333 15.2666L9.13501 9.67158L31.085 19.9999L9.13501 30.3282Z"
             fill="#F3F3F3" />
         </svg>
       </a>
-      <a href="pencil.html">
+      <a id="compose">
         <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M6.66673 35.0001C6.79958 35.0161 6.93388 35.0161 7.06673 35.0001L13.7334 33.3334C14.0291 33.2631 14.3 33.1133 14.5167 32.9001L35.0001 12.3501C35.6209 11.7255 35.9694 10.8807 35.9694 10.0001C35.9694 9.11946 35.6209 8.27463 35.0001 7.65008L32.3667 5.00008C32.0572 4.69016 31.6895 4.4443 31.2849 4.27655C30.8802 4.1088 30.4464 4.02246 30.0084 4.02246C29.5703 4.02246 29.1366 4.1088 28.7319 4.27655C28.3273 4.4443 27.9596 4.69016 27.6501 5.00008L7.16673 25.4834C6.95138 25.7011 6.79631 25.9711 6.71673 26.2668L5.05006 32.9334C4.99016 33.1491 4.9743 33.3746 5.00344 33.5965C5.03258 33.8184 5.10612 34.0322 5.21967 34.225C5.33321 34.4179 5.48444 34.5859 5.66434 34.7191C5.84423 34.8523 6.0491 34.9478 6.26673 35.0001C6.39958 35.0161 6.53388 35.0161 6.66673 35.0001ZM30.0001 7.35008L32.6501 10.0001L30.0001 12.6501L27.3667 10.0001L30.0001 7.35008ZM9.85006 27.5168L25.0001 12.3501L27.6501 15.0001L12.4834 30.1668L8.96673 31.0334L9.85006 27.5168Z"

@@ -194,6 +194,18 @@ p{
   /* display: block; */
   width: 150px;
 }
+.header .logo-user{
+  background-color: var(--link-color);
+  width: 3rem;
+  height: 2rem;
+  border-radius: 50%;
+  text-align: center;
+padding-top: .4rem;
+cursor: pointer;
+text-transform: uppercase;
+font-weight: bold;
+}
+
 
 .container{
   padding: 0 25px;
@@ -272,14 +284,23 @@ menu{
   position: fixed;
   left: 0;
   bottom: 0;
-  z-index: 999;
+  z-index: 800;
   padding: 1rem;
   width:100%;
   height: var(--header-height);
-  background-color: var(--first-alpha-color);
+  /* background-color: var(--first-alpha-color); */
+  /* background-image:url("/mail/static/assets/Backgroup1.png"); */
+  /* background-image:none; */
+  background: no-repeat;
+  background-size: 100% 64px;
   color: var(--gray-light-color);
   display: flex;
   justify-content: space-between;
+}
+
+#inbox svg path {
+  fill:#000000;
+  z-index: 999;
 }
 
 /* 
