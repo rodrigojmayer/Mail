@@ -11,8 +11,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{% static 'mail/styles.css' %}">
   <link rel="shortcut icon" href="#">
-  {% block script %}
-  {% endblock %}
 </head>
 
 <body>
@@ -44,7 +42,8 @@
     {% block body %}
     {% endblock %}
   </div>
-
+{% block script %}
+{% endblock %}
 </body>
 
 </html>

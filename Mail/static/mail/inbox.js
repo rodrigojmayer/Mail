@@ -1,8 +1,6 @@
 var rs = getComputedStyle(document.querySelector(":root"));
 
 document.addEventListener("DOMContentLoaded", function () {
-
-
   // var r = document.querySelector(":root");
   //var rs = getComputedStyle(document.querySelector(":root"));
 
@@ -95,14 +93,19 @@ function compose_email(reply_data) {
     "--first-alpha-color"
   );
 
-    document.querySelector("#inbox1").style.display = "block";
-    document.querySelector("#inbox2").style.display = "none";
-    document.querySelector("#archived1").style.display = "block";
-    document.querySelector("#archived2").style.display = "none";
-    document.querySelector("#sent1").style.display = "block";
-    document.querySelector("#sent2").style.display = "none";
-    document.querySelector("#compose1").style.display = "none";
-    document.querySelector("#compose2").style.display = "block";
+  document.querySelector("#inbox1").style.display = "block";
+  document.querySelector("#inbox2").style.display = "none";
+  document.querySelector("#archived1").style.display = "block";
+  document.querySelector("#archived2").style.display = "none";
+  document.querySelector("#sent1").style.display = "block";
+  document.querySelector("#sent2").style.display = "none";
+  document.querySelector("#compose1").style.display = "none";
+  document.querySelector("#compose2").style.display = "block";
+
+  document.querySelector("#menu11").style.display = "none";
+  document.querySelector("#menu22").style.display = "none";
+  document.querySelector("#menu33").style.display = "none";
+  document.querySelector("#menu44").style.display = "block";
 
   // Clear out composition fields
   if (reply_data) {
@@ -195,6 +198,7 @@ function load_mailbox(mailbox) {
     document.querySelector("#menu2").style.display = "none";
     document.querySelector("#menu3").style.display = "none";
     document.querySelector("#menu4").style.display = "none";
+
     document.querySelector("#inbox svg path").style.fill = rs.getPropertyValue(
       "--first-alpha-color"
     );
@@ -213,6 +217,11 @@ function load_mailbox(mailbox) {
     document.querySelector("#sent2").style.display = "none";
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
+
+    document.querySelector("#menu11").style.display = "block";
+    document.querySelector("#menu22").style.display = "none";
+    document.querySelector("#menu33").style.display = "none";
+    document.querySelector("#menu44").style.display = "none";
 
     fetch("/emails/inbox")
       .then((response) => response.json())
@@ -301,15 +310,15 @@ function load_mailbox(mailbox) {
     document.querySelector("#menu2").style.display = "none";
     document.querySelector("#menu3").style.display = "block";
     document.querySelector("#menu4").style.display = "none";
-  document.querySelector("#inbox svg path").style.fill =
-    rs.getPropertyValue("--gray-light-color");
-  document.querySelector("#archived svg path").style.fill =
-    rs.getPropertyValue("--gray-light-color");
-  document.querySelector("#sent svg path").style.fill = rs.getPropertyValue(
-    "--first-alpha-color"
-  );
-  document.querySelector("#compose svg path").style.fill =
-    rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#inbox svg path").style.fill =
+      rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#archived svg path").style.fill =
+      rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#sent svg path").style.fill = rs.getPropertyValue(
+      "--first-alpha-color"
+    );
+    document.querySelector("#compose svg path").style.fill =
+      rs.getPropertyValue("--gray-light-color");
 
     document.querySelector("#inbox1").style.display = "block";
     document.querySelector("#inbox2").style.display = "none";
@@ -319,6 +328,11 @@ function load_mailbox(mailbox) {
     document.querySelector("#sent2").style.display = "block";
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
+
+  document.querySelector("#menu11").style.display = "none";
+  document.querySelector("#menu22").style.display = "none";
+  document.querySelector("#menu33").style.display = "block";
+  document.querySelector("#menu44").style.display = "none";
 
     fetch("/emails/sent")
       .then((response) => response.json())
@@ -397,15 +411,14 @@ function load_mailbox(mailbox) {
     document.querySelector("#menu2").style.display = "block";
     document.querySelector("#menu3").style.display = "none";
     document.querySelector("#menu4").style.display = "none";
-  document.querySelector("#inbox svg path").style.fill =
-    rs.getPropertyValue("--gray-light-color");
-  document.querySelector("#archived svg path").style.fill = rs.getPropertyValue(
-    "--first-alpha-color"
-  );
-  document.querySelector("#sent svg path").style.fill =
-    rs.getPropertyValue("--gray-light-color");
-  document.querySelector("#compose svg path").style.fill =
-    rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#inbox svg path").style.fill =
+      rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#archived svg path").style.fill =
+      rs.getPropertyValue("--first-alpha-color");
+    document.querySelector("#sent svg path").style.fill =
+      rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#compose svg path").style.fill =
+      rs.getPropertyValue("--gray-light-color");
 
     document.querySelector("#inbox1").style.display = "block";
     document.querySelector("#inbox2").style.display = "none";
@@ -415,6 +428,11 @@ function load_mailbox(mailbox) {
     document.querySelector("#sent2").style.display = "none";
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
+
+  document.querySelector("#menu11").style.display = "none";
+  document.querySelector("#menu22").style.display = "block";
+  document.querySelector("#menu33").style.display = "none";
+  document.querySelector("#menu44").style.display = "none";
 
     // alert("ola");
     fetch("/emails/archive")
@@ -588,10 +606,15 @@ function load_mailbox(mailbox) {
  */
   // Show the mailbox name
   //  document.querySelector('#inbox-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
-  
 
-  if (window.matchMedia("screen and (min-width: 1024px)").matches) {
-    document.querySelector("#menu1").style.display = "none";
-  }
-
+  // if (window.matchMedia("screen and (min-width: 1024px)").matches) {
+  //   document.querySelector(".menu-background-mobile").style.display = "none";
+  // }
 }
+// function funcionpepito() {
+//   if (window.matchMedia("screen and (min-width: 1024px)").matches) {
+//     document.querySelector(".menu-background-mobile").style.display = "none";
+//   }
+// }
+
+// setTimeout(() => funcionpepito(), 100);
