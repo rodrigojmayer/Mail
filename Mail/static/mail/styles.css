@@ -86,7 +86,8 @@ td {
   --white-color: #ffffff;
   --black-color: #000000;
   --white-alpha-color: rgba(255, 255, 255, 0.5);
-  --black-alpha-color: rgba(0, 0, 0, 0.5);
+  --black-alpha-color: rgba(0, 0, 0, 0.3);
+  --black-alpha-color2: rgba(0, 0, 0, 0.5);
   --gray-color: #ccc;
   --gray-dark-color: #555;
   --gray-light-color: #f3f3f3;
@@ -289,7 +290,7 @@ menu {
   justify-content: space-around;
 }
 
-a > h3 { 
+a > h3 {
   display: none;
 }
 
@@ -319,57 +320,130 @@ a > h3 {
   cursor: pointer;
 }
 
-/* 
-.header > .container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  align-content: center;
+/*************************Modal*********************/
+
+.modal-logout{
+  position:fixed;
+  z-index:999;
+  top: 0;
+  right:0;
+  bottom: 0;
+  left: 0;
+  background-color: var(--black-alpha-color);
+  opacity: 0;
+  pointer-events: none;
+  /* overflow: scroll; */
+  overflow-x: hidden;
+}
+
+/* .modal-logout-window{
+  width: 300px;
+  height: 200px;
+  margin: 10% auto;
+  background-color: var(--gray-color);
 } */
 
+.modal-logout-content{
+  width: 300px;
+  height: 200px;
+  margin: 20vh auto;
+  background-color: var(--gray-light-color);
+   display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center; 
+  border-radius: 5px;
+  box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.modal-logout-content h3{
+  display: block;
+  text-align: center;
+  padding-top: 8px;
+  /* padding-bottom: 16px; */
+}
+
+.modal-logout-content .btn{
+  /* font-size: smaller; */
+  margin: 8px;
+  padding:10px;
+  height: 16px;
+  width: 85px;
+  /* margin:  */
+
+
+    /* appearance: auto; */
+    user-select: none;
+    white-space: pre;
+    align-items: flex-start;
+    text-align: center;
+    cursor: pointer;
+    box-sizing: border-box;
+    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+    color: -internal-light-dark(black, white);
+    /* padding: 1px 6px; */
+    border-width: 2px;
+    border-style: outset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+
+  
+
+
+
+}
+
+
 @media screen and (min-width: 1024px) {
+  .header .logo {
+ margin-left: 25px;
+  }
+
   menu {
     display: block;
     width: 20vw;
     height: 100%;
     position: fixed;
     top: 4rem;
-    padding-top:11px;
+    padding-top: 11px;
     flex-direction: column;
-  background-color: transparent;
-  /* background-color: green; */
+    background-color: transparent;
+    /* background-color: green; */
     /* overflow: auto; */
   }
   /* menu svg{
     width:100px;
     margin-left:0;
   } */
-  
-#inbox { 
-  /* display: inline-block; */
-  /* width: 50%; */
-}
-menu a{
-  display: block;
-  height: 50px;
-  width: 80%;
-  margin-top: 22px;
-  margin-left: 4vw;
-}
-a > div {
-  display: inline-block;
-  vertical-align: middle;
-}
-menu svg{
-  width: 47px;
-  height: 47px;
-}
-a > h3 { 
-  display: inline-block;
-  /* padding:9px; */
-  vertical-align: middle;
-  ;
-}
+
+  #inbox {
+    /* display: inline-block; */
+    /* width: 50%; */
+  }
+
+  menu a {
+    display: block;
+    height: 50px;
+    width: 80%;
+    margin-top: 22px;
+    margin-left: 4vw;
+  }
+
+  a > div {
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  menu svg {
+    width: 47px;
+    height: 47px;
+  }
+
+  a > h3 {
+    display: inline-block;
+    /* padding:9px; */
+    vertical-align: middle;
+  }
   /* 
   menu h3 {
     /* display: block; */
@@ -382,10 +456,10 @@ a > h3 {
   } */
   /* .h3-inline {
     display: inline-block; */
-    /* z-index: 999; */
-    /* display: inline; */
+  /* z-index: 999; */
+  /* display: inline; */
   /* } */
-/* 
+  /* 
   button {
     border: 1px solid black;
     padding: 4px 2px;
@@ -402,23 +476,23 @@ a > h3 {
     display: none;
   }
 
-#menu11,
-#menu22,
-#menu33,
-#menu44 {
-  /* margin:0; */
-  position: fixed;
-  left: 0;
-  top: var(--header-height);
-  z-index: 777;
-  /* padding: 1rem; */
-  height: 100%;
+  #menu11,
+  #menu22,
+  #menu33,
+  #menu44 {
+    /* margin:0; */
+    position: fixed;
+    left: 0;
+    top: var(--header-height);
+    z-index: 777;
+    /* padding: 1rem; */
+    height: 100%;
     width: 20vw;
-  /* height: var(--header-height); */
-  background: no-repeat;
-  /* background-size: 100%; */
-  display: none;
-}
+    /* height: var(--header-height); */
+    background: no-repeat;
+    /* background-size: 100%; */
+    display: none;
+  }
   .container {
     margin-left: 20vw;
   }

@@ -67,6 +67,15 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
+  document.querySelector(".logo-user").addEventListener("click", () => {
+    document.querySelector(".modal-logout").style.opacity = 1;
+    document.querySelector(".modal-logout").style.pointerEvents = "auto";
+  });
+  document.querySelector("#cancel-logout").addEventListener("click", () => {
+    document.querySelector(".modal-logout").style.opacity = 0;
+    document.querySelector(".modal-logout").style.pointerEvents = "none";
+  });
+
   // By default, load the inbox
   load_mailbox("inbox");
 });
@@ -329,10 +338,10 @@ function load_mailbox(mailbox) {
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
 
-  document.querySelector("#menu11").style.display = "none";
-  document.querySelector("#menu22").style.display = "none";
-  document.querySelector("#menu33").style.display = "block";
-  document.querySelector("#menu44").style.display = "none";
+    document.querySelector("#menu11").style.display = "none";
+    document.querySelector("#menu22").style.display = "none";
+    document.querySelector("#menu33").style.display = "block";
+    document.querySelector("#menu44").style.display = "none";
 
     fetch("/emails/sent")
       .then((response) => response.json())
@@ -429,10 +438,10 @@ function load_mailbox(mailbox) {
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
 
-  document.querySelector("#menu11").style.display = "none";
-  document.querySelector("#menu22").style.display = "block";
-  document.querySelector("#menu33").style.display = "none";
-  document.querySelector("#menu44").style.display = "none";
+    document.querySelector("#menu11").style.display = "none";
+    document.querySelector("#menu22").style.display = "block";
+    document.querySelector("#menu33").style.display = "none";
+    document.querySelector("#menu44").style.display = "none";
 
     // alert("ola");
     fetch("/emails/archive")

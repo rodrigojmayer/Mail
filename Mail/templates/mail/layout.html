@@ -14,6 +14,15 @@
 </head>
 
 <body>
+  <div class="modal-logout">
+      <div class="modal-logout-content">
+       <h4> Do you want to log out?</h4>
+       <div class="btns">
+        <a href="{% url 'logout' %}" class="btn btn-next">Log out</a>
+        <a id="cancel-logout" class="btn btn-next">Cancel</a>
+        </div>
+      </div>
+  </div>
   <header class="header">
     <div class="logo">
       <a href="inbox.html">
@@ -35,15 +44,17 @@
       </a>
     </div>
     {% if request.user.email %}
-    <div class="logo-user">{{ request.user.email.0 }}</div>
+    <div class="logo-user">{{ request.user.email.0 }}
+    </div>
+
     {% endif %}
   </header>
   <div class="container">
     {% block body %}
     {% endblock %}
   </div>
-{% block script %}
-{% endblock %}
+  {% block script %}
+  {% endblock %}
 </body>
 
 </html>
