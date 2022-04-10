@@ -166,7 +166,7 @@ img {
   height: auto;
 }
 
-p {
+p, input {
   line-height: 1.6;
   font-size: 1.3rem;
 }
@@ -203,6 +203,7 @@ p {
 
 .container {
   padding: 0 25px;
+  padding-top: 10px;
   /* background-color: var(--gray-light-color); */
   height: 90vh;
 }
@@ -322,11 +323,11 @@ a > h3 {
 
 /*************************Modal*********************/
 
-.modal-logout{
-  position:fixed;
-  z-index:999;
+.modal-logout {
+  position: fixed;
+  z-index: 999;
   top: 0;
-  right:0;
+  right: 0;
   bottom: 0;
   left: 0;
   background-color: var(--black-alpha-color);
@@ -334,7 +335,7 @@ a > h3 {
   pointer-events: none;
   /* overflow: scroll; */
   overflow-x: hidden;
-  transition:  .5s;
+  transition: 0.5s;
 }
 
 /* .modal-logout-window{
@@ -344,60 +345,85 @@ a > h3 {
   background-color: var(--gray-color);
 } */
 
-.modal-logout-content{
+.modal-logout-content {
   width: 300px;
   height: 200px;
   margin: 20vh auto;
   background-color: var(--gray-light-color);
-   display: flex;
+  display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center; 
+  align-items: center;
   border-radius: 5px;
   box-shadow: 0.25rem 0.25rem 1rem rgba(0, 0, 0, 0.25);
 }
 
-.modal-logout-content h3{
+.modal-logout-content h3 {
   display: block;
   text-align: center;
   padding-top: 8px;
   /* padding-bottom: 16px; */
 }
 
-.modal-logout-content .btn{
+.modal-logout-content .btn {
   /* font-size: smaller; */
   margin: 8px;
-  padding:10px;
+  padding: 10px;
   height: 16px;
   width: 85px;
   /* margin:  */
 
+  /* appearance: auto; */
+  user-select: none;
+  white-space: pre;
+  align-items: flex-start;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+  color: -internal-light-dark(black, white);
+  /* padding: 1px 6px; */
+  border-width: 2px;
+  border-style: outset;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
 
-    /* appearance: auto; */
-    user-select: none;
-    white-space: pre;
-    align-items: flex-start;
-    text-align: center;
-    cursor: pointer;
-    box-sizing: border-box;
-    background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
-    color: -internal-light-dark(black, white);
-    /* padding: 1px 6px; */
-    border-width: 2px;
-    border-style: outset;
-    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
-    border-image: initial;
-
-  
-
-
+/******************Search******************/
+.search {
+  background-color: var(--white-color);
+  height: 48px;
+  width: 100%;
+  margin: 0;
+  margin-top: 6px;
+  margin-bottom: 16px;
+  /* padding: 27.2px; */
+  border-radius: 40px;
+  border: var(--gray-dark-color);
+  border-style:solid;
+  border-width: 1px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
 
 }
+.search-text{
+  padding: 7px ;
+  
+  width: 85%;
+  background-color: transparent;
+  border: none;
+}
+
+.search-text:focus{
+    outline: none !important;
+}
+
 
 
 @media screen and (min-width: 1024px) {
   .header .logo {
- margin-left: 25px;
+    margin-left: 25px;
   }
 
   menu {
