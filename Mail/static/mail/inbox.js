@@ -76,6 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".modal-logout").style.pointerEvents = "none";
   });
 
+
   // By default, load the inbox
   load_mailbox("inbox");
 });

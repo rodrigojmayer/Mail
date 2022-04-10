@@ -334,6 +334,7 @@ a > h3 {
   pointer-events: none;
   /* overflow: scroll; */
   overflow-x: hidden;
+  transition:  .5s;
 }
 
 /* .modal-logout-window{
