@@ -574,114 +574,31 @@ function load_mailbox(mailbox) {
       });
   }
 
-  /*
-  fetch('/emails/3')
-  .then(response => response.json())
-  .then(email => {
-      // Print email
-      console.log(email);
-  
-      // ... do something else with email ...
-  });*/
-
-  // Show the mailbox and hide other views
-  /*  document.querySelector('#inbox-view').style.display = 'block';
-  document.querySelector('#compose-view').style.display = 'none';
-  document.querySelector('#sent-view').style.display = 'none';
-  document.querySelector('#archived-view').style.display = 'none';
- */
-  // Show the mailbox name
-  //  document.querySelector('#inbox-view').innerHTML = `<h3>${mailbox.charAt(0).toUpperCase() + mailbox.slice(1)}</h3>`;
-
-  // if (window.matchMedia("screen and (min-width: 1024px)").matches) {
-  //   document.querySelector(".menu-background-mobile").style.display = "none";
-  // }
 }
-// function funcionpepito() {
-//   if (window.matchMedia("screen and (min-width: 1024px)").matches) {
-//     document.querySelector(".menu-background-mobile").style.display = "none";
-//   }
-// }
 
-// setTimeout(() => funcionpepito(), 100);
-
-// const inboxTemplate = document.querySelector("[data-inbox-template]");
-
-// document.querySelector("#submitSearch").addEventListener("click", () => {
-//   const pp = document.querySelector("#search").value;
-//   console.log(pp);
-// });
+// Searching
+// Search by pressing enter
 document.getElementById("lookup-form").onsubmit = searching;
-
-// $('input[type=search]').on('search', searching);
-
-// document.getElementById("search").addEventListener("search", function (event) {
-//   $(".resultingarticles").empty();
-// });
+// Clean search when the inpur is empty (when press the x too)
 document.getElementById("search").addEventListener("input", (e) => {
-  console.log(`Input value: "${e.currentTarget.value}"`);
   if (e.currentTarget.value=="")
   searching();
 });
-
-function searching() {
-  let datos_buscados = document.getElementById("search").value;
-  const post = document.querySelectorAll("#email");
-  for (var i = 0, ilen = post.length; i < ilen; i++) {
-    let remitente = post[i].querySelector("#first_column").textContent;
-    let asunto = post[i].querySelector("#second_column").textContent;
-    if (remitente.includes(datos_buscados) || asunto.includes(datos_buscados)) {
-      post[i].style.display = "block";
-    }else{
-      post[i].style.display="none";
-    }
-  }
-  return false;
-};
-
+// Search by clicking the magnifying glass icon
 document.querySelector("#submitSearch").addEventListener("click", searching);
-
-
-/*
-document.getElementById("lookup-form").onsubmit = function () {
-  // alert("holis");
-  // alert("chauchis");
-  // let post_auxiliar = "";
-  let datos_buscados = document.getElementById("search").value;
-  // console.log("Datos buscados: " + datos_buscados);
-
+// The function Search
+function searching() {
+  let datos_buscados = document.getElementById("search").value.toLowerCase();
   const post = document.querySelectorAll("#email");
-  // document.querySelector("#inbox-view").append(post_auxiliar);
   for (var i = 0, ilen = post.length; i < ilen; i++) {
-    // el[i].className = "a_new_class"
-    let postotal = post[i].firstChild;
-    // console.log("Mail numero: " + i);
-    let remitente = post[i].querySelector("#first_column").textContent;
-    // console.log(remitente);
-    let asunto = post[i].querySelector("#second_column").textContent;
-    // console.log(asunto);
-    // console.log(postotal);
-
-    if (remitente.includes(datos_buscados) || asunto.includes(datos_buscados)) {
-      // console.log("Hay coincidencia!!!");
-      // post_auxiliar = postotal;
+    let remitente = post[i].querySelector("#first_column").textContent.toLowerCase();
+    let asunto = post[i].querySelector("#second_column").textContent.toLowerCase();
+    let fecha = post[i].querySelector("#third_column").textContent.toLowerCase();
+    if (remitente.includes(datos_buscados) || asunto.includes(datos_buscados) || fecha.includes(datos_buscados)) {
       post[i].style.display = "block";
-      
-    // document.querySelector("#inbox-view").appendChild(post_auxiliar);
     }else{
       post[i].style.display="none";
     }
   }
-  // console.log("post entero: " + post);
-  // console.log("post filtrado: " + post_auxiliar);
-
-  //  post.innerHTML = `<div id="first_column"><b> Juan Carlos</b></div>
-  //                              <div id="second_column"><b>Hola como estas?</b></div>
-  //                              <div id="third_column">123456</div>`;
-//  post.innerHTML ="";
-//   document.querySelector("#inbox-view").appendChild(post);
-//  document.querySelectorAll("#email") = "";
-  // load_mailbox("inbox");
   return false;
 };
-*/
