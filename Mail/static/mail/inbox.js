@@ -76,7 +76,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".modal-logout").style.pointerEvents = "none";
   });
 
-
   // By default, load the inbox
   load_mailbox("inbox");
 });
@@ -243,34 +242,14 @@ function load_mailbox(mailbox) {
           //console.log(content);
           //console.log(content.sender);
           const user_log = document.querySelector("#testuser").value;
-          //alert(user_log);
+          // alert(user_log);
           content.recipients.forEach((cont) => {
+            ////////////////////////////////////comentado para cambiar el forEach por el map
+            // constantine = content.recipients.map((cont) => {
             if (cont === user_log) {
-              /*      document.querySelector('#inbox-view').style.display = 'block';
-              document.querySelector('#sent-view').style.display = 'none';
-              document.querySelector('#compose-view').style.display = 'none';
-              document.querySelector('#archived-view').style.display = 'none';
-        */ /*   console.log(`El cont es: ${cont}`);
-              console.log(`Sender: ${content.sender}`);
-              console.log(`Subject: ${content.subject}`);
-              console.log(`Body: ${content.body}`);
-              console.log(`Read: ${content.read}`);
-              console.log(`Archived: ${content.archived}`);
-          */ //alert("OK");
-
               const post = document.createElement("div");
               post.id = "email";
               post.className = "email";
-              //  post.class=('class_email');
-              //post.className = 'posti';
-              //post.innerHTML = "Sender: "+content.sender+"<br/>Subject: "+content.subject+"<br/>Body: "+content.body+"<br/><br/>";
-              //timestamp
-              //post.innerHTML = `<p>Sender: ${content.sender}<br/>Subject: ${content.subject}<br/>Body: ${content.body}<br/><br/></p>`;
-              /*post.innerHTML = `<div><p><b>Sender:</b> ${content.sender}<br/>
-                                <b>Subject:</b> ${content.subject}<br/>
-                                <b>Date:</b> ${content.timestamp}</p>
-                                <button class="archive_email" data-id=${content.id}>Archive</button></div>`;
-              */
               content.sender = content.sender.toString();
               if (content.sender.length > 27)
                 content.sender = content.sender.substring(0, 27) + "...";
@@ -280,27 +259,24 @@ function load_mailbox(mailbox) {
               post.innerHTML = `<div><div id="first_column"> <b>${content.sender}</b></div>
                                 <div id="second_column"><b>${content.subject}</b></div>
                                 <div id="third_column">${content.timestamp}</div></div>`;
-              //post.innerHTML = `${content.id}<p><b>Sender:</b> ${content.sender}<br/><b>Subject:</b> ${content.subject}<br/><b>Body:</b> ${content.body}<br/><b>Date:</b> ${content.timestamp}</p>`;
 
               if (content.read) {
                 post.style.backgroundColor = "#E6E6E6";
-                // post.style.boxShadow = "0 3px ";
               }
-              //  post.style.border = " solid black";
-              //  post.style.borderCollapse = "separate";
-              //  console.log(post);
-
               post.addEventListener("click", (event) => {
-                //const element = event.target;
-                //console.log(element);
-                // if(element.className !== 'archive_email'){
                 load_mailbox(`/emails/${content.id}`);
-                // }
               });
 
               document.querySelector("#inbox-view").append(post);
               space_emails = document.createElement("br");
               document.querySelector("#inbox-view").appendChild(space_emails);
+
+              // const elmnt = inboxTemplate.content.cloneNode(true).children[0];
+              // return {
+              //   sender: content.sender,
+              //   subject: content.subject,
+              //   element: elmnt,
+              // };
             }
           });
         });
@@ -628,3 +604,84 @@ function load_mailbox(mailbox) {
 // }
 
 // setTimeout(() => funcionpepito(), 100);
+
+// const inboxTemplate = document.querySelector("[data-inbox-template]");
+
+// document.querySelector("#submitSearch").addEventListener("click", () => {
+//   const pp = document.querySelector("#search").value;
+//   console.log(pp);
+// });
+document.getElementById("lookup-form").onsubmit = searching;
+
+// $('input[type=search]').on('search', searching);
+
+// document.getElementById("search").addEventListener("search", function (event) {
+//   $(".resultingarticles").empty();
+// });
+document.getElementById("search").addEventListener("input", (e) => {
+  console.log(`Input value: "${e.currentTarget.value}"`);
+  if (e.currentTarget.value=="")
+  searching();
+});
+
+function searching() {
+  let datos_buscados = document.getElementById("search").value;
+  const post = document.querySelectorAll("#email");
+  for (var i = 0, ilen = post.length; i < ilen; i++) {
+    let remitente = post[i].querySelector("#first_column").textContent;
+    let asunto = post[i].querySelector("#second_column").textContent;
+    if (remitente.includes(datos_buscados) || asunto.includes(datos_buscados)) {
+      post[i].style.display = "block";
+    }else{
+      post[i].style.display="none";
+    }
+  }
+  return false;
+};
+
+document.querySelector("#submitSearch").addEventListener("click", searching);
+
+
+/*
+document.getElementById("lookup-form").onsubmit = function () {
+  // alert("holis");
+  // alert("chauchis");
+  // let post_auxiliar = "";
+  let datos_buscados = document.getElementById("search").value;
+  // console.log("Datos buscados: " + datos_buscados);
+
+  const post = document.querySelectorAll("#email");
+  // document.querySelector("#inbox-view").append(post_auxiliar);
+  for (var i = 0, ilen = post.length; i < ilen; i++) {
+    // el[i].className = "a_new_class"
+    let postotal = post[i].firstChild;
+    // console.log("Mail numero: " + i);
+    let remitente = post[i].querySelector("#first_column").textContent;
+    // console.log(remitente);
+    let asunto = post[i].querySelector("#second_column").textContent;
+    // console.log(asunto);
+    // console.log(postotal);
+
+    if (remitente.includes(datos_buscados) || asunto.includes(datos_buscados)) {
+      // console.log("Hay coincidencia!!!");
+      // post_auxiliar = postotal;
+      post[i].style.display = "block";
+      
+    // document.querySelector("#inbox-view").appendChild(post_auxiliar);
+    }else{
+      post[i].style.display="none";
+    }
+  }
+  // console.log("post entero: " + post);
+  // console.log("post filtrado: " + post_auxiliar);
+
+  //  post.innerHTML = `<div id="first_column"><b> Juan Carlos</b></div>
+  //                              <div id="second_column"><b>Hola como estas?</b></div>
+  //                              <div id="third_column">123456</div>`;
+//  post.innerHTML ="";
+//   document.querySelector("#inbox-view").appendChild(post);
+//  document.querySelectorAll("#email") = "";
+  // load_mailbox("inbox");
+  return false;
+};
+*/
