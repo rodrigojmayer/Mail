@@ -12,12 +12,13 @@ textarea {
   padding: 10px 0 10px 0;
   margin-bottom: -25px;
   position: relative;
+  display: block;
 }
 #email:hover {
   /*  border :  solid #363636 ;
     width: 101%;
     position: relative;*/
-  font-size: 109%;
+  /* font-size: 109%; */
 }
 /*
 .inbox_class div, .archived_class div{
@@ -28,11 +29,13 @@ textarea {
 .inbox_class div p, .archived_class div p{
     margin-bottom: 7px;
 }*/
+
+/* cambio 2.0
 #first_column {
   width: 15%;
-  margin-left: 10px;
+  margin-left: 10px; */
   /*margin-left: 5px; */
-  display: inline-block;
+  /* display: inline-block;
 }
 #second_column {
   width: 40%;
@@ -45,7 +48,8 @@ textarea {
   margin-left: 55px;
   padding-left: 55px;
   display: inline-block;
-}
+} */
+
 
 .email_view {
   display: inline-block;
@@ -322,6 +326,29 @@ a > h3 {
   cursor: pointer;
 }
 
+#email {
+  /* border: thin solid #aeb7cc; */
+  /* border-radius: 5px; */
+  /*border-collapse : collapse;*/
+  /*box-shadow: 10px 10px;*/
+  cursor: pointer;
+  /* display:inline;*/
+  /*padding-top:100px;*/
+  padding: 10px 0 10px 0;
+  /* margin-bottom: -25px; */
+  position:static;
+  border: none;
+  display: flex;
+  flex-direction: row;
+  
+}
+#email:hover {
+  /*  border :  solid #363636 ;
+    width: 101%;
+    position: relative;*/
+  /* font-size: 109%; */
+}
+
 /*************************Modal*********************/
 
 .modal-logout {
@@ -458,7 +485,10 @@ select:-webkit-autofill:focus { */
 /* background-color: transparent; */
 /* } */
 
+
+
 @media screen and (min-width: 1024px) {
+
   .header .logo {
     margin-left: 25px;
   }

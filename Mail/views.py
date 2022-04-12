@@ -25,6 +25,7 @@ def index(request):
 @login_required
 def compose(request):
 
+    print("---------------Llega hasta aqui------------------")
     # Composing a new email must be via POST
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
@@ -76,6 +77,12 @@ def compose(request):
 def mailbox(request, mailbox):
 
     # Filter emails returned based on mailbox
+    
+    # print( Email.objects.)
+    # for e in Email.objects.all():
+    #   print(e.subject)
+    #   print(e.subject)
+
     if mailbox == "inbox":
         emails = Email.objects.filter(
             user=request.user, recipients=request.user, archived=False
