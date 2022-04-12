@@ -252,10 +252,10 @@ function load_mailbox(mailbox) {
               post.id = "email";
               post.className = "email";
               content.sender = content.sender.toString();
-              if (content.sender.length > 27)
-                content.sender = content.sender.substring(0, 27) + "...";
-              if (content.subject.length > 45)
-                content.subject = content.subject.substring(0, 45) + "...";
+              if (content.sender.length > 14)
+                content.sender = content.sender.substring(0, 14) + "...";
+              if (content.subject.length > 17)
+                content.subject = content.subject.substring(0, 17) + "...";
 
               let svg_inbox;
               // console.log(content);
@@ -270,10 +270,13 @@ function load_mailbox(mailbox) {
               // console.log(dateFormat(content.timestamp));
                const timestampFormatted = dateFormat(content.timestamp);
 
-              post.innerHTML = `${svg_inbox}
-                               <div id="sender-and-subject">
-                                  <div id="first_column"><b>${content.sender}</b></div> 
-                                  <div id="second_column"><b>${content.subject}</b></div>
+              post.innerHTML = `
+                                <div id="left-content">
+                                  ${svg_inbox}
+                                  <div id="sender-and-subject">
+                                    <div id="first_column"><b>${content.sender}</b></div> 
+                                    <div id="second_column"><b>${content.subject}</b></div>
+                                  </div>
                                 </div>
                                 <div id="time-and-archive">
                                   <div id="third_column">${timestampFormatted}</div>
