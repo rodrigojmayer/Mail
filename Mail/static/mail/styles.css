@@ -409,8 +409,6 @@ a > h3 {
 }
 .search-text {
   padding: 7px;
-  padding-left: 0;
-
   width: 85%;
   background-color: transparent;
   border: none;
@@ -419,11 +417,12 @@ a > h3 {
 .search-text:focus {
   outline: none !important;
 }
-#submitSearch{
+#submitSearch {
   margin-top: 4px;
-  /* margin-right: -10px; */
+  margin-right: 5px;
 }
-#search::-webkit-search-cancel-button:hover, #submitSearch:hover{
+#search::-webkit-search-cancel-button:hover,
+#submitSearch:hover {
   cursor: pointer;
 }
 
@@ -433,14 +432,14 @@ a > h3 {
 } */
 
 /* input[type="search"] { */
-  /* background: none; */
-  /* font-weight: bold; */
-  /* border-color: #2e2e2e; */
-  /* border-style: solid; */
-  /* border-width: 2px 2px 2px 2px; */
-  /* outline: none; */
-  /* padding: 10px 20px 10px 20px; */
-  /* width: 250px; */
+/* background: none; */
+/* font-weight: bold; */
+/* border-color: #2e2e2e; */
+/* border-style: solid; */
+/* border-width: 2px 2px 2px 2px; */
+/* outline: none; */
+/* padding: 10px 20px 10px 20px; */
+/* width: 250px; */
 /* } */
 /*Css to target the dropdownbox*/
 /* input:-webkit-autofill,
@@ -452,11 +451,11 @@ textarea:-webkit-autofill:focus,
 select:-webkit-autofill,
 select:-webkit-autofill:hover,
 select:-webkit-autofill:focus { */
-  /* border: 1px solid green;
+/* border: 1px solid green;
   -webkit-text-fill-color: green; */
-  /* -webkit-box-shadow: var(--white-color) ;
+/* -webkit-box-shadow: var(--white-color) ;
   transition: background-color 5000s ease-in-out 0s; */
-  /* background-color: transparent; */
+/* background-color: transparent; */
 /* } */
 
 @media screen and (min-width: 1024px) {
@@ -566,19 +565,17 @@ select:-webkit-autofill:focus { */
     position: absolute;
     margin: auto;
     top: 0;
-  background-color: var(--white-color);
-  height: 48px;
-  width: 70%;
-  margin: 0;
-  margin-top: 8px;
-  margin-bottom: 16px;
-  /* padding: 27.2px; */
-  border-radius: 40px;
-  border: var(--gray-dark-color);
-  border-style: solid;
-  border-width: 1px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
+    width: 70%;
+    margin: 0;
+    margin-top: 8px;
+    margin-bottom: 16px;
+    justify-content: space-around;
+  }
+
+  .search-text {
+    padding-left: 0;
+  }
+#submitSearch {
+  margin-right: -10px;
 }
 }
