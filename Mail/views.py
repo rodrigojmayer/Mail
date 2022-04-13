@@ -6,6 +6,8 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+from django.core.paginator import Paginator
+
 
 from .models import User, Email
 
@@ -78,10 +80,17 @@ def mailbox(request, mailbox):
 
     # Filter emails returned based on mailbox
     
-    # print( Email.objects.)
+    # print( Email.objects.all())
+    # print("queondaaaaaa")
     # for e in Email.objects.all():
     #   print(e.subject)
-    #   print(e.subject)
+      # print(e.subject)
+
+    # print("------Probando paginator 3000------")
+
+    # p = Paginator(Email.objects.all(), 2)
+    # print(p.count)
+    # print(p.num_pages)
 
     if mailbox == "inbox":
         emails = Email.objects.filter(
@@ -100,6 +109,11 @@ def mailbox(request, mailbox):
 
     # Return emails in reverse chronologial order
     emails = emails.order_by("-timestamp").all()
+    
+    p = Paginator(emails, 10)
+    print(p.count)
+    print(p.num_pages)
+
     return JsonResponse([email.serialize() for email in emails], safe=False)
 
 

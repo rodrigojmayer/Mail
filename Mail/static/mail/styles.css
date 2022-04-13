@@ -49,7 +49,7 @@ textarea {
   padding-left: 55px;
   display: inline-block;
 } */
-
+/* 
 
 .email_view {
   display: inline-block;
@@ -57,11 +57,11 @@ textarea {
   width: 65%;
 }
 .email_view2 {
-  float: right;
+  float: right; */
   /*display: inline-block;*/
-  margin-left: 5%;
+  /* margin-left: 5%;
   padding-top: -20%;
-}
+} */
 th {
   text-align: right;
 }
@@ -77,9 +77,9 @@ td {
   margin-right: 15%;
 }
 
-.email_view3 {
+/* .email_view3 {
   white-space: pre-wrap;
-}
+} */
 
 /* ***********************  New Style  **************************** */
 
@@ -209,6 +209,7 @@ input {
 .container {
   padding: 0 20px;
   padding-top: 10px;
+  /* padding-bottom: 150px; */
   /* background-color: var(--gray-light-color); */
   height: 90vh;
 }
@@ -235,6 +236,19 @@ input {
   border-style: none;
   outline: none;
 }
+
+.inbox_class{
+  height: 90vh;
+  /* padding-bottom: 500px; */
+  margin-bottom: 330px;
+
+}
+
+.space-bottom{
+  height: var(--header-height);
+  /* height: 1px; */
+}
+
 
 input:focus::placeholder {
   color: transparent;
@@ -348,12 +362,12 @@ a > h3 {
   display: flex;
   /* flex-direction: row; */
 }
-#email:hover {
+/* #email:hover { */
   /*  border :  solid #363636 ;
     width: 101%;
     position: relative;*/
   /* font-size: 109%; */
-}
+/* } */
 #email #sender-and-subject{
   margin-left: 5%;
 
@@ -535,10 +549,10 @@ select:-webkit-autofill:focus { */
     margin-left:0;
   } */
 
-  #inbox {
+  /* #inbox { */
     /* display: inline-block; */
     /* width: 50%; */
-  }
+  /* } */
 
   menu a {
     display: block;
