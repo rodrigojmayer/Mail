@@ -76,6 +76,22 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".modal-logout").style.pointerEvents = "none";
   });
 
+  document.getElementById("arrow-first-page").addEventListener("click", () => {
+    load_mailbox("inbox", -2);
+  });
+  document.getElementById("arrow-prev-page").addEventListener("click", () => {
+    load_mailbox("inbox", -1);
+  });
+  document.getElementById("arrow-next-page").addEventListener("click", () => {
+    load_mailbox("inbox", 1);
+  });
+  document.getElementById("arrow-last-page").addEventListener("click", () => {
+    load_mailbox("inbox", 2);
+  });
+
+
+  
+  first_page();
   // By default, load the inbox
   load_mailbox("inbox", 1);
 });
@@ -304,23 +320,17 @@ function load_mailbox(mailbox, n_page) {
         });
         // ... do something else with emails ...
       });
-    document.querySelector("#inbox-view").innerHTML = `<h3>${
-      mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
-    }</h3>`;
+    // document.querySelector("#inbox-view").innerHTML = `<h3>${
+    //   mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
+    // }</h3>`;
+    document.querySelector("#inbox-view").innerHTML = ` `;
 
-    document.querySelector(
-      "#inbox-view"
-    ).innerHTML += `<button id="page" onclick="load_mailbox('inbox', 1);">pagina1</button>`;
     // document.querySelector(
     //   "#inbox-view"
-    // ).innerHTML += `<button id="page" onclick="pagination(1);">pagina1</button>`;
-    document.querySelector(
-      "#inbox-view"
-    ).innerHTML += `<button id="page" onclick="load_mailbox('inbox', 2);">pagina2</button>`;
+    // ).innerHTML += `<button id="page" onclick="load_mailbox('inbox', 1);">pagina1</button>`;
     // document.querySelector(
     //   "#inbox-view"
-    // ).innerHTML += `<button id="page" onclick="pagination(2);">pagina2</button>`;
-
+    // ).innerHTML += `<button id="page" onclick="load_mailbox('inbox', 2);">pagina2</button>`;
   } else if (mailbox === "sent") {
     document.querySelector("#sent-view").style.display = "block";
     document.querySelector("#inbox-view").style.display = "none";
@@ -693,7 +703,29 @@ function dateFormat(mailDate) {
   return mailDateFormatted;
 }
 
+function first_page() {
+  document.getElementById("arrow-first-page").disabled = true;
+  document.querySelector("#arrow-first-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
 
-function pagination(num_pagination){
-  alert(num_pagination)
+  document.getElementById("arrow-prev-page").disabled = true;
+  document.querySelector("#arrow-prev-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
+
+  document.getElementById("arrow-next-page").disabled = false;
+  document.querySelector("#arrow-next-page svg").style.fill =
+    rs.getPropertyValue("--gray-dark-color");
+
+  document.getElementById("arrow-last-page").disabled = false;
+  document.querySelector("#arrow-last-page svg").style.fill =
+    rs.getPropertyValue("--gray-dark-color");
+
+
+}
+
+function last_page() {
+  const next_arrow = document.getElementById("arrow-next-page");
+  const last_arrow = document.getElementById("arrow-last-page");
+  next_arrow.style.fill = rs.getPropertyValue("--gray-color");
+  last_arrow.style.fill = rs.getPropertyValue("--gray-color");
 }
