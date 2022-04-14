@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // By default, load the inbox
-  load_mailbox("inbox");
+  load_mailbox("inbox", 1);
 });
 
 function compose_email(reply_data) {
@@ -186,7 +186,8 @@ function get_senmails(content){
   }
 }*/
 
-function load_mailbox(mailbox) {
+function load_mailbox(mailbox, n_page) {
+  // n_page=1;
   // grab element you want to hide
   //const elem = document.querySelector('#hint');
   // remove element
@@ -235,12 +236,12 @@ function load_mailbox(mailbox) {
     document.querySelector("#menu33").style.display = "none";
     document.querySelector("#menu44").style.display = "none";
 
-    fetch("/emails/inbox")
+    fetch(`/emails/inbox/${n_page}`)
       .then((response) => response.json())
       .then((emails) => {
         // Print emails
         // console.log(emails);
-        //console.log(emails.forEach());
+        // console.log(emails.forEach(content));
         emails.forEach((content) => {
           //console.log(content);
           //console.log(content.sender);
@@ -268,7 +269,7 @@ function load_mailbox(mailbox) {
 
               // console.log(typeof content.timestamp);
               // console.log(dateFormat(content.timestamp));
-               const timestampFormatted = dateFormat(content.timestamp);
+              const timestampFormatted = dateFormat(content.timestamp);
 
               post.innerHTML = `
                                 <div id="left-content">
@@ -306,6 +307,20 @@ function load_mailbox(mailbox) {
     document.querySelector("#inbox-view").innerHTML = `<h3>${
       mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
     }</h3>`;
+
+    document.querySelector(
+      "#inbox-view"
+    ).innerHTML += `<button id="page" onclick="load_mailbox('inbox', 1);">pagina1</button>`;
+    // document.querySelector(
+    //   "#inbox-view"
+    // ).innerHTML += `<button id="page" onclick="pagination(1);">pagina1</button>`;
+    document.querySelector(
+      "#inbox-view"
+    ).innerHTML += `<button id="page" onclick="load_mailbox('inbox', 2);">pagina2</button>`;
+    // document.querySelector(
+    //   "#inbox-view"
+    // ).innerHTML += `<button id="page" onclick="pagination(2);">pagina2</button>`;
+
   } else if (mailbox === "sent") {
     document.querySelector("#sent-view").style.display = "block";
     document.querySelector("#inbox-view").style.display = "none";
@@ -640,9 +655,9 @@ function dateFormat(mailDate) {
   const currentDay = current.getDate();
   const currentMonth = current.getMonth() + 1;
   const currentYear = current.getFullYear();
-  console.log("currentDay: " + currentDay);
-  console.log("currentMonth: " + currentMonth);
-  console.log("currentYear: " + currentYear);
+  // console.log("currentDay: " + currentDay);
+  // console.log("currentMonth: " + currentMonth);
+  // console.log("currentYear: " + currentYear);
 
   // console.log(current.getMonth());
   // console.log(mailDate);
@@ -651,11 +666,11 @@ function dateFormat(mailDate) {
   const yearMail = mailDate.substr(7, 4);
   const monthLMail = mailDate.substr(0, 3);
   const hourMail = mailDate.substr(13, 5);
-  console.log("dayMail: " + dayMail);
-  console.log("monthMail: " + monthMail);
-  console.log("yearMail: " + yearMail);
-  console.log("monthLMail: " + monthLMail);
-  console.log("hourMail: " + hourMail);
+  // console.log("dayMail: " + dayMail);
+  // console.log("monthMail: " + monthMail);
+  // console.log("yearMail: " + yearMail);
+  // console.log("monthLMail: " + monthLMail);
+  // console.log("hourMail: " + hourMail);
 
   var mailDateFormatted = new String();
   if (
@@ -663,17 +678,22 @@ function dateFormat(mailDate) {
     currentMonth == monthMail &&
     currentYear == yearMail
   ) {
-    console.log("coincide el diaaa------");
+    // console.log("coincide el diaaa------");
     mailDateFormatted = hourMail;
-    console.log(mailDateFormatted);
+    // console.log(mailDateFormatted);
   } else if (currentYear == yearMail) {
-    console.log("Solo coincide el año---------");
+    // console.log("Solo coincide el año---------");
     mailDateFormatted = dayMail + " " + monthLMail;
-    console.log(mailDateFormatted);
+    // console.log(mailDateFormatted);
   } else {
-    console.log("Es de otro año------");
-    mailDateFormatted = dayMail + "\/" + monthMail + "/" + yearMail;
-    console.log(mailDateFormatted);
+    // console.log("Es de otro año------");
+    mailDateFormatted = dayMail + "/" + monthMail + "/" + yearMail;
+    // console.log(mailDateFormatted);
   }
   return mailDateFormatted;
+}
+
+
+function pagination(num_pagination){
+  alert(num_pagination)
 }

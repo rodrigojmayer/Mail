@@ -6,10 +6,20 @@ from django.http import JsonResponse
 from django.shortcuts import HttpResponse, HttpResponseRedirect, render
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from django.core.paginator import Paginator
+# from django.core.paginator import Paginator
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from django.core import serializers
 
 
 from .models import User, Email
+
+
+
+
+
+
+
+
 
 
 def index(request):
@@ -76,8 +86,9 @@ def compose(request):
 
 
 @login_required
-def mailbox(request, mailbox):
+def mailbox(request, mailbox, num_page):
 
+    print(num_page)
     # Filter emails returned based on mailbox
     
     # print( Email.objects.all())
@@ -109,12 +120,74 @@ def mailbox(request, mailbox):
 
     # Return emails in reverse chronologial order
     emails = emails.order_by("-timestamp").all()
-    
+
+
     p = Paginator(emails, 10)
-    print(p.count)
-    print(p.num_pages)
+    # if 
+    #             emails = Email.objects.filter(
+    #         user=request.user, recipients=request.user, archived=True
+    #     )
+    # print(p)
+    # print(p.count)
+    # print(p.num_pages)
+    # # for e in p:
+      # print(e)
+      # print(e.subject)
+      # e.pepito = "holapepe"
+
+      
+    # for e in emails.all():
+    #   print(e)
+    #   print(e.subject)
+    #   e.subject = "nopuedeser"
+    #   print(e.subject)
+    #   print(emails)
+    
+    # print(emails[0])
+    # print(p.count)
+    # print(p.num_pages)
+    page1 = p.page(num_page)
+    # print(page1)
+    # print(page1.object_list)
+    emails = page1.object_list
+    # page2 = p.page(2)
+    # print(page2.object_list)
+    # print(page2.has_next())
+    # print(page2.has_previous())
+    # print(page2.has_other_pages())
+    # print(page1.next_page_number())
+    # print(page2.previous_page_number())
+    # print(page2.start_index())
+    # print(page2.end_index())
+    # print(page1.start_index())
+    # print(page1.end_index())
+
+    # page_number = request.GET.get('page')
+    # print(page_number)
+    # page_obj = p.get_page(page_number)
+    # print(page_obj)
+    # list_total_pages = True
+    # emails = p
+    # return render(request, 'mail/inbox.html', {
+    #     'page_obj': page_obj,
+    #     "list_total_pages":True,})
+
+    # products = Product.objects.all()
+    # data is a python list
+    # data = json.loads(serializers.serialize('json', emails))
+    # d is a dict
+    # d = {}
+    # # data is a list nested in d
+    # d['results'] = emails
+    # # more keys for d
+    # d['totalPages'] = 10
+    # d['currentPage'] = 1
+    # # data is a json string representation of the dict
+    # emails = json.dumps(d) 
+
 
     return JsonResponse([email.serialize() for email in emails], safe=False)
+    # return JsonResponse([emails], safe=False)
 
 
 @csrf_exempt
