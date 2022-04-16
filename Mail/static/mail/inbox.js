@@ -256,43 +256,67 @@ function load_mailbox(mailbox, n_page) {
       .then((response) => response.json())
       .then((emails) => {
         // Print emails
-        // console.log(emails);
-        // console.log(emails.forEach(content));
-        emails.forEach((content) => {
-          //console.log(content);
-          //console.log(content.sender);
-          const user_log = document.querySelector("#testuser").value;
+        //  console.log(emails.forEach(content));
+          console.log(emails.emails_json);
+          // var stringified = JSON.stringify(emails.emails_json);
+          //  console.log(emails.emails_json);
+          //  var emails_parsed = JSON.stringify(emails.emails_json)
+          //   .replace("\r", '"#"')
+          //   .replace("\n", '"*"');
+          // var emails_parsed = JSON.parse(stringified);
+          var emails_parsed = JSON.parse(emails.emails_json);
+        //  var emails_parsed = JSON.parse('{"a", "b", "c", 1}');
+          // console.log(emails.emails_json);
+
+        // emails_parsed = JSON.parse(emails.emails_json);
+
+          console.log(emails_parsed);
+          for (var data_email of emails_parsed) {
+            console.log(data_email);
+          };
+
+          emails_parsed.forEach((content) => {
+          console.log(content);
+          console.log(content.fields.sender);
+          console.log(content.fields.recipients[0]);
+          var cont = content.fields.recipients[0];
+          var user_log = document.getElementById("testiduser").value;
+          console.log(document.querySelector("#testiduser").value);
           // alert(user_log);
-          content.recipients.forEach((cont) => {
-            if (cont === user_log) {
-              const post = document.createElement("div");
-              post.id = "email";
-              post.className = "email";
-              content.sender = content.sender.toString();
-              if (content.sender.length > 14)
-                content.sender = content.sender.substring(0, 14) + "...";
-              if (content.subject.length > 17)
-                content.subject = content.subject.substring(0, 17) + "...";
+          // // // // // // content.recipients.forEach((cont) => {------------------------------------
+          console.log("el cont es esto: " + cont);
+          console.log("mientras que el userlog es esto: " + user_log);
+          if (cont == user_log) {
+            const post = document.createElement("div");
+            post.id = "email";
+            post.className = "email";
+            content.fields.sender = content.fields.sender.toString();
+            if (content.fields.sender.length > 14)
+              content.fields.sender =
+                content.fields.sender.substring(0, 14) + "...";
+            if (content.fields.subject.length > 17)
+              content.fields.subject =
+                content.fields.subject.substring(0, 17) + "...";
 
-              let svg_inbox;
-              // console.log(content);
-              if (content.read) {
-                // post.style.backgroundColor = "#E6E6E6";
-                svg_inbox = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.9438 10.21L15.6938 2.71001C15.4885 2.57323 15.2473 2.50024 15.0006 2.50024C14.7539 2.50024 14.5128 2.57323 14.3075 2.71001L3.0575 10.21C2.88612 10.3241 2.74556 10.4787 2.64831 10.6601C2.55105 10.8415 2.50011 11.0442 2.5 11.25V25C2.5 26.3788 3.62125 27.5 5 27.5H25C26.3788 27.5 27.5 26.3788 27.5 25V11.25C27.5 10.8325 27.2913 10.4425 26.9438 10.21ZM15 5.25251L23.9963 11.25L15 17.2475L6.00375 11.25L15 5.25251ZM5 25V13.5863L14.3062 19.79C14.5117 19.9271 14.7531 20.0002 15 20.0002C15.2469 20.0002 15.4883 19.9271 15.6938 19.79L25 13.5863L24.9962 25H5Z" fill="#001A83"/></svg>`;
-              } else {
-                svg_inbox = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M25 5H5C3.62125 5 2.5 6.12125 2.5 7.5V22.5C2.5 23.8788 3.62125 25 5 25H25C26.3788 25 27.5 23.8788 27.5 22.5V7.5C27.5 6.12125 26.3788 5 25 5ZM25 7.5V8.13875L15 15.9175L5 8.14V7.5H25ZM5 22.5V11.305L14.2325 18.4862C14.4514 18.6582 14.7217 18.7516 15 18.7516C15.2783 18.7516 15.5486 18.6582 15.7675 18.4862L25 11.305L25.0025 22.5H5Z" fill="#001A83"/> </svg>`;
-              }
+            let svg_inbox;
+            // console.log(content);
+            if (content.fields.read) {
+              // post.style.backgroundColor = "#E6E6E6";
+              svg_inbox = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.9438 10.21L15.6938 2.71001C15.4885 2.57323 15.2473 2.50024 15.0006 2.50024C14.7539 2.50024 14.5128 2.57323 14.3075 2.71001L3.0575 10.21C2.88612 10.3241 2.74556 10.4787 2.64831 10.6601C2.55105 10.8415 2.50011 11.0442 2.5 11.25V25C2.5 26.3788 3.62125 27.5 5 27.5H25C26.3788 27.5 27.5 26.3788 27.5 25V11.25C27.5 10.8325 27.2913 10.4425 26.9438 10.21ZM15 5.25251L23.9963 11.25L15 17.2475L6.00375 11.25L15 5.25251ZM5 25V13.5863L14.3062 19.79C14.5117 19.9271 14.7531 20.0002 15 20.0002C15.2469 20.0002 15.4883 19.9271 15.6938 19.79L25 13.5863L24.9962 25H5Z" fill="#001A83"/></svg>`;
+            } else {
+              svg_inbox = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M25 5H5C3.62125 5 2.5 6.12125 2.5 7.5V22.5C2.5 23.8788 3.62125 25 5 25H25C26.3788 25 27.5 23.8788 27.5 22.5V7.5C27.5 6.12125 26.3788 5 25 5ZM25 7.5V8.13875L15 15.9175L5 8.14V7.5H25ZM5 22.5V11.305L14.2325 18.4862C14.4514 18.6582 14.7217 18.7516 15 18.7516C15.2783 18.7516 15.5486 18.6582 15.7675 18.4862L25 11.305L25.0025 22.5H5Z" fill="#001A83"/> </svg>`;
+            }
 
-              // console.log(typeof content.timestamp);
-              // console.log(dateFormat(content.timestamp));
-              const timestampFormatted = dateFormat(content.timestamp);
+            // console.log(typeof content.timestamp);
+            // console.log(dateFormat(content.timestamp));
+            const timestampFormatted = dateFormat(content.fields.timestamp);
 
-              post.innerHTML = `
+            post.innerHTML = `
                                 <div id="left-content">
                                   ${svg_inbox}
                                   <div id="sender-and-subject">
-                                    <div id="first_column"><b>${content.sender}</b></div> 
-                                    <div id="second_column"><b>${content.subject}</b></div>
+                                    <div id="first_column"><b>${content.fields.sender}</b></div> 
+                                    <div id="second_column"><b>${content.fields.subject}</b></div>
                                   </div>
                                 </div>
                                 <div id="time-and-archive">
@@ -301,25 +325,25 @@ function load_mailbox(mailbox, n_page) {
                                   <path d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
                                 </div>`;
 
-              post.addEventListener("click", (event) => {
-                load_mailbox(`/emails/${content.id}`);
-              });
+            post.addEventListener("click", (event) => {
+              load_mailbox(`/emails/${content.fields.id}`);
+            });
 
-              document.querySelector("#inbox-view").append(post);
-              // space_emails = document.createElement("br");
-              // document.querySelector("#inbox-view").appendChild(space_emails);
+            document.querySelector("#inbox-view").append(post);
+            // space_emails = document.createElement("br");
+            // document.querySelector("#inbox-view").appendChild(space_emails);
 
-              // const elmnt = inboxTemplate.content.cloneNode(true).children[0];
-              // return {
-              //   sender: content.sender,
-              //   subject: content.subject,
-              //   element: elmnt,
-              // };
-            }
-          });
+            // const elmnt = inboxTemplate.content.cloneNode(true).children[0];
+            // return {
+            //   sender: content.sender,
+            //   subject: content.subject,
+            //   element: elmnt,
+            // };
+          }
+        });
         });
         // ... do something else with emails ...
-      });
+      // });------------------------
     // document.querySelector("#inbox-view").innerHTML = `<h3>${
     //   mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
     // }</h3>`;
@@ -707,25 +731,44 @@ function first_page() {
   document.getElementById("arrow-first-page").disabled = true;
   document.querySelector("#arrow-first-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
-
   document.getElementById("arrow-prev-page").disabled = true;
   document.querySelector("#arrow-prev-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
 
   document.getElementById("arrow-next-page").disabled = false;
   document.querySelector("#arrow-next-page svg").style.fill =
-    rs.getPropertyValue("--gray-dark-color");
-
+    rs.getPropertyValue("--first-color");
   document.getElementById("arrow-last-page").disabled = false;
   document.querySelector("#arrow-last-page svg").style.fill =
-    rs.getPropertyValue("--gray-dark-color");
-
-
+    rs.getPropertyValue("--first-color");
 }
-
 function last_page() {
-  const next_arrow = document.getElementById("arrow-next-page");
-  const last_arrow = document.getElementById("arrow-last-page");
-  next_arrow.style.fill = rs.getPropertyValue("--gray-color");
-  last_arrow.style.fill = rs.getPropertyValue("--gray-color");
+  document.getElementById("arrow-first-page").disabled = false;
+  document.querySelector("#arrow-first-page svg").style.fill =
+    rs.getPropertyValue("--first-color");
+  document.getElementById("arrow-prev-page").disabled = false;
+  document.querySelector("#arrow-prev-page svg").style.fill =
+    rs.getPropertyValue("--first-color");
+
+  document.getElementById("arrow-next-page").disabled = true;
+  document.querySelector("#arrow-next-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
+  document.getElementById("arrow-last-page").disabled = true;
+  document.querySelector("#arrow-last-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
+}
+function middle_page() {
+  document.getElementById("arrow-first-page").disabled = false;
+  document.querySelector("#arrow-first-page svg").style.fill =
+    rs.getPropertyValue("--first-color");
+  document.getElementById("arrow-prev-page").disabled = false;
+  document.querySelector("#arrow-prev-page svg").style.fill =
+    rs.getPropertyValue("--first-color");
+
+  document.getElementById("arrow-next-page").disabled = false;
+  document.querySelector("#arrow-next-page svg").style.fill =
+    rs.getPropertyValue("--first-color");
+  document.getElementById("arrow-last-page").disabled = false;
+  document.querySelector("#arrow-last-page svg").style.fill =
+    rs.getPropertyValue("--first-color");
 }

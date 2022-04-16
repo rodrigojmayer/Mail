@@ -504,14 +504,23 @@ a > h3 {
 .pagination{
   margin: 0 auto;
   margin-top: 120px;
+  width: 200px;
+  display: flex;
+  justify-content:space-around;
+
 }
 
  #arrow-first-page,
 #arrow-prev-page,
 #arrow-next-page,
 #arrow-last-page{
-  color: transparent;
-  border-radius: 10px;
+  height: 40px;
+  width: 40px;
+  background-color: transparent;
+  border-radius: 15px;
+  border-width: 1px;
+  border: none;
+  /* border-color: var(--first-color); */
 } 
 
 /* #arrow-first-page,

@@ -8,10 +8,12 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 # from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
-from django.core import serializers
+# from django.core import serializers as core_serializers
+from django.core import serializers 
 
 
 from .models import User, Email
+# from .serializers import EmailSerializer, UserSerializer 
 
 
 
@@ -102,7 +104,7 @@ def mailbox(request, mailbox, num_page):
     # p = Paginator(Email.objects.all(), 2)
     # print(p.count)
     # print(p.num_pages)
-
+    
     if mailbox == "inbox":
         emails = Email.objects.filter(
             user=request.user, recipients=request.user, archived=False
@@ -121,6 +123,20 @@ def mailbox(request, mailbox, num_page):
     # Return emails in reverse chronologial order
     emails = emails.order_by("-timestamp").all()
 
+    # users = User.objects.filter(id in emails.emails_sent)
+    # users = User.objects.all()
+    user_senders = []
+    for s in emails:
+      print(s.sender.id)
+      if  s.sender.id not in user_senders:
+        user_senders.append(s.sender.id)
+
+    print("__________---------__________")
+    print(user_senders)
+
+    print("*****--------*****")
+    # for i in users:
+      # print(i)
 
     p = Paginator(emails, 10)
     # if 
@@ -135,10 +151,35 @@ def mailbox(request, mailbox, num_page):
       # print(e.subject)
       # e.pepito = "holapepe"
 
-      
-    # for e in emails.all():
+    # emails_json = "["
+    # for e in emails:
+    #   emails_json = emails_json + "{"
     #   print(e)
-    #   print(e.subject)
+    #   e = str(e).replace("'", '"')
+    #   # e = str(e).replace('\n', "a")
+    #   # e = str(e).replace('\\n' , "b")
+      
+      
+    #   print(e)
+    #   emails_json = emails_json + str(e)
+    #   emails_json = emails_json + "}, "
+
+    # emails_json = emails_json[:-2]
+    # emails_json = emails_json + "]"
+    # print("***************************************************")
+    # print(emails_json)
+    # emails_json= emails_json.replace("\\n", "\n").replace("\\t", "\t");
+      # print(e.id)
+      # print(e.sender)
+      # for r in e.recipients.all():
+      #   print(r)
+      # print(e.subject)
+      # print(e.body)
+      # print(e.timestamp)
+      # print(e.read)
+      # print(e.archived)
+
+           
     #   e.subject = "nopuedeser"
     #   print(e.subject)
     #   print(emails)
@@ -146,10 +187,10 @@ def mailbox(request, mailbox, num_page):
     # print(emails[0])
     # print(p.count)
     # print(p.num_pages)
-    page1 = p.page(num_page)
+    # page = p.page(num_page)
     # print(page1)
     # print(page1.object_list)
-    emails = page1.object_list
+    # emails = page
     # page2 = p.page(2)
     # print(page2.object_list)
     # print(page2.has_next())
@@ -184,10 +225,65 @@ def mailbox(request, mailbox, num_page):
     # d['currentPage'] = 1
     # # data is a json string representation of the dict
     # emails = json.dumps(d) 
+    # data = [email.serialize() for email in emails]
+    # return JsonResponse(data, safe=False)
+    # return JsonResponse([email.serialize() for email in emails], safe=False)
+    emails_json = serializers.serialize('json', emails)
 
 
-    return JsonResponse([email.serialize() for email in emails], safe=False)
-    # return JsonResponse([emails], safe=False)
+    # for e in emails:
+    #   # print(e)
+    #   print(e.id)
+    #   print(e.sender)
+    #   print(e.subject)
+    #   # print(e.body)
+    #   print(e.timestamp)
+    #   print(e.read)
+    #   print(e.archived)
+    
+
+    # array_of_emails = []
+    # for item in emails:
+    #     array_of_emails.append([item])
+        
+
+    # print("--------------------------------------------")
+    
+    # for e in array_of_emails:
+    #   print(e)
+    #   # print(e.id)
+
+
+    # # return render (request, "map/index.html", {'marker': str(array_of_array)})
+
+    # print("*****************************************************")
+    # # emails_json = json.dumps(array_of_emails) 
+    # emails_json = json.stringify(array_of_emails);
+    # # sample_list = '["1": 1, "2": 3, "3": 6]'
+
+    # # list_to_json_array = json.dumps(sample_list)
+    # print(emails_json)
+    # # user_serializer = UserSerializer.objects.all()
+    # #emails_json = Email.serialize(emails)
+    # # print(user_serializer)
+    print("*****************************************************")
+    print("aca estan los emails json:")
+    print (emails_json)
+    print("--------------------------------------------")
+    print("aca estan los paginationson:")
+    print (p)
+    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    print("aca estan los userjson:")
+    print (users_json)
+
+    # return JsonResponse({"message":"probando",
+    #                     "emails_json": emails_json
+    #                     }, status=201)
+    return JsonResponse({"message":"probando",
+                        "emails_json": emails_json,
+                        # "users_json": users_json
+                        }, status=201)
+
 
 
 @csrf_exempt

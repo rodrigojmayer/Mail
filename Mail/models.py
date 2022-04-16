@@ -1,5 +1,9 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+# from django.core import ModelSerializer 
+# from django.core import serializers
+# from rest_framework import serializers
+# from django.core import serializers as core_serializers
 
 
 class User(AbstractUser):
@@ -19,7 +23,8 @@ class Email(models.Model):
     def serialize(self):
         return {
             "id": self.id,
-            "sender": self.sender.email,
+            "sender": self.sender,
+            # "sender": self.sender.email,
             "recipients": [user.email for user in self.recipients.all()],
             "subject": self.subject,
             "body": self.body,
@@ -28,3 +33,15 @@ class Email(models.Model):
             "read": self.read,
             "archived": self.archived
         }
+
+    def __str__(self):
+      return f'"id": {self.id}, "id_sender": {self.sender.id},"sender": "{self.sender}", "id_recipients":  {[(user.id) for user in self.recipients.all()]}, "recipients":  {[(user.email) for user in self.recipients.all()]}, "subject": "{self.subject}", "body": "{self.body}"'
+
+
+
+# class UserSerializer(serializers.BadSerializer):
+#     emails =core_serializers.serialize('json', [ Email ,])
+
+#     class Meta:
+#         model = User
+#         fields = ['id', 'user', 'emails']

@@ -8,7 +8,6 @@
 <!-- <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button> -->
 <!-- <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button> -->
 <!-- <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button> -->
-
 <div class="menu-background-mobile">
   <div id="menu1" style="background-image: url({% static '/assets/Backgroup1.png' %});"></div>
   <div id="menu2" style="background-image: url({% static '/assets/Backgroup2.png' %});"></div>
@@ -110,7 +109,7 @@
 </form>
 
 <div class="pagination">
-  
+
 <button id="arrow-first-page">
   <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M8.12091 12L13.0609 7.06096L10.9389 4.93896L3.87891 12L10.9389 19.061L13.0609 16.939L8.12091 12Z" />
@@ -137,6 +136,7 @@
   </svg>
 </button>
 </div>
+<input id="testiduser" value="{{ request.user.id }}" style="display:none"></input>
 
 
 <div id="inbox-view" class="inbox_class">
@@ -171,7 +171,6 @@
     <input id="send_email" type="submit" class="btn btn-primary" />
   </form>
 </div>
-
 <div id="sent-view">
   <h3></h3>
   <!--div id="sent-posts"></div-->
@@ -179,7 +178,6 @@
 <div id="archived-view" class="archived_class">
   <h3></h3>
 </div>
-
 
 
 
