@@ -1,4 +1,5 @@
 var rs = getComputedStyle(document.querySelector(":root"));
+var actual_page = 1;
 
 document.addEventListener("DOMContentLoaded", function () {
   // var r = document.querySelector(":root");
@@ -77,23 +78,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("arrow-first-page").addEventListener("click", () => {
-    load_mailbox("inbox", -2);
+    load_mailbox("inbox", actual_page, 12);
   });
   document.getElementById("arrow-prev-page").addEventListener("click", () => {
-    load_mailbox("inbox", -1);
+    load_mailbox("inbox", actual_page, 11);
   });
   document.getElementById("arrow-next-page").addEventListener("click", () => {
-    load_mailbox("inbox", 1);
+    load_mailbox("inbox", actual_page, 1);
   });
   document.getElementById("arrow-last-page").addEventListener("click", () => {
-    load_mailbox("inbox", 2);
+    load_mailbox("inbox", actual_page, 2);
   });
 
-
-  
-  first_page();
+  // first_page();
   // By default, load the inbox
-  load_mailbox("inbox", 1);
+  load_mailbox("inbox", actual_page, 0);
 });
 
 function compose_email(reply_data) {
@@ -202,7 +201,7 @@ function get_senmails(content){
   }
 }*/
 
-function load_mailbox(mailbox, n_page) {
+function load_mailbox(mailbox, a_page, j_page) {
   // n_page=1;
   // grab element you want to hide
   //const elem = document.querySelector('#hint');
@@ -252,48 +251,89 @@ function load_mailbox(mailbox, n_page) {
     document.querySelector("#menu33").style.display = "none";
     document.querySelector("#menu44").style.display = "none";
 
-    fetch(`/emails/inbox/${n_page}`)
+    fetch(`/emails/inbox/${a_page}/${j_page}`)
       .then((response) => response.json())
       .then((emails) => {
         // Print emails
         //  console.log(emails.forEach(content));
-          console.log(emails.emails_json);
-          // var stringified = JSON.stringify(emails.emails_json);
-          //  console.log(emails.emails_json);
-          //  var emails_parsed = JSON.stringify(emails.emails_json)
-          //   .replace("\r", '"#"')
-          //   .replace("\n", '"*"');
-          // var emails_parsed = JSON.parse(stringified);
-          var emails_parsed = JSON.parse(emails.emails_json);
-        //  var emails_parsed = JSON.parse('{"a", "b", "c", 1}');
-          // console.log(emails.emails_json);
 
+        // console.log(emails.emails_json);
+        // console.log(emails.users_json);
+        console.log(emails.p_actual);
+        console.log(emails.p_last);
+        if(emails.p_actual == 1 && emails.p_actual == emails.p_last){
+          single_page();
+        }
+        else if (emails.p_actual == 1) {
+          first_page();
+        } else if (emails.p_actual == emails.p_last) {
+          last_page();
+        } else {
+          middle_page();
+        }
+        actual_page = emails.p_actual;
+
+        // var stringified = JSON.stringify(emails.emails_json);
+        //  console.log(emails.emails_json);
+        //  var emails_parsed = JSON.stringify(emails.emails_json)
+        //   .replace("\r", '"#"')
+        //   .replace("\n", '"*"');
+        // var emails_parsed = JSON.parse(stringified);
+        var emails_parsed = JSON.parse(emails.emails_json);
+        var users_parsed = JSON.parse(emails.users_json);
+
+        //  var emails_parsed = JSON.parse('{"a", "b", "c", 1}');
+        // console.log(emails_parsed);
+        // console.log(users_parsed);
+        // users_parsed.forEach((content) =>{
+        //   console.log(content);
+        //   console.log(content.pk);
+        // });
+        // console.log("----------**********----------");
+
+        // console.log("----------**********----------");
         // emails_parsed = JSON.parse(emails.emails_json);
 
-          console.log(emails_parsed);
-          for (var data_email of emails_parsed) {
-            console.log(data_email);
-          };
+        // console.log(emails_parsed);
+        // for (var data_email of emails_parsed) {
+        //   console.log(data_email);
+        // }
 
-          emails_parsed.forEach((content) => {
-          console.log(content);
-          console.log(content.fields.sender);
-          console.log(content.fields.recipients[0]);
+        emails_parsed.forEach((content) => {
+
+          var sender_email = users_parsed.filter(function (entry) {
+            return entry.pk == content.fields.sender;
+          });
+
+          // console.log(sender_email[0]);
+          // console.log(content.fields.sender);
+          // console.log(content.fields.recipients[0]);
+          // console.log("datetimee: ");
+          // console.log(content.fields.timestamp);
+          
           var cont = content.fields.recipients[0];
           var user_log = document.getElementById("testiduser").value;
-          console.log(document.querySelector("#testiduser").value);
+          // console.log(document.querySelector("#testiduser").value);
           // alert(user_log);
           // // // // // // content.recipients.forEach((cont) => {------------------------------------
-          console.log("el cont es esto: " + cont);
-          console.log("mientras que el userlog es esto: " + user_log);
+          // console.log(
+          //   "el sender_email.fields.email es esto: " + sender_email[0].fields.email
+          // );
+          // console.log("el cont es esto: " + cont);
+          // console.log("mientras que el userlog es esto: " + user_log);
           if (cont == user_log) {
             const post = document.createElement("div");
             post.id = "email";
             post.className = "email";
-            content.fields.sender = content.fields.sender.toString();
-            if (content.fields.sender.length > 14)
-              content.fields.sender =
-                content.fields.sender.substring(0, 14) + "...";
+            // content.fields.sender = content.fields.sender.toString();
+            sender_email[0].fields.email =
+              sender_email[0].fields.email.toString();
+            // if (content.fields.sender.length > 14)
+            if (sender_email[0].fields.email.length > 14)
+              // content.fields.sender =
+              //   content.fields.sender.substring(0, 14) + "...";
+              sender_email[0].fields.email =
+                sender_email[0].fields.email.substring(0, 14) + "...";
             if (content.fields.subject.length > 17)
               content.fields.subject =
                 content.fields.subject.substring(0, 17) + "...";
@@ -315,7 +355,7 @@ function load_mailbox(mailbox, n_page) {
                                 <div id="left-content">
                                   ${svg_inbox}
                                   <div id="sender-and-subject">
-                                    <div id="first_column"><b>${content.fields.sender}</b></div> 
+                                    <div id="first_column"><b>${sender_email[0].fields.email}</b></div> 
                                     <div id="second_column"><b>${content.fields.subject}</b></div>
                                   </div>
                                 </div>
@@ -341,9 +381,9 @@ function load_mailbox(mailbox, n_page) {
             // };
           }
         });
-        });
-        // ... do something else with emails ...
-      // });------------------------
+      });
+    // ... do something else with emails ...
+    // });------------------------
     // document.querySelector("#inbox-view").innerHTML = `<h3>${
     //   mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
     // }</h3>`;
@@ -686,8 +726,13 @@ var current = new Date();
 
 //  Date format
 function dateFormat(mailDate) {
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  // console.log(" ");
+  
+  // Output: Tue, July 21, 2020, 10:01:14 AM
+
   const currentDay = current.getDate();
-  const currentMonth = current.getMonth() + 1;
+  const currentMonth = current.getMonth()+1;
   const currentYear = current.getFullYear();
   // console.log("currentDay: " + currentDay);
   // console.log("currentMonth: " + currentMonth);
@@ -695,16 +740,36 @@ function dateFormat(mailDate) {
 
   // console.log(current.getMonth());
   // console.log(mailDate);
-  const dayMail = mailDate.substr(4, 2);
-  const monthMail = mailDate.substr(23, 2);
-  const yearMail = mailDate.substr(7, 4);
-  const monthLMail = mailDate.substr(0, 3);
-  const hourMail = mailDate.substr(13, 5);
+  const dayMail = mailDate.substr(8, 2);
+  const monthMail = mailDate.substr(5, 2);
+  const yearMail = mailDate.substr(0, 4);
+  const hourMail = mailDate.substr(11, 5);  
+  // console.log(parseInt(monthMail));
+  // console.log(months[parseInt(monthMail) - 1]);
+  const monthLMail = months[parseInt(monthMail) - 1];
+
+
+  // console.log("***----------******* ");
   // console.log("dayMail: " + dayMail);
   // console.log("monthMail: " + monthMail);
   // console.log("yearMail: " + yearMail);
   // console.log("monthLMail: " + monthLMail);
   // console.log("hourMail: " + hourMail);
+  
+  // console.log(
+  //   current.toLocaleString("en-US", {
+  //     weekday: "short", // long, short, narrow
+  //     day: "numeric", // numeric, 2-digit
+  //     year: "numeric", // numeric, 2-digit
+  //     // month: "long", // numeric, 2-digit, long, short, narrow
+  //     month: "short", // numeric, 2-digit, long, short, narrow
+  //     hour: "numeric", // numeric, 2-digit
+  //     minute: "numeric", // numeric, 2-digit
+  //     second: "numeric", // numeric, 2-digit
+  //   })
+  // );
+
+  // console.log("***************** ");
 
   var mailDateFormatted = new String();
   if (
@@ -771,4 +836,19 @@ function middle_page() {
   document.getElementById("arrow-last-page").disabled = false;
   document.querySelector("#arrow-last-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+}
+function single_page() {
+  document.getElementById("arrow-first-page").disabled = true;
+  document.querySelector("#arrow-first-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
+  document.getElementById("arrow-prev-page").disabled = true;
+  document.querySelector("#arrow-prev-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
+
+  document.getElementById("arrow-next-page").disabled = true;
+  document.querySelector("#arrow-next-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
+  document.getElementById("arrow-last-page").disabled = true;
+  document.querySelector("#arrow-last-page svg").style.fill =
+    rs.getPropertyValue("--gray-color");
 }

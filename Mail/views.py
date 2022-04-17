@@ -88,9 +88,8 @@ def compose(request):
 
 
 @login_required
-def mailbox(request, mailbox, num_page):
+def mailbox(request, mailbox, actual_page,  jump_page):
 
-    print(num_page)
     # Filter emails returned based on mailbox
     
     # print( Email.objects.all())
@@ -123,29 +122,61 @@ def mailbox(request, mailbox, num_page):
     # Return emails in reverse chronologial order
     emails = emails.order_by("-timestamp").all()
 
-    # users = User.objects.filter(id in emails.emails_sent)
-    # users = User.objects.all()
-    user_senders = []
+    # print("__________---------__________")
+    id_users_array = []
+    # print(emails)
     for s in emails:
-      print(s.sender.id)
-      if  s.sender.id not in user_senders:
-        user_senders.append(s.sender.id)
+      # print(s.sender.id)
+      # print(s.sender)
+      if  s.sender.id not in id_users_array :
+        id_users_array.append(s.sender.id)
+      # print(s.recipients.all())  
+      for r in s.recipients.all():
+        # print(r.id)
+        if r.id not in id_users_array:
+          id_users_array.append(r.id)
+      # for r in s.recipients:
+        # print(r.id)
+    
+    
+    # print(id_users_array)
+    
+    # print("*-*-*-*-*-*-*-*-")
+    users = User.objects.filter(id__in=id_users_array)
+    # users = User.objects.all()
+    
 
-    print("__________---------__________")
-    print(user_senders)
+    # print(users)
 
-    print("*****--------*****")
     # for i in users:
       # print(i)
 
     p = Paginator(emails, 10)
-    # if 
-    #             emails = Email.objects.filter(
-    #         user=request.user, recipients=request.user, archived=True
-    #     )
-    # print(p)
+    
+    # print(actual_page)
+    # print(jump_page)
+    if(jump_page==12):
+      num_page = 1
+    elif(jump_page==11):
+      num_page = actual_page - 1
+    elif(jump_page == 1):
+      num_page = actual_page + 1
+    elif(jump_page == 2):
+      num_page = p.num_pages
+    else:
+      num_page = actual_page
+
+
+
+
+    page = p.page(num_page)
+
+    # print(page)
+    # print(page.object_list)    
+    # print("*****--------*****")
     # print(p.count)
     # print(p.num_pages)
+
     # # for e in p:
       # print(e)
       # print(e.subject)
@@ -228,12 +259,14 @@ def mailbox(request, mailbox, num_page):
     # data = [email.serialize() for email in emails]
     # return JsonResponse(data, safe=False)
     # return JsonResponse([email.serialize() for email in emails], safe=False)
-    emails_json = serializers.serialize('json', emails)
+    # emails_json = serializers.serialize('json', emails)
+    users_json = serializers.serialize('json', users)
+    p_json = serializers.serialize('json', page.object_list)
 
 
-    # for e in emails:
-    #   # print(e)
-    #   print(e.id)
+    for e in emails:
+      # print(e)
+      print(e.timestamp)
     #   print(e.sender)
     #   print(e.subject)
     #   # print(e.body)
@@ -266,22 +299,24 @@ def mailbox(request, mailbox, num_page):
     # # user_serializer = UserSerializer.objects.all()
     # #emails_json = Email.serialize(emails)
     # # print(user_serializer)
-    print("*****************************************************")
-    print("aca estan los emails json:")
-    print (emails_json)
-    print("--------------------------------------------")
-    print("aca estan los paginationson:")
-    print (p)
-    print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-    print("aca estan los userjson:")
-    print (users_json)
+    # print("*****************************************************")
+    # print("aca estan los emails json:")
+    # print (emails_json)
+    # print("--------------------------------------------")
+    # print("aca estan los paginationson:")
+    # print (p)
+    # print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+    # print("aca estan los userjson:")
+    # print (users_json)
 
     # return JsonResponse({"message":"probando",
     #                     "emails_json": emails_json
     #                     }, status=201)
     return JsonResponse({"message":"probando",
-                        "emails_json": emails_json,
-                        # "users_json": users_json
+                        "emails_json": p_json,
+                        "users_json": users_json,
+                        "p_actual" : num_page,
+                        "p_last" : p.num_pages
                         }, status=201)
 
 
