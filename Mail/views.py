@@ -161,7 +161,7 @@ def mailbox(request, mailbox, actual_page,  jump_page):
       num_page = actual_page - 1
     elif(jump_page == 1):
       num_page = actual_page + 1
-    elif(jump_page == 2):
+    elif(jump_page == 2 or actual_page > p.num_pages):
       num_page = p.num_pages
     else:
       num_page = actual_page

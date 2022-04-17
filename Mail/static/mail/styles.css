@@ -356,7 +356,7 @@ a > h3 {
   /* border-radius: 5px; */
   /*border-collapse : collapse;*/
   /*box-shadow: 10px 10px;*/
-  cursor: pointer;
+  /* cursor: pointer; */
   /* display:inline;*/
   /*padding-top:100px;*/
   padding: 10px 0 10px 0;
@@ -368,7 +368,8 @@ a > h3 {
   justify-content: space-between;
 }
 #email #left-content {
-  width: 70vw;
+  cursor: pointer;
+  width: 80vw;
   display: flex;
   /* flex-direction: row; */
 }
@@ -394,7 +395,9 @@ a > h3 {
   /* justify-self: flex-end; */
 }
 
-
+.archive_svg{
+  cursor:pointer;
+}
 /* ,#time-and-archive svg */
 
 /*************************Modal*********************/

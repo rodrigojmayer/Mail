@@ -375,7 +375,7 @@ function load_mailbox(mailbox, a_page, j_page) {
             // onclick = "load_mailbox('/emails/${content.pk}')"
             // onclick = "load_max(event)"; 
             post.innerHTML = `
-                                <div id="left-content" >
+                                <div id="left-content" onclick = "load_mailbox('/emails/${content.pk}')" >
                                   ${svg_inbox}
                                   <div id="sender-and-subject">
                                     <div id="first_column"><b>${sender_email[0].fields.email}</b></div> 
@@ -388,9 +388,9 @@ function load_mailbox(mailbox, a_page, j_page) {
                                   <path d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
                                 </div>`;
 
-            post.addEventListener("click", (event) => {
-              load_mailbox(`/emails/${content.pk}`);
-            });
+            // post.addEventListener("click", (event) => {
+            //   load_mailbox(`/emails/${content.pk}`);
+            // });
 
             document.querySelector("#inbox-view").append(post);
             // space_emails = document.createElement("br");
@@ -617,7 +617,8 @@ function load_mailbox(mailbox, a_page, j_page) {
       mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
     }</h3>`;
   } else if (submailbox === "emails") {
-    //alert(mailbox);
+    // alert("no se porque entra aca");
+    // alert(mailbox);
 
     document.querySelector("#emails-view").style.display = "block";
     document.querySelector("#archived-view").style.display = "none";
