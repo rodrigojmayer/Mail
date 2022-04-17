@@ -127,6 +127,13 @@ body {
   background-color: var(--gray-light-color);
 }
 
+/* #arrow-first-page svg:hover,
+#arrow-prev-page svg:hover,
+#arrow-next-page svg:hover,
+#arrow-last-page svg:hover{
+  cursor: pointer;
+} */
+
 a {
   color: var(--link-color);
   text-decoration: none;
@@ -386,6 +393,7 @@ a > h3 {
   /* margin: 0 5%; */
   /* justify-self: flex-end; */
 }
+
 
 /* ,#time-and-archive svg */
 

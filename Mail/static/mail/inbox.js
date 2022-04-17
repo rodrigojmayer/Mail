@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Use buttons to toggle between views
   document
     .querySelector("#inbox")
-    .addEventListener("click", () => load_mailbox("inbox"));
+    .addEventListener("click", () => load_mailbox("inbox", 1, 0));
   document
     .querySelector("#sent")
     .addEventListener("click", () => load_mailbox("sent"));
@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#compose")
     .addEventListener("click", () => compose_email(null));
+
 
   document.addEventListener("click", (event) => {
     //event.stopPropagation();
@@ -29,9 +30,31 @@ document.addEventListener("DOMContentLoaded", function () {
     // ).style.backgroundImage = "url({% static '/assets/Backgroup1.png' %}";
 
     // document.querySelector("#menu").style.display = "none";
-
+    console.log("reloco");
+    console.log(event);
+    console.log(element);
+    console.log(element.dataset);
+    console.log(element.dataset.class);
+    console.log(element.getAttribute('class'));
+    console.log(element.getAttribute("value"));
+    if(element.getAttribute('class') == "archive_svg"){
+      alert("kacepapa");
+      fetch(`/emails/${element.getAttribute("value")}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          archived: true,
+        }),
+      });
+      
+      // load_mailbox("inbox", actual_page, 0);
+      // ;
+      setTimeout(() => load_mailbox("inbox", actual_page, 0), 100);
+      setTimeout(() => event.stopPropagation(), 100);
+      
+    }
     // alert("probando probando");
     //document.currentScript.getAttribute('one');
+
     if (element.id === "archive_email") {
       //alert("vamopototo");
       //console.log(element.dataset.id);
@@ -259,12 +282,11 @@ function load_mailbox(mailbox, a_page, j_page) {
 
         // console.log(emails.emails_json);
         // console.log(emails.users_json);
-        console.log(emails.p_actual);
-        console.log(emails.p_last);
-        if(emails.p_actual == 1 && emails.p_actual == emails.p_last){
+        // console.log(emails.p_actual);
+        // console.log(emails.p_last);
+        if (emails.p_actual == 1 && emails.p_actual == emails.p_last) {
           single_page();
-        }
-        else if (emails.p_actual == 1) {
+        } else if (emails.p_actual == 1) {
           first_page();
         } else if (emails.p_actual == emails.p_last) {
           last_page();
@@ -300,17 +322,17 @@ function load_mailbox(mailbox, a_page, j_page) {
         // }
 
         emails_parsed.forEach((content) => {
-
           var sender_email = users_parsed.filter(function (entry) {
             return entry.pk == content.fields.sender;
           });
 
           // console.log(sender_email[0]);
+          // console.log(content.pk);
           // console.log(content.fields.sender);
           // console.log(content.fields.recipients[0]);
           // console.log("datetimee: ");
           // console.log(content.fields.timestamp);
-          
+
           var cont = content.fields.recipients[0];
           var user_log = document.getElementById("testiduser").value;
           // console.log(document.querySelector("#testiduser").value);
@@ -350,9 +372,10 @@ function load_mailbox(mailbox, a_page, j_page) {
             // console.log(typeof content.timestamp);
             // console.log(dateFormat(content.timestamp));
             const timestampFormatted = dateFormat(content.fields.timestamp);
-
+            // onclick = "load_mailbox('/emails/${content.pk}')"
+            // onclick = "load_max(event)"; 
             post.innerHTML = `
-                                <div id="left-content">
+                                <div id="left-content" >
                                   ${svg_inbox}
                                   <div id="sender-and-subject">
                                     <div id="first_column"><b>${sender_email[0].fields.email}</b></div> 
@@ -361,12 +384,12 @@ function load_mailbox(mailbox, a_page, j_page) {
                                 </div>
                                 <div id="time-and-archive">
                                   <div id="third_column">${timestampFormatted}</div>
-                                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <svg  class="archive_svg" value="${content.pk}"  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
                                   <path d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
                                 </div>`;
 
             post.addEventListener("click", (event) => {
-              load_mailbox(`/emails/${content.fields.id}`);
+              load_mailbox(`/emails/${content.pk}`);
             });
 
             document.querySelector("#inbox-view").append(post);
@@ -683,6 +706,7 @@ function load_mailbox(mailbox, a_page, j_page) {
         console.log(emails);
       });
   }
+
 }
 
 // Searching
@@ -726,13 +750,26 @@ var current = new Date();
 
 //  Date format
 function dateFormat(mailDate) {
-  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
   // console.log(" ");
-  
+
   // Output: Tue, July 21, 2020, 10:01:14 AM
 
   const currentDay = current.getDate();
-  const currentMonth = current.getMonth()+1;
+  const currentMonth = current.getMonth() + 1;
   const currentYear = current.getFullYear();
   // console.log("currentDay: " + currentDay);
   // console.log("currentMonth: " + currentMonth);
@@ -743,11 +780,10 @@ function dateFormat(mailDate) {
   const dayMail = mailDate.substr(8, 2);
   const monthMail = mailDate.substr(5, 2);
   const yearMail = mailDate.substr(0, 4);
-  const hourMail = mailDate.substr(11, 5);  
+  const hourMail = mailDate.substr(11, 5);
   // console.log(parseInt(monthMail));
   // console.log(months[parseInt(monthMail) - 1]);
   const monthLMail = months[parseInt(monthMail) - 1];
-
 
   // console.log("***----------******* ");
   // console.log("dayMail: " + dayMail);
@@ -755,7 +791,7 @@ function dateFormat(mailDate) {
   // console.log("yearMail: " + yearMail);
   // console.log("monthLMail: " + monthLMail);
   // console.log("hourMail: " + hourMail);
-  
+
   // console.log(
   //   current.toLocaleString("en-US", {
   //     weekday: "short", // long, short, narrow
@@ -796,59 +832,154 @@ function first_page() {
   document.getElementById("arrow-first-page").disabled = true;
   document.querySelector("#arrow-first-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-first-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
   document.getElementById("arrow-prev-page").disabled = true;
   document.querySelector("#arrow-prev-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-prev-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
 
   document.getElementById("arrow-next-page").disabled = false;
   document.querySelector("#arrow-next-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-next-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
   document.getElementById("arrow-last-page").disabled = false;
   document.querySelector("#arrow-last-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-last-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
 }
 function last_page() {
   document.getElementById("arrow-first-page").disabled = false;
   document.querySelector("#arrow-first-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-first-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
   document.getElementById("arrow-prev-page").disabled = false;
   document.querySelector("#arrow-prev-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-prev-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
 
   document.getElementById("arrow-next-page").disabled = true;
   document.querySelector("#arrow-next-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-next-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
   document.getElementById("arrow-last-page").disabled = true;
   document.querySelector("#arrow-last-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-last-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
 }
 function middle_page() {
   document.getElementById("arrow-first-page").disabled = false;
   document.querySelector("#arrow-first-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-first-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
+
   document.getElementById("arrow-prev-page").disabled = false;
   document.querySelector("#arrow-prev-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-prev-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
 
   document.getElementById("arrow-next-page").disabled = false;
   document.querySelector("#arrow-next-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-next-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
   document.getElementById("arrow-last-page").disabled = false;
   document.querySelector("#arrow-last-page svg").style.fill =
     rs.getPropertyValue("--first-color");
+  document
+    .querySelector("#arrow-last-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "pointer";
+    });
 }
 function single_page() {
   document.getElementById("arrow-first-page").disabled = true;
   document.querySelector("#arrow-first-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-first-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
+
   document.getElementById("arrow-prev-page").disabled = true;
   document.querySelector("#arrow-prev-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-prev-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
 
   document.getElementById("arrow-next-page").disabled = true;
   document.querySelector("#arrow-next-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-next-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
   document.getElementById("arrow-last-page").disabled = true;
   document.querySelector("#arrow-last-page svg").style.fill =
     rs.getPropertyValue("--gray-color");
+  document
+    .querySelector("#arrow-last-page svg")
+    .addEventListener("mouseover", function (event) {
+      event.target.style.cursor = "default";
+    });
+
+  //     #arrow-first-page:hover,
+  // #arrow-prev-page:hover,
+  // #arrow-next-page:hover,
+  // #arrow-last-page:hover{
+  //   cursor: pointer;}
 }
+
+// function load_max(event){
+//   alert("holis");
+//   if (event.stopPropagation) {
+//     event.stopPropagation();
+//   }
+// }
