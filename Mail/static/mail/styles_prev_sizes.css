@@ -102,7 +102,7 @@ td {
 
   --max-width: 1200px;
   --header-height: 4rem;
-  --search-height: 3rem;
+  --search-height: 48px;
 
 }
 
@@ -110,7 +110,7 @@ td {
 html {
   box-sizing: border-box;
   font-family: var(--font);
-  font-size: 32px;
+  font-size: 16px;
   scroll-behavior: smooth;
 }
 
@@ -188,8 +188,7 @@ input {
 .header {
   /* position: sticky; */
   position: fixed;
-  padding: .5rem 1rem;
-  /* padding: 13px 1rem; */
+  padding: 13px 1rem;
   width: 100%;
   height: var(--header-height);
   background-color: var(--first-color);
@@ -203,13 +202,7 @@ input {
 
 .header .logo {
   /* display: block; */
-  width: 8rem;
-  /* width: 150px; */
-}
-
-.header .logo svg{
-  width: 10rem;
-  height: 10rem;
+  width: 150px;
 }
 .header .logo-user {
   background-color: var(--link-color);
@@ -224,10 +217,8 @@ input {
 }
 
 .container {
-  padding: 0 1rem;
-  /* padding: 0 20px; */
-  padding-top: 3rem;
-  /* padding-top: 10px; */
+  padding: 0 20px;
+  padding-top: 10px;
   /* padding-bottom: 150px; */
   /* background-color: var(--gray-light-color); */
   height: 90vh;
@@ -235,14 +226,12 @@ input {
 
 .container > h2 {
   text-align: center;
-  padding-top: 1.5rem;
-  /* padding-top: 25px; */
+  padding-top: 25px;
 }
 
 .container .form-group {
   text-align: center;
-  padding-bottom: 1.5rem;
-  /* padding-bottom: 25px; */
+  padding-bottom: 25px;
 }
 .container .form-control {
   text-align: center;
@@ -279,10 +268,10 @@ input:focus::placeholder {
 .btn-next {
   background-color: var(--first-color);
   color: var(--white-color);
-  height: 1.5rem;
-  width: 3.5rem;
+  height: 40px;
+  width: 105px;
   border-radius: 10px;
-  font-size: 1rem;
+  font-size: 18px;
   font-weight: bold;
   font-family: var(--font);
   /* float: right; */
@@ -371,7 +360,7 @@ a > h3 {
   /* cursor: pointer; */
   /* display:inline;*/
   /*padding-top:100px;*/
-  padding: .5rem 0 .5rem 0;
+  padding: 10px 0 10px 0;
   /* margin-bottom: -25px; */
   position: static;
   border: none;
@@ -392,29 +381,19 @@ a > h3 {
 /* font-size: 109%; */
 /* } */
 
-#email #left-content svg{
-  height: 2.5rem;
-  width: 2.5rem;
-  margin: auto 0;
-}
 #email #sender-and-subject {
   margin-left: 5%;
 }
 
-#first_column {
-  font-size: 1.7rem;
-}
-
 #second_column {
   padding-left: 15px;
-  font-size: 1.5rem;
 }
 
 #time-and-archive {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  width: 3rem;
+  width: 60px;
   /* position: fixed;
   right:10px; */
   /* margin: 0 5%; */
@@ -423,8 +402,6 @@ a > h3 {
 
 .archive_svg{
   cursor:pointer;
-  width: 1.7rem;
-  height: 1.7rem;
 }
 
 /* ,#time-and-archive svg */
@@ -531,15 +508,9 @@ a > h3 {
 .search-text:focus {
   outline: none !important;
 }
-
 #submitSearch {
   margin-top: 4px;
   margin-right: 5px;
-}
-
-#submitSearch svg{
-  width: 2rem;
-  height: 2rem;
 }
 #search::-webkit-search-cancel-button:hover,
 #submitSearch:hover {
@@ -609,18 +580,7 @@ select:-webkit-autofill:focus { */
 /* } */
 
 
-
-@media screen and (min-width: 768px) {
-
-
-
-}
-
 @media screen and (min-width: 1024px) {
-  html {
-  font-size: 16px;
-}
-
   .header .logo {
     margin-left: 25px;
   }
@@ -731,49 +691,6 @@ select:-webkit-autofill:focus { */
   }
   .container {
     margin-left: 20vw;
-    padding-top: .3rem;
-  }
-
-  #email {
-  padding: .5rem 0;
-  }
-
-#email #sender-and-subject{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    /* justify-content: ; */
-    align-items:center ;
-    /* margin: 0 auto ; */
-}
-
-  #email #left-content svg{
-    height: 2rem;
-    width: 2rem;
-  }
-
-  #first_column {
-    width: 40%;
-    font-size: 1.2rem;
-  }
-
-  #second_column {
-    width: 50%;
-    font-size: 1rem;
-  }
-  
-  #time-and-archive {
-    
-    /* width: 100%; */
-    display: flex;
-    flex-direction: row;
-    justify-content:flex-end; 
-    align-items:center ;
-    width: 10rem;
-  }
-  
-  #time-and-archive #third_column{
-    margin-right: 10px;
   }
 
   .search {
@@ -796,8 +713,8 @@ select:-webkit-autofill:focus { */
   }
 
   
-  .pagination{
-    margin-top: 63px;
-  }
+.pagination{
+  margin-top: 63px;
+}
 }
 

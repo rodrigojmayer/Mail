@@ -351,14 +351,36 @@ function load_mailbox(mailbox, a_page, j_page) {
             sender_email[0].fields.email =
               sender_email[0].fields.email.toString();
             // if (content.fields.sender.length > 14)
-            if (sender_email[0].fields.email.length > 14)
-              // content.fields.sender =
-              //   content.fields.sender.substring(0, 14) + "...";
-              sender_email[0].fields.email =
-                sender_email[0].fields.email.substring(0, 14) + "...";
-            if (content.fields.subject.length > 17)
-              content.fields.subject =
-                content.fields.subject.substring(0, 17) + "...";
+            // alert(screen.width)
+
+            if(screen.width < 768){
+              if (sender_email[0].fields.email.length > 14)
+                // content.fields.sender =
+                //   content.fields.sender.substring(0, 14) + "...";
+                sender_email[0].fields.email =
+                  sender_email[0].fields.email.substring(0, 14) + "...";
+              if (content.fields.subject.length > 17)
+                content.fields.subject =
+                  content.fields.subject.substring(0, 17) + "...";
+            }else if(screen.width < 1024){
+              if (sender_email[0].fields.email.length > 18)
+                // content.fields.sender =
+                //   content.fields.sender.substring(0, 14) + "...";
+                sender_email[0].fields.email =
+                  sender_email[0].fields.email.substring(0, 18) + "...";
+              if (content.fields.subject.length > 20)
+                content.fields.subject =
+                  content.fields.subject.substring(0, 20) + "...";
+            }else{
+              if (sender_email[0].fields.email.length > 30)
+                // content.fields.sender =
+                //   content.fields.sender.substring(0, 14) + "...";
+                sender_email[0].fields.email =
+                  sender_email[0].fields.email.substring(0, 30) + "...";
+              if (content.fields.subject.length > 35)
+                content.fields.subject =
+                  content.fields.subject.substring(0, 35) + "...";
+            }
 
             let svg_inbox;
             // console.log(content);
