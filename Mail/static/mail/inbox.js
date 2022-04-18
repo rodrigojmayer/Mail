@@ -250,6 +250,22 @@ function load_mailbox(mailbox, a_page, j_page) {
     // document.querySelector("#menu3").style.display = "none";
     // document.querySelector("#menu4").style.display = "none";
 
+
+      document.querySelector("#inbox").style.backgroundColor = rs.getPropertyValue(
+      "--gray-light-color"
+    );
+    document.querySelector("#archived").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+    document.querySelector("#sent").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+    document.querySelector("#compose").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+
+document.querySelector("#sep_menu2").style.borderTopRightRadius = 0;
+document.querySelector("#sep_menu3").style.borderRadius = 0;
+document.querySelector("#sep_menu4").style.borderRadius = 0;
+document.querySelector("#sep_menu5").style.borderRadius = 0;
+
     document.querySelector("#inbox svg path").style.fill = rs.getPropertyValue(
       "--first-alpha-color"
     );
@@ -353,7 +369,7 @@ function load_mailbox(mailbox, a_page, j_page) {
             // if (content.fields.sender.length > 14)
             // alert(screen.width)
 
-            if(screen.width < 768){
+            if (screen.width < 768) {
               if (sender_email[0].fields.email.length > 17)
                 // content.fields.sender =
                 //   content.fields.sender.substring(0, 14) + "...";
@@ -362,7 +378,7 @@ function load_mailbox(mailbox, a_page, j_page) {
               if (content.fields.subject.length > 20)
                 content.fields.subject =
                   content.fields.subject.substring(0, 20) + "...";
-            }else if(screen.width < 1024){
+            } else if (screen.width < 1024) {
               if (sender_email[0].fields.email.length > 20)
                 // content.fields.sender =
                 //   content.fields.sender.substring(0, 14) + "...";
@@ -371,7 +387,7 @@ function load_mailbox(mailbox, a_page, j_page) {
               if (content.fields.subject.length > 23)
                 content.fields.subject =
                   content.fields.subject.substring(0, 23) + "...";
-            }else{
+            } else {
               if (sender_email[0].fields.email.length > 30)
                 // content.fields.sender =
                 //   content.fields.sender.substring(0, 14) + "...";
@@ -395,7 +411,7 @@ function load_mailbox(mailbox, a_page, j_page) {
             // console.log(dateFormat(content.timestamp));
             const timestampFormatted = dateFormat(content.fields.timestamp);
             // onclick = "load_mailbox('/emails/${content.pk}')"
-            // onclick = "load_max(event)"; 
+            // onclick = "load_max(event)";
             post.innerHTML = `
                                 <div id="left-content" onclick = "load_mailbox('/emails/${content.pk}')" >
                                   ${svg_inbox}
