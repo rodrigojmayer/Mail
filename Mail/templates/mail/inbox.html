@@ -8,23 +8,30 @@
 <!-- <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button> -->
 <!-- <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button> -->
 <!-- <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button> -->
-<div class="menu-background-mobile">
+
+
+
+<!-- <div class="menu-background-mobile">
   <div id="menu1" style="background-image: url({% static '/assets/Backgroup1.png' %});"></div>
   <div id="menu2" style="background-image: url({% static '/assets/Backgroup2.png' %});"></div>
   <div id="menu3" style="background-image: url({% static '/assets/Backgroup3.png' %});"></div>
   <div id="menu4" style="background-image: url({% static '/assets/Backgroup4.png' %});"></div>
-</div>
+</div> -->
+
 <div class="menu-background-sidebar">
   <div id="menu11" style="background-image: url({% static '/assets/Backgroupsidebar1.png' %});"></div>
   <div id="menu22" style="background-image: url({% static '/assets/Backgroupsidebar2.png' %});"></div>
   <div id="menu33" style="background-image: url({% static '/assets/Backgroupsidebar3.png' %});"></div>
   <div id="menu44" style="background-image: url({% static '/assets/Backgroupsidebar4.png' %});"> </div>
 </div>
+<div class="half_back_menu"></div>
 <menu class="menu">
-
   <!-- <menu class="menu"> -->
   <!-- href="{% static 'mail/styles.css' %}" -->
   <!-- <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button> -->
+
+  <!-- <div class="menu-background-mobile"> -->
+  <div id="back_sep_menu"><div id="sep_menu1"></div></div>
 
   <a id="inbox">
     <div>
@@ -41,7 +48,7 @@
     </div>
     <h3>Inbox </h3>
   </a>
-
+  <div id="back_sep_menu"><div id="sep_menu2"></div></div>
   <!-- <a id="compose"> -->
   <!-- <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button> -->
   <a id="archived">
@@ -59,6 +66,7 @@
     </div>
     <h3>Archived </h3>
   </a>
+  <div id="back_sep_menu"><div id="sep_menu3"></div></div>
   <a id="sent">
     <div>
       <svg id="sent1" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -74,6 +82,7 @@
     </div>
     <h3>Sent </h3>
   </a>
+  <div id="back_sep_menu"><div id="sep_menu4"></div></div>
   <a id="compose">
     <div>
       <svg id="compose1" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -89,7 +98,10 @@
     </div>
     <h3>Compose </h3>
   </a>
+  <div id="back_sep_menu"><div id="sep_menu5"></div></div>
+  <!-- </div> -->
 </menu>
+<!-- </div> -->
 
 
 <!-- <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a> -->
@@ -110,31 +122,31 @@
 
 <div class="pagination">
 
-<button id="arrow-first-page">
-  <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M8.12091 12L13.0609 7.06096L10.9389 4.93896L3.87891 12L10.9389 19.061L13.0609 16.939L8.12091 12Z" />
-    <path d="M17.9389 4.93896L10.8789 12L17.9389 19.061L20.0609 16.939L15.1209 12L20.0609 7.06096L17.9389 4.93896Z"/>
-  </svg>
-</button>
+  <button id="arrow-first-page">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8.12091 12L13.0609 7.06096L10.9389 4.93896L3.87891 12L10.9389 19.061L13.0609 16.939L8.12091 12Z" />
+      <path d="M17.9389 4.93896L10.8789 12L17.9389 19.061L20.0609 16.939L15.1209 12L20.0609 7.06096L17.9389 4.93896Z" />
+    </svg>
+  </button>
 
-<button id="arrow-prev-page">
-  <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13.9389 4.93896L6.87891 12L13.9389 19.061L16.0609 16.939L11.1209 12L16.0609 7.06096L13.9389 4.93896Z"/>
-  </svg>
-</button>
+  <button id="arrow-prev-page">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.9389 4.93896L6.87891 12L13.9389 19.061L16.0609 16.939L11.1209 12L16.0609 7.06096L13.9389 4.93896Z" />
+    </svg>
+  </button>
 
-<button id="arrow-next-page">
-  <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M10.061 19.061L17.121 12L10.061 4.93896L7.93896 7.06096L12.879 12L7.93896 16.939L10.061 19.061Z"/>
-  </svg>
-</button>
+  <button id="arrow-next-page">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M10.061 19.061L17.121 12L10.061 4.93896L7.93896 7.06096L12.879 12L7.93896 16.939L10.061 19.061Z" />
+    </svg>
+  </button>
 
-<button id="arrow-last-page">
-  <svg  width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M13.061 4.93896L10.939 7.06096L15.879 12L10.939 16.939L13.061 19.061L20.121 12L13.061 4.93896Z" />
-    <path d="M6.06096 19.061L13.121 12L6.06096 4.93896L3.93896 7.06096L8.87896 12L3.93896 16.939L6.06096 19.061Z"/>
-  </svg>
-</button>
+  <button id="arrow-last-page">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M13.061 4.93896L10.939 7.06096L15.879 12L10.939 16.939L13.061 19.061L20.121 12L13.061 4.93896Z" />
+      <path d="M6.06096 19.061L13.121 12L6.06096 4.93896L3.93896 7.06096L8.87896 12L3.93896 16.939L6.06096 19.061Z" />
+    </svg>
+  </button>
 </div>
 <input id="testiduser" value="{{ request.user.id }}" style="display:none"></input>
 

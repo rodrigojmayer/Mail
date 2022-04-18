@@ -245,10 +245,10 @@ function load_mailbox(mailbox, a_page, j_page) {
 
     // var rs = getComputedStyle(document.querySelector(":root"));
 
-    document.querySelector("#menu1").style.display = "block";
-    document.querySelector("#menu2").style.display = "none";
-    document.querySelector("#menu3").style.display = "none";
-    document.querySelector("#menu4").style.display = "none";
+    // document.querySelector("#menu1").style.display = "block";
+    // document.querySelector("#menu2").style.display = "none";
+    // document.querySelector("#menu3").style.display = "none";
+    // document.querySelector("#menu4").style.display = "none";
 
     document.querySelector("#inbox svg path").style.fill = rs.getPropertyValue(
       "--first-alpha-color"
@@ -354,23 +354,23 @@ function load_mailbox(mailbox, a_page, j_page) {
             // alert(screen.width)
 
             if(screen.width < 768){
-              if (sender_email[0].fields.email.length > 14)
+              if (sender_email[0].fields.email.length > 17)
                 // content.fields.sender =
                 //   content.fields.sender.substring(0, 14) + "...";
                 sender_email[0].fields.email =
-                  sender_email[0].fields.email.substring(0, 14) + "...";
-              if (content.fields.subject.length > 17)
-                content.fields.subject =
-                  content.fields.subject.substring(0, 17) + "...";
-            }else if(screen.width < 1024){
-              if (sender_email[0].fields.email.length > 18)
-                // content.fields.sender =
-                //   content.fields.sender.substring(0, 14) + "...";
-                sender_email[0].fields.email =
-                  sender_email[0].fields.email.substring(0, 18) + "...";
+                  sender_email[0].fields.email.substring(0, 17) + "...";
               if (content.fields.subject.length > 20)
                 content.fields.subject =
                   content.fields.subject.substring(0, 20) + "...";
+            }else if(screen.width < 1024){
+              if (sender_email[0].fields.email.length > 20)
+                // content.fields.sender =
+                //   content.fields.sender.substring(0, 14) + "...";
+                sender_email[0].fields.email =
+                  sender_email[0].fields.email.substring(0, 20) + "...";
+              if (content.fields.subject.length > 23)
+                content.fields.subject =
+                  content.fields.subject.substring(0, 23) + "...";
             }else{
               if (sender_email[0].fields.email.length > 30)
                 // content.fields.sender =
