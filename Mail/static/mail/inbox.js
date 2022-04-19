@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Use buttons to toggle between views
   document
     .querySelector("#inbox")
-    .addEventListener("click", () => load_mailbox("inbox", 1, 0));
+    .addEventListener("click", () => load_mailbox("inbox", 1, 0,  ));
   document
     .querySelector("#sent")
     .addEventListener("click", () => load_mailbox("sent"));
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // load_mailbox("inbox", actual_page, 0);
       // ;
-      setTimeout(() => load_mailbox("inbox", actual_page, 0), 100);
+      setTimeout(() => load_mailbox("inbox", actual_page, 0,  ), 100);
       setTimeout(() => event.stopPropagation(), 100);
     }
     // alert("probando probando");
@@ -99,21 +99,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("arrow-first-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 12);
+    load_mailbox("inbox", actual_page, 12,  );
   });
   document.getElementById("arrow-prev-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 11);
+    load_mailbox("inbox", actual_page, 11,  );
   });
   document.getElementById("arrow-next-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 1);
+    load_mailbox("inbox", actual_page, 1,  );
   });
   document.getElementById("arrow-last-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 2);
+    load_mailbox("inbox", actual_page, 2,  );
   });
 
   // first_page();
   // By default, load the inbox
-  load_mailbox("inbox", actual_page, 0);
+  load_mailbox("inbox", actual_page, 0,  "nullnullnull");
 });
 
 function compose_email(reply_data) {
@@ -248,7 +248,7 @@ function get_senmails(content){
   }
 }*/
 
-function load_mailbox(mailbox, a_page, j_page) {
+function load_mailbox(mailbox, a_page, j_page, d_search) {
   // n_page=1;
   // grab element you want to hide
   //const elem = document.querySelector('#hint');
@@ -326,7 +326,7 @@ function load_mailbox(mailbox, a_page, j_page) {
     // document.querySelector("#menu33").style.display = "none";
     // document.querySelector("#menu44").style.display = "none";
 
-    fetch(`/emails/inbox/${a_page}/${j_page}`)
+    fetch(`/emails/inbox/${a_page}/${j_page}/${d_search}`)
       .then((response) => response.json())
       .then((emails) => {
         // Print emails
@@ -843,7 +843,7 @@ function load_mailbox(mailbox, a_page, j_page) {
 // Searching
 // Search by pressing enter
 document.getElementById("lookup-form").onsubmit = searching;
-// Clean search when the inpur is empty (when press the x too)
+// Clean search when the input is empty (when press the x too)
 document.getElementById("search").addEventListener("input", (e) => {
   if (e.currentTarget.value == "") searching();
 });
@@ -853,27 +853,37 @@ document.querySelector("#submitSearch").addEventListener("click", searching);
 function searching() {
   let datos_buscados = document.getElementById("search").value.toLowerCase();
   const post = document.querySelectorAll("#email");
-  for (var i = 0, ilen = post.length; i < ilen; i++) {
-    let remitente = post[i]
-      .querySelector("#first_column")
-      .textContent.toLowerCase();
-    let asunto = post[i]
-      .querySelector("#second_column")
-      .textContent.toLowerCase();
-    let fecha = post[i]
-      .querySelector("#third_column")
-      .textContent.toLowerCase();
-    if (
-      remitente.includes(datos_buscados) ||
-      asunto.includes(datos_buscados) ||
-      fecha.includes(datos_buscados)
-    ) {
-      // post[i].style.display = "block";
-      post[i].style.display = "flex";
-    } else {
-      post[i].style.display = "none";
-    }
+  console.log(post);
+  console.log(post.length);
+  // for (var i = 0, ilen = post.length; i < ilen; i++) {
+  //   let remitente = post[i]
+  //     .querySelector("#first_column")
+  //     .textContent.toLowerCase();
+  //   let asunto = post[i]
+  //     .querySelector("#second_column")
+  //     .textContent.toLowerCase();
+  //   let fecha = post[i]
+  //     .querySelector("#third_column")
+  //     .textContent.toLowerCase();
+  //   if (
+  //     remitente.includes(datos_buscados) ||
+  //     asunto.includes(datos_buscados) ||
+  //     fecha.includes(datos_buscados)
+  //   ) {
+  //     // post[i].style.display = "block";
+  //     post[i].style.display = "flex";
+  //   } else {
+  //     post[i].style.display = "none";
+  //   }
+  // }
+  // console.log(datos_buscados);
+  if (datos_buscados.length== 0){
+    console.log("relakakaka");
+    datos_buscados="nullnullnull";
   }
+  setTimeout(() => load_mailbox("inbox", actual_page, 0, datos_buscados), 100);
+
+
   return false;
 }
 

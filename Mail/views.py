@@ -88,8 +88,9 @@ def compose(request):
 
 
 @login_required
-def mailbox(request, mailbox, actual_page,  jump_page):
-
+def mailbox(request, mailbox, actual_page,  jump_page, data_search):
+    print(data_search)
+    # data_search=None
     # Filter emails returned based on mailbox
     
     # print( Email.objects.all())
@@ -119,6 +120,9 @@ def mailbox(request, mailbox, actual_page,  jump_page):
     else:
         return JsonResponse({"error": "Invalid mailbox."}, status=400)
 
+    if data_search == "nullnullnull":
+      emails = emails.filter(subject__icontains = "k")
+                    
     # Return emails in reverse chronologial order
     emails = emails.order_by("-timestamp").all()
 
