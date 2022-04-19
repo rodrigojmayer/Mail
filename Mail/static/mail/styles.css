@@ -609,7 +609,15 @@ a > h3 {
   width: 2rem;
   height: 2rem;
 }
-#search::-webkit-search-cancel-button:hover,
+/* #search::-webkit-search-cancel-button:hover,
+#submitSearch:hover {
+  cursor: pointer;
+} */
+
+#search::-webkit-search-cancel-button{
+  display:none;
+}
+
 #submitSearch:hover {
   cursor: pointer;
 }
@@ -748,7 +756,7 @@ select:-webkit-autofill:focus { */
     width: 100%;
     /* width: 2vw; */
     background-color: var(--first-beta-color);
-    background-color: red;
+    /* background-color: red; */
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     border-top-left-radius: 0;
@@ -774,8 +782,10 @@ select:-webkit-autofill:focus { */
     width: 80%;
     padding-top: 4px;
     /* padding-left: 10%; */
-    padding-left: 2vw;
-    margin: 0 2vw;
+    /* padding-left: 2vw; */
+    padding-left: 1rem;
+    /* margin: 0 2vw; */
+    margin: 0 1rem;
   }
 
   a > div {
@@ -802,12 +812,21 @@ select:-webkit-autofill:focus { */
   /* color: var(--gray-light-color); */
   /* background-color: var(--gray-light-color); */
   border-radius: 15px 0 0 15px;
-  width: calc(100% - 2vw);
+  width: calc(90%);
+  margin:0 0 0 10%;
   /* height: calc(var(--header-height) - 25px); */
   height: 3rem;
   /* height: 100%; */
   z-index: 990;
   cursor: pointer;
+}
+
+#inbox:hover h3,
+#archived:hover h3,
+#sent:hover h3,
+#compose:hover h3 {
+  opacity: 0.5;
+  transition: 0.7s;
 }
 
   /* 
@@ -838,9 +857,9 @@ select:-webkit-autofill:focus { */
     vertical-align: middle;
   } */
 
-  .menu-background-mobile {
+  /* .menu-background-mobile {
     display: none;
-  }
+  } */
 
   /* #menu11,
   #menu22,
@@ -860,12 +879,13 @@ select:-webkit-autofill:focus { */
     /* display: none;
   } */
   .container {
-    margin-left: 20vw;
+    margin-left: 14rem;
+    padding-left: 20px;
     padding-top: 0.3rem;
   }
 
   #email {
-    padding: 0.5rem 0;
+    padding: 0.3rem 0;
   }
 
   #email #sender-and-subject {
@@ -878,8 +898,8 @@ select:-webkit-autofill:focus { */
   }
 
   #email #left-content svg {
-    height: 2rem;
-    width: 2rem;
+    height: 2.5rem;
+    width: 2.5rem;
   }
 
   #first_column {
@@ -926,5 +946,6 @@ select:-webkit-autofill:focus { */
 
   .pagination {
     margin-top: 63px;
+    margin-bottom: 0;
   }
 }

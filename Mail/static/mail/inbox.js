@@ -173,10 +173,10 @@ function compose_email(reply_data) {
   document.querySelector("#compose1").style.display = "none";
   document.querySelector("#compose2").style.display = "block";
 
-  document.querySelector("#menu11").style.display = "none";
-  document.querySelector("#menu22").style.display = "none";
-  document.querySelector("#menu33").style.display = "none";
-  document.querySelector("#menu44").style.display = "block";
+  // document.querySelector("#menu11").style.display = "none";
+  // document.querySelector("#menu22").style.display = "none";
+  // document.querySelector("#menu33").style.display = "none";
+  // document.querySelector("#menu44").style.display = "block";
 
   // Clear out composition fields
   if (reply_data) {
@@ -321,10 +321,10 @@ function load_mailbox(mailbox, a_page, j_page) {
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
 
-    document.querySelector("#menu11").style.display = "block";
-    document.querySelector("#menu22").style.display = "none";
-    document.querySelector("#menu33").style.display = "none";
-    document.querySelector("#menu44").style.display = "none";
+    // document.querySelector("#menu11").style.display = "block";
+    // document.querySelector("#menu22").style.display = "none";
+    // document.querySelector("#menu33").style.display = "none";
+    // document.querySelector("#menu44").style.display = "none";
 
     fetch(`/emails/inbox/${a_page}/${j_page}`)
       .then((response) => response.json())
@@ -551,10 +551,10 @@ function load_mailbox(mailbox, a_page, j_page) {
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
 
-    document.querySelector("#menu11").style.display = "none";
-    document.querySelector("#menu22").style.display = "none";
-    document.querySelector("#menu33").style.display = "block";
-    document.querySelector("#menu44").style.display = "none";
+    // document.querySelector("#menu11").style.display = "none";
+    // document.querySelector("#menu22").style.display = "none";
+    // document.querySelector("#menu33").style.display = "block";
+    // document.querySelector("#menu44").style.display = "none";
 
     fetch("/emails/sent")
       .then((response) => response.json())
@@ -679,10 +679,10 @@ function load_mailbox(mailbox, a_page, j_page) {
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
 
-    document.querySelector("#menu11").style.display = "none";
-    document.querySelector("#menu22").style.display = "block";
-    document.querySelector("#menu33").style.display = "none";
-    document.querySelector("#menu44").style.display = "none";
+    // document.querySelector("#menu11").style.display = "none";
+    // document.querySelector("#menu22").style.display = "block";
+    // document.querySelector("#menu33").style.display = "none";
+    // document.querySelector("#menu44").style.display = "none";
 
     // alert("ola");
     fetch("/emails/archive")
