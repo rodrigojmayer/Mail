@@ -19,7 +19,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .querySelector("#compose")
     .addEventListener("click", () => compose_email(null));
 
-
   document.addEventListener("click", (event) => {
     //event.stopPropagation();
     const element = event.target;
@@ -35,9 +34,9 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(element);
     console.log(element.dataset);
     console.log(element.dataset.class);
-    console.log(element.getAttribute('class'));
+    console.log(element.getAttribute("class"));
     console.log(element.getAttribute("value"));
-    if(element.getAttribute('class') == "archive_svg"){
+    if (element.getAttribute("class") == "archive_svg") {
       alert("kacepapa");
       fetch(`/emails/${element.getAttribute("value")}`, {
         method: "PUT",
@@ -45,12 +44,11 @@ document.addEventListener("DOMContentLoaded", function () {
           archived: true,
         }),
       });
-      
+
       // load_mailbox("inbox", actual_page, 0);
       // ;
       setTimeout(() => load_mailbox("inbox", actual_page, 0), 100);
       setTimeout(() => event.stopPropagation(), 100);
-      
     }
     // alert("probando probando");
     //document.currentScript.getAttribute('one');
@@ -130,7 +128,7 @@ function compose_email(reply_data) {
   // document.querySelector("#menu2").style.display = "none";
   // document.querySelector("#menu3").style.display = "none";
   // document.querySelector("#menu4").style.display = "block";
-  
+
   document.querySelector("#inbox").style.backgroundColor =
     rs.getPropertyValue("--first-beta-color");
   document.querySelector("#archived").style.backgroundColor =
@@ -140,13 +138,22 @@ function compose_email(reply_data) {
   document.querySelector("#compose").style.backgroundColor =
     rs.getPropertyValue("--gray-light-color");
 
-  document.querySelector("#sep_menu1").style.borderRadius = 0;
-  document.querySelector("#sep_menu2").style.borderRadius = 0;
-  document.querySelector("#sep_menu3").style.borderRadius = 0;
-  document.querySelector("#sep_menu4").style.borderTopLeftRadius = 0;
-  document.querySelector("#sep_menu4").style.borderTopRightRadius = "5px";
-  document.querySelector("#sep_menu5").style.borderTopLeftRadius = "5px";
-
+  if (screen.width < 1024) {
+    document.querySelector("#sep_menu1").style.borderRadius = 0;
+    document.querySelector("#sep_menu2").style.borderRadius = 0;
+    document.querySelector("#sep_menu3").style.borderRadius = 0;
+    document.querySelector("#sep_menu4").style.borderTopLeftRadius = 0;
+    document.querySelector("#sep_menu4").style.borderTopRightRadius = "5px";
+    document.querySelector("#sep_menu5").style.borderTopLeftRadius = "5px";
+  } else {
+    document.querySelector("#sep_menu1").style.borderRadius = 0;
+    document.querySelector("#sep_menu2").style.borderRadius = 0;
+    document.querySelector("#sep_menu3").style.borderRadius = 0;
+    document.querySelector("#sep_menu4").style.borderTopRightRadius = 0;
+    document.querySelector("#sep_menu4").style.borderBottomRightRadius = "5px";
+    document.querySelector("#sep_menu5").style.borderTopRightRadius = "5px";
+    document.querySelector("#sep_menu5").style.borderBottomRightRadius = 0;
+  }
   document.querySelector("#inbox svg path").style.fill =
     rs.getPropertyValue("--gray-light-color");
   document.querySelector("#archived svg path").style.fill =
@@ -267,10 +274,8 @@ function load_mailbox(mailbox, a_page, j_page) {
     // document.querySelector("#menu3").style.display = "none";
     // document.querySelector("#menu4").style.display = "none";
 
-
-      document.querySelector("#inbox").style.backgroundColor = rs.getPropertyValue(
-      "--gray-light-color"
-    );
+    document.querySelector("#inbox").style.backgroundColor =
+      rs.getPropertyValue("--gray-light-color");
     document.querySelector("#archived").style.backgroundColor =
       rs.getPropertyValue("--first-beta-color");
     document.querySelector("#sent").style.backgroundColor =
@@ -278,12 +283,24 @@ function load_mailbox(mailbox, a_page, j_page) {
     document.querySelector("#compose").style.backgroundColor =
       rs.getPropertyValue("--first-beta-color");
 
+    // alert(screen.width);
+    if (screen.width < 1024) {
+      // alert("es pantalla chica");
       document.querySelector("#sep_menu1").style.borderTopRightRadius = "5px";
       document.querySelector("#sep_menu2").style.borderTopLeftRadius = "5px";
       document.querySelector("#sep_menu2").style.borderTopRightRadius = 0;
       document.querySelector("#sep_menu3").style.borderRadius = 0;
       document.querySelector("#sep_menu4").style.borderRadius = 0;
       document.querySelector("#sep_menu5").style.borderRadius = 0;
+    } else {
+      document.querySelector("#sep_menu1").style.borderBottomRightRadius =
+        "5px";
+      document.querySelector("#sep_menu2").style.borderTopRightRadius = "5px";
+      document.querySelector("#sep_menu2").style.borderBottomRightRadius = 0;
+      document.querySelector("#sep_menu3").style.borderRadius = 0;
+      document.querySelector("#sep_menu4").style.borderRadius = 0;
+      document.querySelector("#sep_menu5").style.borderRadius = 0;
+    }
 
     document.querySelector("#inbox svg path").style.fill = rs.getPropertyValue(
       "--first-alpha-color"
@@ -487,7 +504,6 @@ function load_mailbox(mailbox, a_page, j_page) {
     // document.querySelector("#menu3").style.display = "block";
     // document.querySelector("#menu4").style.display = "none";
 
-
     document.querySelector("#inbox").style.backgroundColor =
       rs.getPropertyValue("--first-beta-color");
     document.querySelector("#archived").style.backgroundColor =
@@ -497,13 +513,24 @@ function load_mailbox(mailbox, a_page, j_page) {
     document.querySelector("#compose").style.backgroundColor =
       rs.getPropertyValue("--first-beta-color");
 
-    document.querySelector("#sep_menu1").style.borderRadius = 0;
-    document.querySelector("#sep_menu2").style.borderRadius = 0;
-    document.querySelector("#sep_menu3").style.borderTopLeftRadius = 0; 
-    document.querySelector("#sep_menu3").style.borderTopRightRadius = "5px";
-    document.querySelector("#sep_menu4").style.borderTopLeftRadius = "5px";
-    document.querySelector("#sep_menu4").style.borderTopRightRadius = 0;
-    document.querySelector("#sep_menu5").style.borderRadius = 0;
+    if (screen.width < 1024) {
+      document.querySelector("#sep_menu1").style.borderRadius = 0;
+      document.querySelector("#sep_menu2").style.borderRadius = 0;
+      document.querySelector("#sep_menu3").style.borderTopLeftRadius = 0;
+      document.querySelector("#sep_menu3").style.borderTopRightRadius = "5px";
+      document.querySelector("#sep_menu4").style.borderTopLeftRadius = "5px";
+      document.querySelector("#sep_menu4").style.borderTopRightRadius = 0;
+      document.querySelector("#sep_menu5").style.borderRadius = 0;
+    } else {
+      document.querySelector("#sep_menu1").style.borderRadius = 0;
+      document.querySelector("#sep_menu2").style.borderRadius = 0;
+      document.querySelector("#sep_menu3").style.borderTopRightRadius = 0;
+      document.querySelector("#sep_menu3").style.borderBottomRightRadius =
+        "5px";
+      document.querySelector("#sep_menu4").style.borderTopRightRadius = "5px";
+      document.querySelector("#sep_menu4").style.borderBottomRightRadius = 0;
+      document.querySelector("#sep_menu5").style.borderRadius = 0;
+    }
 
     document.querySelector("#inbox svg path").style.fill =
       rs.getPropertyValue("--gray-light-color");
@@ -607,17 +634,16 @@ function load_mailbox(mailbox, a_page, j_page) {
     // document.querySelector("#menu3").style.display = "none";
     // document.querySelector("#menu4").style.display = "none";
 
+    document.querySelector("#inbox").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+    document.querySelector("#archived").style.backgroundColor =
+      rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#sent").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+    document.querySelector("#compose").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
 
-      document.querySelector("#inbox").style.backgroundColor =
-        rs.getPropertyValue("--first-beta-color");
-      document.querySelector("#archived").style.backgroundColor =
-        rs.getPropertyValue("--gray-light-color");
-      document.querySelector("#sent").style.backgroundColor =
-        rs.getPropertyValue("--first-beta-color");
-      document.querySelector("#compose").style.backgroundColor =
-        rs.getPropertyValue("--first-beta-color");
-
-        
+    if(screen.width < 1024){
       document.querySelector("#sep_menu1").style.borderRadius = 0;
       document.querySelector("#sep_menu2").style.borderTopLeftRadius = 0;
       document.querySelector("#sep_menu2").style.borderTopRightRadius = "5px";
@@ -625,7 +651,16 @@ function load_mailbox(mailbox, a_page, j_page) {
       document.querySelector("#sep_menu3").style.borderTopRightRadius = 0;
       document.querySelector("#sep_menu4").style.borderRadius = 0;
       document.querySelector("#sep_menu5").style.borderRadius = 0;
-
+    } else {
+      document.querySelector("#sep_menu1").style.borderRadius = 0;
+      document.querySelector("#sep_menu2").style.borderTopRightRadius = 0;
+      document.querySelector("#sep_menu2").style.borderBottomRightRadius =
+        "5px";
+      document.querySelector("#sep_menu3").style.borderTopRightRadius = "5px";
+      document.querySelector("#sep_menu3").style.borderBottomRightRadius = 0;
+      document.querySelector("#sep_menu4").style.borderRadius = 0;
+      document.querySelector("#sep_menu5").style.borderRadius = 0;
+    }
     document.querySelector("#inbox svg path").style.fill =
       rs.getPropertyValue("--gray-light-color");
     document.querySelector("#archived svg path").style.fill =
@@ -803,7 +838,6 @@ function load_mailbox(mailbox, a_page, j_page) {
         console.log(emails);
       });
   }
-
 }
 
 // Searching
