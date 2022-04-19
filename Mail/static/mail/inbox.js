@@ -126,10 +126,27 @@ function compose_email(reply_data) {
   document.querySelector("#archived-view").style.display = "none";
   document.querySelector("#emails-view").style.display = "none";
 
-  document.querySelector("#menu1").style.display = "none";
-  document.querySelector("#menu2").style.display = "none";
-  document.querySelector("#menu3").style.display = "none";
-  document.querySelector("#menu4").style.display = "block";
+  // document.querySelector("#menu1").style.display = "none";
+  // document.querySelector("#menu2").style.display = "none";
+  // document.querySelector("#menu3").style.display = "none";
+  // document.querySelector("#menu4").style.display = "block";
+  
+  document.querySelector("#inbox").style.backgroundColor =
+    rs.getPropertyValue("--first-beta-color");
+  document.querySelector("#archived").style.backgroundColor =
+    rs.getPropertyValue("--first-beta-color");
+  document.querySelector("#sent").style.backgroundColor =
+    rs.getPropertyValue("--first-beta-color");
+  document.querySelector("#compose").style.backgroundColor =
+    rs.getPropertyValue("--gray-light-color");
+
+  document.querySelector("#sep_menu1").style.borderRadius = 0;
+  document.querySelector("#sep_menu2").style.borderRadius = 0;
+  document.querySelector("#sep_menu3").style.borderRadius = 0;
+  document.querySelector("#sep_menu4").style.borderTopLeftRadius = 0;
+  document.querySelector("#sep_menu4").style.borderTopRightRadius = "5px";
+  document.querySelector("#sep_menu5").style.borderTopLeftRadius = "5px";
+
   document.querySelector("#inbox svg path").style.fill =
     rs.getPropertyValue("--gray-light-color");
   document.querySelector("#archived svg path").style.fill =
@@ -261,10 +278,12 @@ function load_mailbox(mailbox, a_page, j_page) {
     document.querySelector("#compose").style.backgroundColor =
       rs.getPropertyValue("--first-beta-color");
 
-document.querySelector("#sep_menu2").style.borderTopRightRadius = 0;
-document.querySelector("#sep_menu3").style.borderRadius = 0;
-document.querySelector("#sep_menu4").style.borderRadius = 0;
-document.querySelector("#sep_menu5").style.borderRadius = 0;
+      document.querySelector("#sep_menu1").style.borderTopRightRadius = "5px";
+      document.querySelector("#sep_menu2").style.borderTopLeftRadius = "5px";
+      document.querySelector("#sep_menu2").style.borderTopRightRadius = 0;
+      document.querySelector("#sep_menu3").style.borderRadius = 0;
+      document.querySelector("#sep_menu4").style.borderRadius = 0;
+      document.querySelector("#sep_menu5").style.borderRadius = 0;
 
     document.querySelector("#inbox svg path").style.fill = rs.getPropertyValue(
       "--first-alpha-color"
@@ -463,10 +482,29 @@ document.querySelector("#sep_menu5").style.borderRadius = 0;
     document.querySelector("#archived-view").style.display = "none";
     document.querySelector("#emails-view").style.display = "none";
 
-    document.querySelector("#menu1").style.display = "none";
-    document.querySelector("#menu2").style.display = "none";
-    document.querySelector("#menu3").style.display = "block";
-    document.querySelector("#menu4").style.display = "none";
+    // document.querySelector("#menu1").style.display = "none";
+    // document.querySelector("#menu2").style.display = "none";
+    // document.querySelector("#menu3").style.display = "block";
+    // document.querySelector("#menu4").style.display = "none";
+
+
+    document.querySelector("#inbox").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+    document.querySelector("#archived").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+    document.querySelector("#sent").style.backgroundColor =
+      rs.getPropertyValue("--gray-light-color");
+    document.querySelector("#compose").style.backgroundColor =
+      rs.getPropertyValue("--first-beta-color");
+
+    document.querySelector("#sep_menu1").style.borderRadius = 0;
+    document.querySelector("#sep_menu2").style.borderRadius = 0;
+    document.querySelector("#sep_menu3").style.borderTopLeftRadius = 0; 
+    document.querySelector("#sep_menu3").style.borderTopRightRadius = "5px";
+    document.querySelector("#sep_menu4").style.borderTopLeftRadius = "5px";
+    document.querySelector("#sep_menu4").style.borderTopRightRadius = 0;
+    document.querySelector("#sep_menu5").style.borderRadius = 0;
+
     document.querySelector("#inbox svg path").style.fill =
       rs.getPropertyValue("--gray-light-color");
     document.querySelector("#archived svg path").style.fill =
@@ -564,10 +602,30 @@ document.querySelector("#sep_menu5").style.borderRadius = 0;
     document.querySelector("#compose-view").style.display = "none";
     document.querySelector("#emails-view").style.display = "none";
 
-    document.querySelector("#menu1").style.display = "none";
-    document.querySelector("#menu2").style.display = "block";
-    document.querySelector("#menu3").style.display = "none";
-    document.querySelector("#menu4").style.display = "none";
+    // document.querySelector("#menu1").style.display = "none";
+    // document.querySelector("#menu2").style.display = "block";
+    // document.querySelector("#menu3").style.display = "none";
+    // document.querySelector("#menu4").style.display = "none";
+
+
+      document.querySelector("#inbox").style.backgroundColor =
+        rs.getPropertyValue("--first-beta-color");
+      document.querySelector("#archived").style.backgroundColor =
+        rs.getPropertyValue("--gray-light-color");
+      document.querySelector("#sent").style.backgroundColor =
+        rs.getPropertyValue("--first-beta-color");
+      document.querySelector("#compose").style.backgroundColor =
+        rs.getPropertyValue("--first-beta-color");
+
+        
+      document.querySelector("#sep_menu1").style.borderRadius = 0;
+      document.querySelector("#sep_menu2").style.borderTopLeftRadius = 0;
+      document.querySelector("#sep_menu2").style.borderTopRightRadius = "5px";
+      document.querySelector("#sep_menu3").style.borderTopLeftRadius = "5px";
+      document.querySelector("#sep_menu3").style.borderTopRightRadius = 0;
+      document.querySelector("#sep_menu4").style.borderRadius = 0;
+      document.querySelector("#sep_menu5").style.borderRadius = 0;
+
     document.querySelector("#inbox svg path").style.fill =
       rs.getPropertyValue("--gray-light-color");
     document.querySelector("#archived svg path").style.fill =
