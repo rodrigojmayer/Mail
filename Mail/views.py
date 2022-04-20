@@ -129,9 +129,9 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
       # print(s.sender)
       if  s.sender.id not in id_users_array :
         id_users_array.append(s.sender.id)
-        print(s.sender.username)
+        # print(s.sender.username)
         if data_search in s.sender.username:
-          print("encontrado")
+          # print("encontrado")
           id_users_senders_search_array.append(s.sender.id)
       # print(s.recipients.all())  
       for r in s.recipients.all():

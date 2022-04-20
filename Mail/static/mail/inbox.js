@@ -1,5 +1,6 @@
 var rs = getComputedStyle(document.querySelector(":root"));
 var actual_page = 1;
+var datos_buscados = "nullnullnull";
 
 document.addEventListener("DOMContentLoaded", function () {
   // var r = document.querySelector(":root");
@@ -9,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
   document
     .querySelector("#inbox")
     .addEventListener("click", () =>
-      load_mailbox("inbox", 1, 0, "nullnullnull")
+      load_mailbox("inbox", 1, 0, datos_buscados)
     );
   document
     .querySelector("#sent")
@@ -50,7 +51,7 @@ document.addEventListener("DOMContentLoaded", function () {
       // load_mailbox("inbox", actual_page, 0);
       // ;
       setTimeout(
-        () => load_mailbox("inbox", actual_page, 0, "nullnullnull"),
+        () => load_mailbox("inbox", actual_page, 0, datos_buscados),
         100
       );
       setTimeout(() => event.stopPropagation(), 100);
@@ -104,21 +105,21 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("arrow-first-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 12, "nullnullnull");
+    load_mailbox("inbox", actual_page, 12, datos_buscados);
   });
   document.getElementById("arrow-prev-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 11, "nullnullnull");
+    load_mailbox("inbox", actual_page, 11, datos_buscados);
   });
   document.getElementById("arrow-next-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 1, "nullnullnull");
+    load_mailbox("inbox", actual_page, 1, datos_buscados);
   });
   document.getElementById("arrow-last-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 2, "nullnullnull");
+    load_mailbox("inbox", actual_page, 2, datos_buscados);
   });
 
   // first_page();
   // By default, load the inbox
-  load_mailbox("inbox", actual_page, 0,  "nullnullnull");
+  load_mailbox("inbox", actual_page, 0, datos_buscados);
 });
 
 function compose_email(reply_data) {
@@ -253,7 +254,7 @@ function get_senmails(content){
   }
 }*/
 
-function load_mailbox(mailbox, a_page, j_page, d_search) {
+function load_mailbox(mailbox, a_page, j_page,  d_search) {
   // n_page=1;
   // grab element you want to hide
   //const elem = document.querySelector('#hint');
@@ -856,7 +857,7 @@ document.getElementById("search").addEventListener("input", (e) => {
 document.querySelector("#submitSearch").addEventListener("click", searching);
 // The function Search
 function searching() {
-  let datos_buscados = document.getElementById("search").value.toLowerCase();
+  datos_buscados = document.getElementById("search").value.toLowerCase();
   const post = document.querySelectorAll("#email");
   console.log(post);
   console.log(post.length);
