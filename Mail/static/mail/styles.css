@@ -224,13 +224,16 @@ input {
 }
 
 .container {
-  padding: 0 1rem;
+  padding: var(--header-height) 1rem;
   /* padding: 0 20px; */
-  padding-top: 3rem;
+  /* padding-top: 3rem; */
   /* padding-top: 10px; */
   /* padding-bottom: 150px; */
   /* background-color: var(--gray-light-color); */
-  height: 90vh;
+  /* height: 90vh; */
+  /* height: auto; */
+  /* padding-bottom: var(--header-height); */
+  padding-bottom: 0;
 }
 
 .container > h2 {
@@ -241,7 +244,8 @@ input {
 
 .container .form-group {
   text-align: center;
-  padding-bottom: 1.5rem;
+  /* padding-bottom: 1.5rem; */
+  /* padding-bottom: var(--header-height); */
   /* padding-bottom: 25px; */
 }
 .container .form-control {
@@ -259,12 +263,12 @@ input {
 }
 
 .inbox_class {
-  height: 45vh;
+  /* height: 5vh; */
   /* padding-bottom: 500px; */
   /* margin-top: calc(var(--header-height)+8px+var(--search-height)); */
   /* margin-top: calc(48px+8px+48px); */
   /* margin-top: 120px; */
-  margin-bottom: 350px;
+  /* margin-bottom: 350px; */
 }
 
 .space-bottom {
@@ -624,7 +628,7 @@ a > h3 {
 
 .pagination {
   margin: 0 auto;
-  margin-top: 6rem;
+  margin-top: 5rem;
   margin-bottom: 0.7rem;
   width: 20rem;
   display: flex;
