@@ -98,8 +98,9 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
     # for e in Email.objects.all():
     #   print(e.subject)
       # print(e.subject)
+    print(request.user)
 
-    # print("------Probando paginator 3000------")
+    print("------Probando paginator 3000------")
 
     # p = Paginator(Email.objects.all(), 2)
     # print(p.count)
@@ -120,20 +121,18 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
     else:
         return JsonResponse({"error": "Invalid mailbox."}, status=400)
 
-    if data_search == "nullnullnull":
-      emails = emails.filter(subject__icontains = "k")
-                    
-    # Return emails in reverse chronologial order
-    emails = emails.order_by("-timestamp").all()
-
-    # print("__________---------__________")
     id_users_array = []
+    id_users_senders_search_array = []
     # print(emails)
     for s in emails:
       # print(s.sender.id)
       # print(s.sender)
       if  s.sender.id not in id_users_array :
         id_users_array.append(s.sender.id)
+        print(s.sender.username)
+        if data_search in s.sender.username:
+          print("encontrado")
+          id_users_senders_search_array.append(s.sender.id)
       # print(s.recipients.all())  
       for r in s.recipients.all():
         # print(r.id)
@@ -142,11 +141,22 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
       # for r in s.recipients:
         # print(r.id)
     
+    print(id_users_array)
     
-    # print(id_users_array)
-    
-    # print("*-*-*-*-*-*-*-*-")
     users = User.objects.filter(id__in=id_users_array)
+
+    if not data_search == "nullnullnull":
+      emails = emails.filter(subject__icontains = data_search) | emails.filter(sender__in = id_users_senders_search_array)
+      # emails = emails.filter(user__username__icontains = data_search)
+      # emails = emails.filter(sender = data_search)
+      # userios = User.objects.filter(emails_sent = "4")
+                    
+    # emails.sender
+    # Return emails in reverse chronologial order
+    emails = emails.order_by("-timestamp").all()
+
+    # print("__________---------__________")
+    
     # users = User.objects.all()
     
 
@@ -217,7 +227,9 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
            
     #   e.subject = "nopuedeser"
     #   print(e.subject)
-    #   print(emails)
+    # print(emails)
+    # for e in emails:
+      # print(e.sender)
     
     # print(emails[0])
     # print(p.count)
@@ -268,9 +280,9 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
     p_json = serializers.serialize('json', page.object_list)
 
 
-    for e in emails:
+    # for e in emails:
       # print(e)
-      print(e.timestamp)
+      # print(e.timestamp)
     #   print(e.sender)
     #   print(e.subject)
     #   # print(e.body)

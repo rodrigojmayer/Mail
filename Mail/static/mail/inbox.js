@@ -8,7 +8,9 @@ document.addEventListener("DOMContentLoaded", function () {
   // Use buttons to toggle between views
   document
     .querySelector("#inbox")
-    .addEventListener("click", () => load_mailbox("inbox", 1, 0,  ));
+    .addEventListener("click", () =>
+      load_mailbox("inbox", 1, 0, "nullnullnull")
+    );
   document
     .querySelector("#sent")
     .addEventListener("click", () => load_mailbox("sent"));
@@ -47,7 +49,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
       // load_mailbox("inbox", actual_page, 0);
       // ;
-      setTimeout(() => load_mailbox("inbox", actual_page, 0,  ), 100);
+      setTimeout(
+        () => load_mailbox("inbox", actual_page, 0, "nullnullnull"),
+        100
+      );
       setTimeout(() => event.stopPropagation(), 100);
     }
     // alert("probando probando");
@@ -99,16 +104,16 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   document.getElementById("arrow-first-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 12,  );
+    load_mailbox("inbox", actual_page, 12, "nullnullnull");
   });
   document.getElementById("arrow-prev-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 11,  );
+    load_mailbox("inbox", actual_page, 11, "nullnullnull");
   });
   document.getElementById("arrow-next-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 1,  );
+    load_mailbox("inbox", actual_page, 1, "nullnullnull");
   });
   document.getElementById("arrow-last-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 2,  );
+    load_mailbox("inbox", actual_page, 2, "nullnullnull");
   });
 
   // first_page();
