@@ -35,8 +35,9 @@ class Email(models.Model):
         }
 
     def __str__(self):
-      return f'"id": {self.id}, "id_sender": {self.sender.id},"sender": "{self.sender}", "id_recipients":  {[(user.id) for user in self.recipients.all()]}, "recipients":  {[(user.email) for user in self.recipients.all()]}, "subject": "{self.subject}", "body": "{self.body}"'
-
+      # return f'"id": {self.id}, "id_sender": {self.sender.id},"sender": "{self.sender}", "id_recipients":  {[(user.id) for user in self.recipients.all()]}, "recipients":  {[(user.email) for user in self.recipients.all()]}, "subject": "{self.subject}", "body": "{self.body}"'
+      
+      return f'"id": {self.id}, "id_sender": {self.sender.id},"sender": "{self.sender}", "id_recipients":  {[(user.id) for user in self.recipients.all()]}, "recipients":  {[(user.email) for user in self.recipients.all()]}, "subject": "{self.subject}", "archived": "{self.archived}"'
 
 
 # class UserSerializer(serializers.BadSerializer):

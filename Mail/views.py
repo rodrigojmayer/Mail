@@ -39,7 +39,7 @@ def index(request):
 @login_required
 def compose(request):
 
-    print("---------------Llega hasta aqui------------------")
+    # print("---------------Llega hasta aqui------------------")
     # Composing a new email must be via POST
     if request.method != "POST":
         return JsonResponse({"error": "POST request required."}, status=400)
@@ -89,7 +89,7 @@ def compose(request):
 
 @login_required
 def mailbox(request, mailbox, actual_page,  jump_page, data_search):
-    print(data_search)
+    # print(data_search)
     # data_search=None
     # Filter emails returned based on mailbox
     
@@ -98,9 +98,9 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
     # for e in Email.objects.all():
     #   print(e.subject)
       # print(e.subject)
-    print(request.user)
+    # print(request.user)
 
-    print("------Probando paginator 3000------")
+    # print("------Probando paginator 3000------")
 
     # p = Paginator(Email.objects.all(), 2)
     # print(p.count)
@@ -141,7 +141,7 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
       # for r in s.recipients:
         # print(r.id)
     
-    print(id_users_array)
+    # print(id_users_array)
     
     users = User.objects.filter(id__in=id_users_array)
 
