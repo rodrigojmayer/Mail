@@ -1,6 +1,7 @@
 var rs = getComputedStyle(document.querySelector(":root"));
 var actual_page = 1;
 var datos_buscados = "nullnullnull";
+var actual_view = "inbox";
 
 document.addEventListener("DOMContentLoaded", function () {
   // var r = document.querySelector(":root");
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // console.log(element.getAttribute("class"));
     // console.log(element.getAttribute("value"));
     if (element.getAttribute("class") == "archive_svg") {
-       alert("kacepapa archive");
+      //  alert("kacepapa archive");
       fetch(`/emails/${element.getAttribute("value")}`, {
         method: "PUT",
         body: JSON.stringify({
@@ -58,7 +59,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     if (element.getAttribute("class") == "unarchive_svg") {
-       alert("kacepapa UNarchive");
+      //  alert("kacepapa UNarchive");
       fetch(`/emails/${element.getAttribute("value")}`, {
         method: "PUT",
         body: JSON.stringify({
@@ -113,22 +114,22 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // alert("chucaro1")
-    // console.log()
+    // console.log(actual_view)
     if(element.classList[0] == "arrow-first-page" && document.getElementById("arrow-first-page").disabled == false) {
-      alert("chucaro1")
-      load_mailbox("inbox", actual_page, 12, datos_buscados);
+      // alert("chucaro1")
+      load_mailbox(actual_view, actual_page, 12, datos_buscados);
     }
     if(element.classList[0] == "arrow-prev-page" && document.getElementById("arrow-prev-page").disabled == false) {
-      alert("chucaro2")
-      load_mailbox("inbox", actual_page, 11, datos_buscados);
+      // alert("chucaro2")
+      load_mailbox(actual_view, actual_page, 11, datos_buscados);
     }
     if(element.classList[0] == "arrow-next-page" && document.getElementById("arrow-next-page").disabled == false) {
-      alert("chucaro3")
-      load_mailbox("inbox", actual_page, 1, datos_buscados);
+      // alert("chucaro3")
+      load_mailbox(actual_view, actual_page, 1, datos_buscados);
     }
     if(element.classList[0] == "arrow-last-page" && document.getElementById("arrow-last-page").disabled == false) {
-      alert("chucaro4")
-      load_mailbox("inbox", actual_page, 2, datos_buscados);
+      // alert("chucaro4")
+      load_mailbox(actual_view, actual_page, 2, datos_buscados);
     }
   });
 
@@ -292,6 +293,7 @@ function get_senmails(content){
 }*/
 
 function load_mailbox(mailbox, a_page, j_page,  d_search) {
+  actual_view = mailbox;
   // n_page=1;
   // grab element you want to hide
   //const elem = document.querySelector('#hint');
