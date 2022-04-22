@@ -1011,7 +1011,7 @@ function searching() {
     // console.log("relakakaka");
     datos_buscados="nullnullnull";
   }
-  setTimeout(() => load_mailbox("inbox", actual_page, 0, datos_buscados), 100);
+  setTimeout(() => load_mailbox(actual_view, actual_page, 0, datos_buscados), 100);
 
 
   return false;
