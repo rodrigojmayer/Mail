@@ -34,13 +34,13 @@ document.addEventListener("DOMContentLoaded", function () {
     // document.querySelector("#menu").style.display = "none";
     // console.log("reloco");
     // console.log(event);
-    // console.log(element);
+     console.log(element);
     // console.log(element.dataset);
     // console.log(element.dataset.class);
     // console.log(element.getAttribute("class"));
     // console.log(element.getAttribute("value"));
     if (element.getAttribute("class") == "archive_svg") {
-      // alert("kacepapa");
+       alert("kacepapa archive");
       fetch(`/emails/${element.getAttribute("value")}`, {
         method: "PUT",
         body: JSON.stringify({
@@ -52,6 +52,24 @@ document.addEventListener("DOMContentLoaded", function () {
       // ;
       setTimeout(
         () => load_mailbox("inbox", actual_page, 0, datos_buscados),
+        100
+      );
+      setTimeout(() => event.stopPropagation(), 100);
+    }
+
+    if (element.getAttribute("class") == "unarchive_svg") {
+       alert("kacepapa UNarchive");
+      fetch(`/emails/${element.getAttribute("value")}`, {
+        method: "PUT",
+        body: JSON.stringify({
+          archived: false,
+        }),
+      });
+
+      // load_mailbox("inbox", actual_page, 0);
+      // ;
+      setTimeout(
+        () => load_mailbox("archive", actual_page, 0, datos_buscados),
         100
       );
       setTimeout(() => event.stopPropagation(), 100);
@@ -465,7 +483,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
                                 <div id="time-and-archive">
                                   <div id="third_column">${timestampFormatted}</div>
                                   <svg  class="archive_svg" value="${content.pk}"  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
+                                  <path class="archive_svg" value="${content.pk}" d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
                                 </div>`;
 
             // post.addEventListener("click", (event) => {
@@ -808,9 +826,10 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
                               </div>
                               <div id="time-and-archive">
                                   <div id="third_column">${timestampFormatted}</div>
-                                  <svg  class="unarchive_svg" value="${content.pk}"  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                  <path d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
-                                </div>`;
+                                  <svg  class="unarchive_svg" value="${content.pk}" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path class="unarchive_svg" value="${content.pk}" d="M15.8334 8.44328V3.44328C15.8334 2.52411 15.0859 1.77661 14.1667 1.77661H5.83341C4.91425 1.77661 4.16675 2.52411 4.16675 3.44328V18.3333L10.0001 14.4449L15.8334 18.3333V8.44328Z" fill="#001A83"/>
+                                  </svg>
+                              </div>`;
             //post.innerHTML = `<b>Recipients:</b> ${content.recipients}<br/><b>Subject:</b> ${content.subject}<br/><b>Body:</b> ${content.body}<br/><b>Date:</b> ${content.timestamp}</p>`;
             //document.querySelector('#archived-posts').append(post);
             // if (content.fields.read) {
@@ -836,6 +855,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     // document.querySelector("#archived-view").innerHTML = `<h3>${
     //   mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
     // }</h3>`;
+    document.querySelector("#archived-view").innerHTML = ` `;
   } else if (submailbox === "emails") {
     // alert("no se porque entra aca");
     // alert(mailbox);
