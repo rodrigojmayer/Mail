@@ -340,6 +340,8 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
 @csrf_exempt
 @login_required
 def email(request, email_id):
+    
+    print ("entrando al email view py")
 
     # Query for requested email
     try:
@@ -347,8 +349,18 @@ def email(request, email_id):
     except Email.DoesNotExist:
         return JsonResponse({"error": "Email not found."}, status=404)
 
+    print (request.method)
+    print (email)
+    print (email.serialize())
+
     # Return email contents
     if request.method == "GET":
+        
+        # email_json = serializers.serialize('json', email)
+
+        # return JsonResponse({"message":"probando",
+        #                 "email": email_json,
+        #                 }, status=201)
         return JsonResponse(email.serialize())
 
     # Update whether email is read or should be archived

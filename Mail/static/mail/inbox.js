@@ -879,7 +879,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#archived-view").innerHTML = ` `;
   } else if (submailbox === "emails") {
     // alert("no se porque entra aca");
-    // alert(mailbox);
+     alert(mailbox);
 
     document.querySelector("#emails-view").style.display = "block";
     document.querySelector("#archived-view").style.display = "none";
@@ -892,11 +892,11 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     // document.querySelector("#menu3").style.display = "none";
     // document.querySelector("#menu4").style.display = "none";
 
-    fetch(mailbox)
+    fetch(`${mailbox}`)
       .then((response) => response.json())
       .then((email) => {
         // Print email
-        // console.log(email.body);
+         console.log(email);
         //PUT request to /emails/<email_id></email_id>
         fetch(mailbox, {
           method: "PUT",
