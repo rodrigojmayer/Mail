@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // document.querySelector("#menu").style.display = "none";
     // console.log("reloco");
     // console.log(event);
-     console.log(element);
+    //  console.log(element.classList[0]);
     // console.log(element.dataset);
     // console.log(element.dataset.class);
     // console.log(element.getAttribute("class"));
@@ -111,6 +111,25 @@ document.addEventListener("DOMContentLoaded", function () {
       };
       compose_email(data_reply);
     }
+
+    // alert("chucaro1")
+    // console.log()
+    if(element.classList[0] == "arrow-first-page" && document.getElementById("arrow-first-page").disabled == false) {
+      alert("chucaro1")
+      load_mailbox("inbox", actual_page, 12, datos_buscados);
+    }
+    if(element.classList[0] == "arrow-prev-page" && document.getElementById("arrow-prev-page").disabled == false) {
+      alert("chucaro2")
+      load_mailbox("inbox", actual_page, 11, datos_buscados);
+    }
+    if(element.classList[0] == "arrow-next-page" && document.getElementById("arrow-next-page").disabled == false) {
+      alert("chucaro3")
+      load_mailbox("inbox", actual_page, 1, datos_buscados);
+    }
+    if(element.classList[0] == "arrow-last-page" && document.getElementById("arrow-last-page").disabled == false) {
+      alert("chucaro4")
+      load_mailbox("inbox", actual_page, 2, datos_buscados);
+    }
   });
 
   document.querySelector(".logo-user").addEventListener("click", () => {
@@ -122,18 +141,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".modal-logout").style.pointerEvents = "none";
   });
 
-  document.getElementById("arrow-first-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 12, datos_buscados);
-  });
-  document.getElementById("arrow-prev-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 11, datos_buscados);
-  });
-  document.getElementById("arrow-next-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 1, datos_buscados);
-  });
-  document.getElementById("arrow-last-page").addEventListener("click", () => {
-    load_mailbox("inbox", actual_page, 2, datos_buscados);
-  });
+  // document.getElementById("arrow-first-page").addEventListener("click", () => {
+  //   load_mailbox("inbox", actual_page, 12, datos_buscados);
+  // });
+  // document.getElementById("arrow-prev-page").addEventListener("click", () => {
+  //   load_mailbox("inbox", actual_page, 11, datos_buscados);
+  // });
+  // document.getElementById("arrow-next-page").addEventListener("click", () => {
+  //   load_mailbox("inbox", actual_page, 1, datos_buscados);
+  // });
+  // document.getElementById("arrow-last-page").addEventListener("click", () => {
+  //   load_mailbox("inbox", actual_page, 2, datos_buscados);
+  // });
 
   // first_page();
   // By default, load the inbox
