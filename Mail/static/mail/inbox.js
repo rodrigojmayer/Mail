@@ -879,7 +879,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#archived-view").innerHTML = ` `;
   } else if (submailbox === "emails") {
     // alert("no se porque entra aca");
-     alert(mailbox);
+    //  alert(mailbox);
 
     document.querySelector("#emails-view").style.display = "block";
     document.querySelector("#archived-view").style.display = "none";
@@ -892,7 +892,11 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     // document.querySelector("#menu3").style.display = "none";
     // document.querySelector("#menu4").style.display = "none";
 
-    fetch(`${mailbox}`)
+    document.querySelector(".pagination").style.display = "none";
+    
+
+
+    fetch(mailbox)
       .then((response) => response.json())
       .then((email) => {
         // Print email
@@ -925,26 +929,28 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
         const post = document.createElement("div");
         //post.id=('email');
         post.innerHTML = `<div class="email_view">
-                          <table>
-                            <tr>
-                              <th >From:</th> <td>  ${email.sender}</td>
-                            </tr>
-                            <tr>
-                              <th >To:</th> <td>  ${email.recipients}</td>
-                            </tr>
-                            <tr>
-                              <th>Subject:</th> <td>  ${email.subject}</td>
-                            </tr>
-                          </table>
-                        </div>
-                        <div class="email_view2"><b>Date:&emsp;</b> ${email.timestamp}<br/>
-                          <div class="buttons">
-                            <button class="btn btn-sm btn-outline-primary" id="reply" data-sender="${email.sender}" data-subject="${email.subject}" data-timestamp="${email.timestamp}" data-body="${email.body}" style="display:${display_buttons};">Reply</button>
-                            <button class="btn btn-sm btn-outline-primary" id=${id_archived_email} data-id=${email.id} style="display:${display_buttons};">${tag_archived_email}</button>
+                            <div class="btns">
+                              <a class="btn btn-next btn-svg" id="reply" data-sender="${email.sender}" data-subject="${email.subject}" data-timestamp="${email.timestamp}" data-body="${email.body}" ><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4615 17.4615H31.6154V36.3077H37V14.7692C37 14.0552 36.7163 13.3704 36.2114 12.8655C35.7065 12.3606 35.0217 12.0769 34.3077 12.0769H15.4615V4L2 14.7692L15.4615 25.5385V17.4615Z" fill="#F3F3F3"/></svg>Reply</a>
+                              <a class="btn btn-next btn-svg" id=${id_archived_email} data-id=${email.id}><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M30.0001 3.33325H10.0001C8.16175 3.33325 6.66675 4.82825 6.66675 6.66659V36.6666L20.0001 29.0466L33.3334 36.6666V6.66659C33.3334 4.82825 31.8384 3.33325 30.0001 3.33325ZM30.0001 30.9216L20.0001 25.2083L10.0001 30.9216V6.66659H30.0001V30.9216Z" fill="#F3F3F3"/>
+                              </svg>${tag_archived_email}</a>
+                            </div>
+                            <table>
+                              <tr>
+                                <th >From:</th> <td>  ${email.sender}</td>
+                              </tr>
+                              <tr>
+                                <th >To:</th> <td>  ${email.recipients}</td>
+                              </tr>
+                              <tr>
+                                <th>Subject:</th> <td>  ${email.subject}</td>
+                              </tr>
+                            </table>
                           </div>
-                        </div><br/>
-                        <hr>
-                         <div class="email_view3">${email.body}</div><br/>`;
+                          <div class="email_view2"><b>Date:&emsp;</b> ${email.timestamp}<br/>
+                          </div><br/>
+                          <hr>
+                          <div class="email_view3">${email.body}</div><br/>`;
 
         /*  post.addEventListener('click', event => {
         const element = event.target; 

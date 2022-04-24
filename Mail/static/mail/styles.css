@@ -545,7 +545,8 @@ a > h3 {
   /* padding-bottom: 16px; */
 }
 
-.modal-logout-content .btn {
+/* .modal-logout-content .btn { */
+.btn {
   /* font-size: smaller; */
   margin: 8px;
   padding: 10px;
@@ -692,6 +693,33 @@ select:-webkit-autofill:focus { */
   transition: background-color 5000s ease-in-out 0s; */
 /* background-color: transparent; */
 /* } */
+
+
+/* ********************* EMAIL VIEW ************************* */
+
+.email_view{
+  padding-top: var(--header-height);
+}
+.btn-svg{
+  height: 3rem;
+  width: 7rem;
+  display: flex;
+  /* justify-content: space-evenly; */
+  justify-content: space-around;
+  /* justify-content: space-between; */
+  align-items: center;
+  
+}
+.btn svg{
+  height: 1.2rem;
+  width: 1.2rem;
+  /* margin-bottom: 15rem; */
+}
+.btns a{
+  /* font-size: 1.3rem; */
+  /* margin: auto 0; */
+  /* margin: auto 0; */
+}
 
 @media screen and (min-width: 768px) {
 }
