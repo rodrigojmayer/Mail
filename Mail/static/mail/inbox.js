@@ -950,6 +950,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
                                 <p class="b-small"> To:</p><p class="email-recipients">  ${email.recipients} </p>
                                 <p class="b-small"> Subject:</p><p class="email-subject">  ${email.subject} </p>
                               </aside>
+                              <hr>
                               <p> ${email.body} </p>
                             </div>`;
 
@@ -967,6 +968,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
       });
 
     // document.querySelector("#emails-view").innerHTML = `<h3>Email</h3>`;
+    document.querySelector("#emails-view").innerHTML = ` `;
   } else {
     mailbox = "Error";
     fetch(`/emails/${mailbox}`)
