@@ -89,7 +89,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       });
       //load_mailbox('inbox');
-      setTimeout(() => load_mailbox("inbox"), 100);
+      // setTimeout(() => load_mailbox("inbox"), 100);
+      setTimeout(() => load_mailbox(`/emails/${element.dataset.id}`), 100);
     } else if (element.id === "unarchive_email") {
       fetch(`/emails/${element.dataset.id}`, {
         method: "PUT",
@@ -98,7 +99,8 @@ document.addEventListener("DOMContentLoaded", function () {
         }),
       });
       //load_mailbox('inbox');
-      setTimeout(() => load_mailbox("inbox"), 100);
+      // setTimeout(() => load_mailbox("inbox"), 100);
+      setTimeout(() => load_mailbox(`/emails/${element.dataset.id}`), 100);
     } else if (element.id === "reply") {
       /*console.log(element.dataset.sender);
       console.log(element.dataset.subject);
@@ -294,6 +296,11 @@ function get_senmails(content){
 
 function load_mailbox(mailbox, a_page, j_page,  d_search) {
   actual_view = mailbox;
+  console.log(`mailbox: ${mailbox}`);
+  console.log(`a_page: ${a_page}`);
+  console.log(`j_page: ${j_page}`);
+  console.log(`d_search: ${d_search}`);
+  console.log(`------------------------------`);
   // n_page=1;
   // grab element you want to hide
   //const elem = document.querySelector('#hint');
@@ -328,7 +335,8 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#compose").style.backgroundColor =
       rs.getPropertyValue("--first-beta-color");
 
-    // alert(screen.width);
+    //  alert(screen.width);
+    //  alert("holita");
     if (screen.width < 1024) {
       // alert("es pantalla chica");
       document.querySelector("#sep_menu1").style.borderTopRightRadius = "5px";
@@ -928,8 +936,8 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
 
         const timestampFormatted = dateFormat(email.timestamp, "email");
             
-        console.log(email.timestamp);
-        console.log(timestampFormatted);
+        // console.log(email.timestamp);
+        // console.log(timestampFormatted);
 
         //const user_log = document.querySelector('#testuser').value;
         //alert(user_log);
@@ -1097,7 +1105,7 @@ function dateFormat(mailDate, mode) {
 
   var mailDateFormatted = new String();
   if(mode == "list"){
-    console.log("entra al modo list");
+    // console.log("entra al modo list");
     if (currentYear == yearMail){
       if(currentMonth == monthMail && currentDay == dayMail){
         mailDateFormatted = hourMinutesMail;
@@ -1111,24 +1119,24 @@ function dateFormat(mailDate, mode) {
     }
   }
   else if(mode == "email"){
-    console.log("entra al modo email");
+    // console.log("entra al modo email");
     // mailDateFormatted =  mailDateFormatted  + " " + hourMail ;
     if (currentYear == yearMail && currentMonth == monthMail && currentDay == dayMail){
       if(currentHour == hourMail){
-        console.log("entra al primer if, mismo dia y hora");
+        // console.log("entra al primer if, mismo dia y hora");
         mailDateFormatted = parseInt(currentMinutes) - parseInt(minutesMail);
         mailDateFormatted = mailDateFormatted + " minutes ago";
       }
       else{
         
-        console.log("entra al primer else, mismo dia")
+        // console.log("entra al primer else, mismo dia")
         mailDateFormatted = dayMail + " " + monthLMail;
         mailDateFormatted = parseInt(currentHour) - parseInt(hourMail);
         mailDateFormatted = mailDateFormatted + " hours ago";
       }
     }
     else {
-      console.log("entra al segundo else, otro dia")
+      // console.log("entra al segundo else, otro dia")
       mailDateFormatted = dayMail + "/" + monthMail + "/" + yearMail;
     }
   }
