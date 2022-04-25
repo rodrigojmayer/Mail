@@ -366,6 +366,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#compose1").style.display = "block";
     document.querySelector("#compose2").style.display = "none";
 
+    document.querySelector(".pagination").style.display = "block";
     // document.querySelector("#menu11").style.display = "block";
     // document.querySelector("#menu22").style.display = "none";
     // document.querySelector("#menu33").style.display = "none";
@@ -490,7 +491,10 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
 
             // console.log(typeof content.timestamp);
             // console.log(dateFormat(content.timestamp));
-            const timestampFormatted = dateFormat(content.fields.timestamp);
+            const timestampFormatted = dateFormat(content.fields.timestamp, "list");
+            
+            // console.log(content.fields.timestamp);
+            // console.log(timestampFormatted);
             // onclick = "load_mailbox('/emails/${content.pk}')"
             // onclick = "load_max(event)";
             post.innerHTML = `
@@ -675,6 +679,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#compose-view").style.display = "none";
     document.querySelector("#emails-view").style.display = "none";
 
+    document.querySelector(".pagination").style.display = "block";
     // document.querySelector("#menu1").style.display = "none";
     // document.querySelector("#menu2").style.display = "block";
     // document.querySelector("#menu3").style.display = "none";
@@ -835,7 +840,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
             } else {
               svg_inbox = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"> <path d="M25 5H5C3.62125 5 2.5 6.12125 2.5 7.5V22.5C2.5 23.8788 3.62125 25 5 25H25C26.3788 25 27.5 23.8788 27.5 22.5V7.5C27.5 6.12125 26.3788 5 25 5ZM25 7.5V8.13875L15 15.9175L5 8.14V7.5H25ZM5 22.5V11.305L14.2325 18.4862C14.4514 18.6582 14.7217 18.7516 15 18.7516C15.2783 18.7516 15.5486 18.6582 15.7675 18.4862L25 11.305L25.0025 22.5H5Z" fill="#001A83"/> </svg>`;
             }
-            const timestampFormatted = dateFormat(content.fields.timestamp);
+            const timestampFormatted = dateFormat(content.fields.timestamp, "list");
             
             post.innerHTML = `
                               <div id="left-content" onclick = "load_mailbox('/emails/${content.pk}')" >
@@ -900,7 +905,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
       .then((response) => response.json())
       .then((email) => {
         // Print email
-         console.log(email);
+        //  console.log(email);
         //PUT request to /emails/<email_id></email_id>
         fetch(mailbox, {
           method: "PUT",
@@ -920,7 +925,11 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
           id_archived_email = "archive_email";
           tag_archived_email = "Archive";
         }
-        let display_buttons = "inline-block";
+
+        const timestampFormatted = dateFormat(email.timestamp, "email");
+            
+        console.log(email.timestamp);
+        console.log(timestampFormatted);
 
         //const user_log = document.querySelector('#testuser').value;
         //alert(user_log);
@@ -929,28 +938,20 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
         const post = document.createElement("div");
         //post.id=('email');
         post.innerHTML = `<div class="email_view">
-                            <div class="btns">
-                              <a class="btn btn-next btn-svg" id="reply" data-sender="${email.sender}" data-subject="${email.subject}" data-timestamp="${email.timestamp}" data-body="${email.body}" ><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4615 17.4615H31.6154V36.3077H37V14.7692C37 14.0552 36.7163 13.3704 36.2114 12.8655C35.7065 12.3606 35.0217 12.0769 34.3077 12.0769H15.4615V4L2 14.7692L15.4615 25.5385V17.4615Z" fill="#F3F3F3"/></svg>Reply</a>
-                              <a class="btn btn-next btn-svg" id=${id_archived_email} data-id=${email.id}><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                              <path d="M30.0001 3.33325H10.0001C8.16175 3.33325 6.66675 4.82825 6.66675 6.66659V36.6666L20.0001 29.0466L33.3334 36.6666V6.66659C33.3334 4.82825 31.8384 3.33325 30.0001 3.33325ZM30.0001 30.9216L20.0001 25.2083L10.0001 30.9216V6.66659H30.0001V30.9216Z" fill="#F3F3F3"/>
-                              </svg>${tag_archived_email}</a>
-                            </div>
-                            <table>
-                              <tr>
-                                <th >From:</th> <td>  ${email.sender}</td>
-                              </tr>
-                              <tr>
-                                <th >To:</th> <td>  ${email.recipients}</td>
-                              </tr>
-                              <tr>
-                                <th>Subject:</th> <td>  ${email.subject}</td>
-                              </tr>
-                            </table>
-                          </div>
-                          <div class="email_view2"><b>Date:&emsp;</b> ${email.timestamp}<br/>
-                          </div><br/>
-                          <hr>
-                          <div class="email_view3">${email.body}</div><br/>`;
+                              <div class="btns">
+                                <a class="btn btn-next btn-svg" id="reply" data-sender="${email.sender}" data-subject="${email.subject}" data-timestamp="${email.timestamp}" data-body="${email.body}" ><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4615 17.4615H31.6154V36.3077H37V14.7692C37 14.0552 36.7163 13.3704 36.2114 12.8655C35.7065 12.3606 35.0217 12.0769 34.3077 12.0769H15.4615V4L2 14.7692L15.4615 25.5385V17.4615Z" fill="#F3F3F3"/></svg>Reply</a>
+                                <a class="btn btn-next btn-svg" id=${id_archived_email} data-id=${email.id}><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M30.0001 3.33325H10.0001C8.16175 3.33325 6.66675 4.82825 6.66675 6.66659V36.6666L20.0001 29.0466L33.3334 36.6666V6.66659C33.3334 4.82825 31.8384 3.33325 30.0001 3.33325ZM30.0001 30.9216L20.0001 25.2083L10.0001 30.9216V6.66659H30.0001V30.9216Z" fill="#F3F3F3"/>
+                                </svg>${tag_archived_email}</a>
+                              </div>
+                              <aside class="email-details"> 
+                                <p class="b-small">From:</p><p> ${email.sender} </p>
+                                <p class="email-date"> ${timestampFormatted} </p>
+                                <p class="b-small"> To:</p><p class="email-recipients">  ${email.recipients} </p>
+                                <p class="b-small"> Subject:</p><p class="email-subject">  ${email.subject} </p>
+                              </aside>
+                              <p> ${email.body} </p>
+                            </div>`;
 
         /*  post.addEventListener('click', event => {
         const element = event.target; 
@@ -965,7 +966,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
         // ... do something else with email ...
       });
 
-    document.querySelector("#emails-view").innerHTML = `<h3>Email</h3>`;
+    // document.querySelector("#emails-view").innerHTML = `<h3>Email</h3>`;
   } else {
     mailbox = "Error";
     fetch(`/emails/${mailbox}`)
@@ -1026,7 +1027,7 @@ function searching() {
 var current = new Date();
 
 //  Date format
-function dateFormat(mailDate) {
+function dateFormat(mailDate, mode) {
   const months = [
     "Jan",
     "Feb",
@@ -1048,16 +1049,21 @@ function dateFormat(mailDate) {
   const currentDay = current.getDate();
   const currentMonth = current.getMonth() + 1;
   const currentYear = current.getFullYear();
+  const currentHour = current.getHours();
+  const currentMinutes = current.getMinutes();
   // console.log("currentDay: " + currentDay);
   // console.log("currentMonth: " + currentMonth);
   // console.log("currentYear: " + currentYear);
+  console.log("currentHour: " + currentHour);
+  console.log("currentMinutes: " + currentMinutes);
 
   // console.log(current.getMonth());
   // console.log(mailDate);
   const dayMail = mailDate.substr(8, 2);
   const monthMail = mailDate.substr(5, 2);
   const yearMail = mailDate.substr(0, 4);
-  const hourMail = mailDate.substr(11, 5);
+  const hourMail = mailDate.substr(11, 2);
+  const minutesMail = mailDate.substr(14, 2);
   // console.log(parseInt(monthMail));
   // console.log(months[parseInt(monthMail) - 1]);
   const monthLMail = months[parseInt(monthMail) - 1];
@@ -1067,7 +1073,8 @@ function dateFormat(mailDate) {
   // console.log("monthMail: " + monthMail);
   // console.log("yearMail: " + yearMail);
   // console.log("monthLMail: " + monthLMail);
-  // console.log("hourMail: " + hourMail);
+  console.log("hourMail: " + hourMail);
+  console.log("minutesMail: " + minutesMail);
 
   // console.log(
   //   current.toLocaleString("en-US", {
@@ -1085,22 +1092,38 @@ function dateFormat(mailDate) {
   // console.log("***************** ");
 
   var mailDateFormatted = new String();
-  if (
-    currentDay == dayMail &&
-    currentMonth == monthMail &&
-    currentYear == yearMail
-  ) {
-    // console.log("coincide el diaaa------");
-    mailDateFormatted = hourMail;
-    // console.log(mailDateFormatted);
-  } else if (currentYear == yearMail) {
-    // console.log("Solo coincide el año---------");
-    mailDateFormatted = dayMail + " " + monthLMail;
-    // console.log(mailDateFormatted);
-  } else {
-    // console.log("Es de otro año------");
-    mailDateFormatted = dayMail + "/" + monthMail + "/" + yearMail;
-    // console.log(mailDateFormatted);
+  if(mode = "list"){
+    if (
+      currentDay == dayMail &&
+      currentMonth == monthMail &&
+      currentYear == yearMail
+    ) {
+      // console.log("coincide el diaaa------");
+      mailDateFormatted = hourMail;
+      // console.log(mailDateFormatted);
+    } else if (currentYear == yearMail) {
+      // console.log("Solo coincide el año---------");
+      mailDateFormatted = dayMail + " " + monthLMail;
+      // console.log(mailDateFormatted);
+    } else {
+      // console.log("Es de otro año------");
+      mailDateFormatted = dayMail + "/" + monthMail + "/" + yearMail;
+      // console.log(mailDateFormatted);
+    }
+  }
+  else if(mode == "email"){
+    // mailDateFormatted =  mailDateFormatted  + " " + hourMail ;
+    if (
+      currentDay == dayMail &&
+      currentMonth == monthMail &&
+      currentYear == yearMail
+    ) {
+      mailDateFormatted = hourMail;
+    } else if (currentYear == yearMail) {
+      mailDateFormatted = dayMail + " " + monthLMail;
+    } else {
+      mailDateFormatted = dayMail + "/" + monthMail + "/" + yearMail;
+    }
   }
   return mailDateFormatted;
 }

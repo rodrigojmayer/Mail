@@ -500,7 +500,10 @@ a > h3 {
 }
 
 /* ,#time-and-archive svg */
-
+.btns{
+  display: flex;
+  justify-content: start;
+}
 /*************************Modal*********************/
 
 .modal-logout {
@@ -698,9 +701,14 @@ select:-webkit-autofill:focus { */
 /* ********************* EMAIL VIEW ************************* */
 
 .email_view{
-  padding-top: var(--header-height);
+  height: 90vh;
+  margin-top: var(--header-height);
+}
+.email_view{
+  /* padding-top: var(--header-height); */
 }
 .btn-svg{
+  margin:1rem .5rem 0 0 !important;
   height: 3rem;
   width: 7rem;
   display: flex;
@@ -719,6 +727,26 @@ select:-webkit-autofill:focus { */
   /* font-size: 1.3rem; */
   /* margin: auto 0; */
   /* margin: auto 0; */
+}
+
+.email-details {
+  display: grid;
+  grid-template-columns: 5rem 70% 20%;
+  grid-auto-rows: 2rem;
+  column-gap: 1rem;
+}
+
+.email-details .b-small {
+  color: var(--first-color);
+  text-align: right;
+  font-weight: bold;
+}
+.email-details .email-date {
+  text-align: right;
+}
+.email-details .email-recipients, .email-details .email-subject{
+  grid-column-start: 2;
+  grid-column-end: 4;
 }
 
 @media screen and (min-width: 768px) {
