@@ -1054,8 +1054,8 @@ function dateFormat(mailDate, mode) {
   // console.log("currentDay: " + currentDay);
   // console.log("currentMonth: " + currentMonth);
   // console.log("currentYear: " + currentYear);
-  console.log("currentHour: " + currentHour);
-  console.log("currentMinutes: " + currentMinutes);
+  // console.log("currentHour: " + currentHour);
+  // console.log("currentMinutes: " + currentMinutes);
 
   // console.log(current.getMonth());
   // console.log(mailDate);
@@ -1064,6 +1064,8 @@ function dateFormat(mailDate, mode) {
   const yearMail = mailDate.substr(0, 4);
   const hourMail = mailDate.substr(11, 2);
   const minutesMail = mailDate.substr(14, 2);
+  const hourMinutesMail = mailDate.substr(11, 5);
+
   // console.log(parseInt(monthMail));
   // console.log(months[parseInt(monthMail) - 1]);
   const monthLMail = months[parseInt(monthMail) - 1];
@@ -1073,8 +1075,8 @@ function dateFormat(mailDate, mode) {
   // console.log("monthMail: " + monthMail);
   // console.log("yearMail: " + yearMail);
   // console.log("monthLMail: " + monthLMail);
-  console.log("hourMail: " + hourMail);
-  console.log("minutesMail: " + minutesMail);
+  // console.log("hourMail: " + hourMail);
+  // console.log("minutesMail: " + minutesMail);
 
   // console.log(
   //   current.toLocaleString("en-US", {
@@ -1092,40 +1094,45 @@ function dateFormat(mailDate, mode) {
   // console.log("***************** ");
 
   var mailDateFormatted = new String();
-  if(mode = "list"){
-    if (
-      currentDay == dayMail &&
-      currentMonth == monthMail &&
-      currentYear == yearMail
-    ) {
-      // console.log("coincide el diaaa------");
-      mailDateFormatted = hourMail;
-      // console.log(mailDateFormatted);
-    } else if (currentYear == yearMail) {
-      // console.log("Solo coincide el año---------");
-      mailDateFormatted = dayMail + " " + monthLMail;
-      // console.log(mailDateFormatted);
-    } else {
-      // console.log("Es de otro año------");
+  if(mode == "list"){
+    console.log("entra al modo list");
+    if (currentYear == yearMail){
+      if(currentMonth == monthMail && currentDay == dayMail){
+        mailDateFormatted = hourMinutesMail;
+      }
+      else{
+        mailDateFormatted = dayMail + " " + monthLMail;
+      }
+    }
+    else {
       mailDateFormatted = dayMail + "/" + monthMail + "/" + yearMail;
-      // console.log(mailDateFormatted);
     }
   }
   else if(mode == "email"){
+    console.log("entra al modo email");
     // mailDateFormatted =  mailDateFormatted  + " " + hourMail ;
-    if (
-      currentDay == dayMail &&
-      currentMonth == monthMail &&
-      currentYear == yearMail
-    ) {
-      mailDateFormatted = hourMail;
-    } else if (currentYear == yearMail) {
-      mailDateFormatted = dayMail + " " + monthLMail;
-    } else {
+    if (currentYear == yearMail && currentMonth == monthMail && currentDay == dayMail){
+      if(currentHour == hourMail){
+        console.log("entra al primer if, mismo dia y hora");
+        mailDateFormatted = parseInt(currentMinutes) - parseInt(minutesMail);
+        mailDateFormatted = mailDateFormatted + " minutes ago";
+      }
+      else{
+        
+        console.log("entra al primer else, mismo dia")
+        mailDateFormatted = dayMail + " " + monthLMail;
+        mailDateFormatted = parseInt(currentHour) - parseInt(hourMail);
+        mailDateFormatted = mailDateFormatted + " hours ago";
+      }
+    }
+    else {
+      console.log("entra al segundo else, otro dia")
       mailDateFormatted = dayMail + "/" + monthMail + "/" + yearMail;
     }
   }
   return mailDateFormatted;
+  // minutesMail  currentMinutes
+  // currentHour == hourMail && 
 }
 
 function first_page() {
