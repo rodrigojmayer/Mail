@@ -236,19 +236,28 @@ input {
   padding-bottom: 0;
 }
 
-.container > h2 {
+.register > h2 , .login > h2 {
   text-align: center;
   padding-top: 1.5rem;
   /* padding-top: 25px; */
 }
 
-.container .form-group {
+.register, .login {
+  
+  /* position: fixed; */
+  /* top:20vh; */
+  /* left:40vw; */
+  padding-top: 15vh ;
+} 
+/* .container .form-group { */
+.register .form-group, .login .form-group {
   text-align: center;
-  /* padding-bottom: 1.5rem; */
+  padding-bottom: 1.5rem;
   /* padding-bottom: var(--header-height); */
   /* padding-bottom: 25px; */
 }
-.container .form-control {
+/* .container .form-control { */
+.register .form-control, .login .form-control {
   text-align: center;
   width: 16rem;
   height: 2rem;
@@ -553,8 +562,10 @@ a > h3 {
   /* font-size: smaller; */
   margin: 8px;
   padding: 10px;
-  height: 16px;
-  width: 85px;
+  /* height: 16px; */
+  height: 3rem;
+  /* width: 85px; */
+  width: 8rem;
   /* margin:  */
 
   /* appearance: auto; */

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   document
     .querySelector("#sent")
-    .addEventListener("click", () => load_mailbox("sent"));
+    .addEventListener("click", () => load_mailbox("sent", 1, 0, datos_buscados));
   document
     .querySelector("#archived")
     .addEventListener("click", () => load_mailbox("archive", 1, 0, datos_buscados));
@@ -277,7 +277,7 @@ ${reply_data.body}`;
         // Print result
         //console.log(result);
         // alert("Alerta roja");
-        load_mailbox("sent");
+        load_mailbox("sent", 1, 0, datos_buscados);
       });
 
     return false;
@@ -375,6 +375,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#compose2").style.display = "none";
 
     document.querySelector(".pagination").style.display = "block";
+    // document.querySelector("#lookup-form").style.display = "block";
     // document.querySelector("#menu11").style.display = "block";
     // document.querySelector("#menu22").style.display = "none";
     // document.querySelector("#menu33").style.display = "none";
@@ -455,7 +456,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
             post.className = "email";
             // content.fields.sender = content.fields.sender.toString();
             sender_email[0].fields.email =
-              sender_email[0].fields.email.toString();
+            sender_email[0].fields.email.toString();
             // if (content.fields.sender.length > 14)
             // alert(screen.width)
 
@@ -613,18 +614,84 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     // document.querySelector("#menu33").style.display = "block";
     // document.querySelector("#menu44").style.display = "none";
 
-    fetch("/emails/sent")
+    // fetch(`/emails/archive/${a_page}/${j_page}/${d_search}`)
+
+    fetch(`/emails/sent/${a_page}/${j_page}/${d_search}`)
       .then((response) => response.json())
       .then((emails) => {
         // Print emails
         //console.log(`Emails: ${emails}`);
         //console.log(emails.forEach());
-        emails.forEach((content) => {
-          //console.log(content);
+        // console.log(emails);
+        // console.log(emails.emails_json);
+        // console.log(emails.users_json);
+        // console.log(emails.p_actual);
+        // console.log(emails.p_last);
+        if (emails.p_actual == 1 && emails.p_actual == emails.p_last) {
+          single_page();
+        } else if (emails.p_actual == 1) {
+          first_page();
+        } else if (emails.p_actual == emails.p_last) {
+          last_page();
+        } else {
+          middle_page();
+        }
+        actual_page = emails.p_actual;
+
+        var emails_parsed = JSON.parse(emails.emails_json);
+        var users_parsed = JSON.parse(emails.users_json);
+
+        // emails.forEach((content) => {
+        emails_parsed.forEach((content) => {
+          var recipients_email = [] ;
+          var str_recipients;
+          // recipients_email[0] = users_parsed.filter(function (entry) {
+          //   return entry.pk == content.fields.recipients[0];
+          // });
+          // recipients_email[1] = users_parsed.filter(function (entry) {
+          //   return entry.pk == content.fields.recipients[1];
+          // });
+
+          content.fields.recipients.forEach((id_recipient) => {
+            // console.log(id_recipient);
+            recipients_email[id_recipient] = users_parsed.filter(function (entry) {
+            // recipients_email= users_parsed.filter(function (entry) {
+              return entry.pk == id_recipient;
+            });
+            
+            // recipients_email[0].fields.email = recipients_email[0].fields.email + ", " + recipients_email[0].fields.email 
+
+            // console.log(recipients_email);
+          });
+
+          let first_entrance=true;
+          let str_recipient;
+          recipients_email.forEach((recipient) => {
+            if(first_entrance){
+              str_recipient = recipient[0].fields.email.toString();
+              first_entrance = false;
+            }
+            else{
+              str_recipient = str_recipient + ", " + recipient[0].fields.email.toString();
+            }
+            // console.log(recipient);
+
+          })
+          // console.log(content);
+          / console.log(str_recipient);
+          //  console.log(recipients_email.filter(Boolean).length);
+
+
           //console.log(content.sender);
-          const user_log = document.querySelector("#testuser").value;
-          //alert(user_log);
-          if (content.sender === user_log) {
+          // console.log(content.fields.recipients.length);
+          // var cont = content.fields.sender[0];
+          var cont = content.fields.sender;
+          var user_log = document.getElementById("testiduser").value;
+          // const user_log = document.querySelector("#testuser").value;
+          // console.log(`cont: ${cont} /-/-/-/ user_log: ${user_log}`);
+          // if (content.sender === user_log) {
+          if (cont == user_log) {
+            // console.log("llega o no llega¡__?");
             /*       document.querySelector('#sent-view').style.display = 'block';
             document.querySelector('#inbox-view').style.display = 'none';
             document.querySelector('#compose-view').style.display = 'none';
@@ -635,50 +702,118 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
 
             const post = document.createElement("div");
             post.id = "email";
+            post.className = "email";
             // post.className = 'post';
             //post.innerHTML = "Recipients: "+content.recipients+"<br/>Subject: "+content.subject+"<br/>Body: "+content.body+"<br/><br/>";
             /*post.innerHTML = `<p><b>Recipients:</b> ${content.recipients}<br/>
                               <b>Subject:</b> ${content.subject}<br/>
                               <b>Date:</b> ${content.timestamp}</p>`;
           */
-            content.recipients = content.recipients.toString();
-            if (content.recipients.length > 27)
-              content.recipients = content.recipients.substring(0, 27) + "...";
+            // recipients_email[0][0].fields.email =
+            // recipients_email[0][0].fields.email.toString();
+            // recipients_email[1][0].fields.email =
+            // recipients_email[1][0].fields.email.toString();
+            // recipients_email.forEach((id_recipient) => {
+              //  console.log(id_recipient);
+              // recipients_email[id_recipient] = users_parsed.filter(function (entry) {
+                // return entry.pk == id_recipient;
+              // });
+            // });
+
+            // recipients_email[0][0].fields.email = recipients_email[0][0].fields.email + ", " + recipients_email[1][0].fields.email 
+
+
+            if (screen.width < 768) {
+              // if (recipients_email[0][0].fields.email.length > 17)
+              if (str_recipient.length > 17)
+                // content.fields.sender =
+                //   content.fields.sender.substring(0, 14) + "...";
+                str_recipient =
+                str_recipient.substring(0, 17) + "...";
+              if (content.fields.subject.length > 20)
+                content.fields.subject =
+                  content.fields.subject.substring(0, 20) + "...";
+            } else if (screen.width < 1024) {
+              // if (recipients_email[0][0].fields.email.length > 20)
+              if (str_recipient.length > 20)
+                // content.fields.sender =
+                //   content.fields.sender.substring(0, 14) + "...";
+                str_recipient =
+                str_recipient.substring(0, 20) + "...";
+              if (content.fields.subject.length > 23)
+                content.fields.subject =
+                  content.fields.subject.substring(0, 23) + "...";
+            } else {
+              // if (recipients_email[0][0].fields.email.length > 30)
+              if (str_recipient.length > 30)
+                // content.fields.sender =
+                //   content.fields.sender.substring(0, 14) + "...";
+                str_recipient =
+                str_recipient.substring(0, 30) + "...";
+              if (content.fields.subject.length > 35)
+                content.fields.subject =
+                  content.fields.subject.substring(0, 35) + "...";
+            }
+
+            let svg_inbox = `<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M26.9438 10.21L15.6938 2.71001C15.4885 2.57323 15.2473 2.50024 15.0006 2.50024C14.7539 2.50024 14.5128 2.57323 14.3075 2.71001L3.0575 10.21C2.88612 10.3241 2.74556 10.4787 2.64831 10.6601C2.55105 10.8415 2.50011 11.0442 2.5 11.25V25C2.5 26.3788 3.62125 27.5 5 27.5H25C26.3788 27.5 27.5 26.3788 27.5 25V11.25C27.5 10.8325 27.2913 10.4425 26.9438 10.21ZM15 5.25251L23.9963 11.25L15 17.2475L6.00375 11.25L15 5.25251ZM5 25V13.5863L14.3062 19.79C14.5117 19.9271 14.7531 20.0002 15 20.0002C15.2469 20.0002 15.4883 19.9271 15.6938 19.79L25 13.5863L24.9962 25H5Z" fill="#001A83"/></svg>`;
+            
+            const timestampFormatted = dateFormat(content.fields.timestamp, "list");
+            
+            // content.recipients = content.recipients.toString();
+            // if (content.recipients.length > 27)
+            //   content.recipients = content.recipients.substring(0, 27) + "...";
 
             /*console.log(content);
             console.log(content.sender);
             console.log(content.subject);
             console.log(content.body);*/
 
-            if (content.subject.length > 45)
-              content.subject = content.subject.substring(0, 45) + "...";
+            // if (content.subject.length > 45)
+            //   content.subject = content.subject.substring(0, 45) + "...";
 
-            post.innerHTML = `<div id="first_column"> <b>${content.recipients}</b></div>
-                              <div id="second_column"><b>${content.subject}</b></div>
-                              <div id="third_column">${content.timestamp}</div>`;
+            // post.innerHTML = `<div id="first_column"> <b>${content.recipients}</b></div>
+            //                   <div id="second_column"><b>${content.subject}</b></div>
+            //                   <div id="third_column">${content.timestamp}</div>`;
+            post.innerHTML = `
+                              <div id="left-content" onclick = "load_mailbox('/emails/${content.pk}')" >
+                                ${svg_inbox}
+                                <div id="sender-and-subject">
+                                  <div id="first_column"><b>${str_recipient}</b></div> 
+                                  <div id="second_column"><b>${content.fields.subject}</b></div>
+                                </div>
+                              </div>
+                              <div id="time-and-archive">
+                                <div id="third_column">${timestampFormatted}</div>
+                                <svg  class="archive_svg" value="${content.pk}"  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path class="archive_svg" value="${content.pk}" d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
+                              </div>`;
+
             //  post.innerHTML = `<p><b>Recipients:</b> ${content.recipients}<br/><b>Subject:</b> ${content.subject}<br/><b>Body:</b> ${content.body}<br/><b>Date:</b> ${content.timestamp}</p>`;
             //    if(content.read){
             //        post.style.backgroundColor = "LightGray";
             //        post.style.boxShadow = "3px 3px";
             //      }
 
-            post.addEventListener("click", (event) => {
-              //const element = event.target;
-              //console.log(element);
-              // if(element.className !== 'archive_email'){
-              load_mailbox(`/emails/${content.id}`);
-              // }
-            });
+            // post.addEventListener("click", (event) => {
+            //   //const element = event.target;
+            //   //console.log(element);
+            //   // if(element.className !== 'archive_email'){
+            //   load_mailbox(`/emails/${content.id}`);
+            //   // }
+            // });
             document.querySelector("#sent-view").append(post);
-            space_emails = document.createElement("br");
-            document.querySelector("#sent-view").appendChild(space_emails);
+            // space_emails = document.createElement("br");
+            // document.querySelector("#sent-view").appendChild(space_emails);
           }
         });
         // ... do something else with emails ...
       });
-    document.querySelector("#sent-view").innerHTML = `<h3>${
-      mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
-    }</h3>`;
+    // document.querySelector("#sent-view").innerHTML = `<h3>${
+    //   mailbox.charAt(0).toUpperCase() + mailbox.slice(1)
+    // }</h3>`;
+    
+    document.querySelector("#sent-view").innerHTML = ` `;
+
   } else if (mailbox === "archive") {
     // alert("segundo alert de archive");
     document.querySelector("#archived-view").style.display = "block";
@@ -688,6 +823,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#emails-view").style.display = "none";
 
     document.querySelector(".pagination").style.display = "block";
+    // document.querySelector("#lookup-form").style.display = "block";
     // document.querySelector("#menu1").style.display = "none";
     // document.querySelector("#menu2").style.display = "block";
     // document.querySelector("#menu3").style.display = "none";
@@ -748,7 +884,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
       .then((response) => response.json())
       .then((emails) => {
         // Print emailsdas
-        console.log(emails);
+        // console.log(emails);
         //console.log(emails.forEach());
 
         
@@ -768,8 +904,8 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
         var users_parsed = JSON.parse(emails.users_json);
 
         
-        console.log(emails_parsed);
-        console.log(users_parsed);
+        // console.log(emails_parsed);
+        // console.log(users_parsed);
         emails_parsed.forEach((content) => {
         // emails.forEach((content) => {
           //console.log(content);
@@ -779,7 +915,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
             return entry.pk == content.fields.sender;
           });
           // const user_log = document.querySelector("#testuser").value;
-          console.log(content.fields.archived);
+          // console.log(content.fields.archived);
           if (content.fields.archived) {
           // if (content.archived) {
             /*     document.querySelector('#archived-view').style.display = 'block';
@@ -906,7 +1042,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     // document.querySelector("#menu4").style.display = "none";
 
     document.querySelector(".pagination").style.display = "none";
-    
+    // document.querySelector("#lookup-form").style.display = "none";
 
 
     fetch(mailbox)
