@@ -296,11 +296,11 @@ function get_senmails(content){
 
 function load_mailbox(mailbox, a_page, j_page,  d_search) {
   actual_view = mailbox;
-  console.log(`mailbox: ${mailbox}`);
-  console.log(`a_page: ${a_page}`);
-  console.log(`j_page: ${j_page}`);
-  console.log(`d_search: ${d_search}`);
-  console.log(`------------------------------`);
+  // console.log(`mailbox: ${mailbox}`);
+  // console.log(`a_page: ${a_page}`);
+  // console.log(`j_page: ${j_page}`);
+  // console.log(`d_search: ${d_search}`);
+  // console.log(`------------------------------`);
   // n_page=1;
   // grab element you want to hide
   //const elem = document.querySelector('#hint');
@@ -423,7 +423,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
         // console.log("----------**********----------");
         // emails_parsed = JSON.parse(emails.emails_json);
 
-        console.log(emails_parsed);
+        // console.log(emails_parsed);
         // for (var data_email of emails_parsed) {
         //   console.log(data_email);
         // }
@@ -443,9 +443,9 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
           var cont = content.fields.recipients;
           var user_log = document.getElementById("testiduser").value;
           // console.log(document.querySelector("#testiduser").value);
-          console.log(cont);
-          console.log(user_log);
-          console.log(cont.includes(parseInt(user_log)));
+          // console.log(cont);
+          // console.log(user_log);
+          // console.log(cont.includes(parseInt(user_log)));
           // alert(user_log);
           // // // // // // content.recipients.forEach((cont) => {------------------------------------
           // console.log(
@@ -453,7 +453,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
           // );
           // console.log("el cont es esto: " + cont);
           // console.log("mientras que el userlog es esto: " + user_log);
-          if (cont.includes(parseInt(user_log))) {
+          // if (cont.includes(parseInt(user_log))) {
             const post = document.createElement("div");
             post.id = "email";
             post.className = "email";
@@ -537,7 +537,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
             //   subject: content.subject,
             //   element: elmnt,
             // };
-          }
+          // }
         });
       });
     // ... do something else with emails ...
@@ -560,6 +560,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#archived-view").style.display = "none";
     document.querySelector("#emails-view").style.display = "none";
 
+    document.querySelector(".pagination").style.display = "block";
     // document.querySelector("#menu1").style.display = "none";
     // document.querySelector("#menu2").style.display = "none";
     // document.querySelector("#menu3").style.display = "block";
@@ -681,7 +682,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
 
           })
           // console.log(content);
-          / console.log(str_recipient);
+          // / console.log(str_recipient);
           //  console.log(recipients_email.filter(Boolean).length);
 
 
@@ -1080,14 +1081,15 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
 
         //const user_log = document.querySelector('#testuser').value;
         //alert(user_log);
+        let display_buttons="flex";
         if (email.sender == document.querySelector("#testuser").value)
           display_buttons = "none";
         const post = document.createElement("div");
         //post.id=('email');
         post.innerHTML = `<div class="email_view">
-                              <div class="btns">
+                              <div class="btns" style="display:${display_buttons};">
                                 <a class="btn btn-next btn-svg" id="reply" data-sender="${email.sender}" data-subject="${email.subject}" data-timestamp="${email.timestamp}" data-body="${email.body}" ><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M15.4615 17.4615H31.6154V36.3077H37V14.7692C37 14.0552 36.7163 13.3704 36.2114 12.8655C35.7065 12.3606 35.0217 12.0769 34.3077 12.0769H15.4615V4L2 14.7692L15.4615 25.5385V17.4615Z" fill="#F3F3F3"/></svg>Reply</a>
-                                <a class="btn btn-next btn-svg" id=${id_archived_email} data-id=${email.id}><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <a class="btn btn-next btn-svg" id=${id_archived_email} data-id=${email.id} ><svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M30.0001 3.33325H10.0001C8.16175 3.33325 6.66675 4.82825 6.66675 6.66659V36.6666L20.0001 29.0466L33.3334 36.6666V6.66659C33.3334 4.82825 31.8384 3.33325 30.0001 3.33325ZM30.0001 30.9216L20.0001 25.2083L10.0001 30.9216V6.66659H30.0001V30.9216Z" fill="#F3F3F3"/>
                                 </svg>${tag_archived_email}</a>
                               </div>
@@ -1191,6 +1193,8 @@ function dateFormat(mailDate, mode) {
     "Nov",
     "Dec",
   ];
+
+  current = new Date();
   // console.log(" ");
 
   // Output: Tue, July 21, 2020, 10:01:14 AM
@@ -1200,11 +1204,11 @@ function dateFormat(mailDate, mode) {
   const currentYear = current.getFullYear();
   const currentHour = current.getHours();
   const currentMinutes = current.getMinutes();
-  // console.log("currentDay: " + currentDay);
-  // console.log("currentMonth: " + currentMonth);
-  // console.log("currentYear: " + currentYear);
-  // console.log("currentHour: " + currentHour);
-  // console.log("currentMinutes: " + currentMinutes);
+  console.log("currentDay: " + currentDay);
+  console.log("currentMonth: " + currentMonth);
+  console.log("currentYear: " + currentYear);
+  console.log("currentHour: " + currentHour);
+  console.log("currentMinutes: " + currentMinutes);
 
   // console.log(current.getMonth());
   // console.log(mailDate);
@@ -1219,13 +1223,13 @@ function dateFormat(mailDate, mode) {
   // console.log(months[parseInt(monthMail) - 1]);
   const monthLMail = months[parseInt(monthMail) - 1];
 
-  // console.log("***----------******* ");
-  // console.log("dayMail: " + dayMail);
-  // console.log("monthMail: " + monthMail);
-  // console.log("yearMail: " + yearMail);
-  // console.log("monthLMail: " + monthLMail);
-  // console.log("hourMail: " + hourMail);
-  // console.log("minutesMail: " + minutesMail);
+  console.log("***----------******* ");
+  console.log("dayMail: " + dayMail);
+  console.log("monthMail: " + monthMail);
+  console.log("yearMail: " + yearMail);
+  console.log("monthLMail: " + monthLMail);
+  console.log("hourMail: " + hourMail);
+  console.log("minutesMail: " + minutesMail);
 
   // console.log(
   //   current.toLocaleString("en-US", {
