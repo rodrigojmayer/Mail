@@ -1200,11 +1200,11 @@ function dateFormat(mailDate, mode) {
 
   // Output: Tue, July 21, 2020, 10:01:14 AM
 
-  const currentDay = current.getDate();
-  const currentMonth = current.getMonth() + 1;
-  const currentYear = current.getFullYear();
-  const currentHour = current.getHours();
-  const currentMinutes = current.getMinutes();
+  const currentDay = parseInt(current.getDate());
+  const currentMonth = parseInt(current.getMonth()) + 1;
+  const currentYear = parseInt(current.getFullYear());
+  const currentHour = parseInt(current.getHours());
+  const currentMinutes = parseInt(current.getMinutes());
   console.log("currentDay: " + currentDay);
   console.log("currentMonth: " + currentMonth);
   console.log("currentYear: " + currentYear);
@@ -1213,11 +1213,11 @@ function dateFormat(mailDate, mode) {
 
   // console.log(current.getMonth());
   // console.log(mailDate);
-  const dayMail = mailDate.substr(8, 2);
+  const dayMail = parseInt(mailDate.substr(8, 2));
   const monthMail = mailDate.substr(5, 2);
   const yearMail = mailDate.substr(0, 4);
-  const hourMail = mailDate.substr(11, 2);
-  const minutesMail = mailDate.substr(14, 2);
+  const hourMail = parseInt(mailDate.substr(11, 2));
+  const minutesMail = parseInt(mailDate.substr(14, 2));
   const hourMinutesMail = mailDate.substr(11, 5);
 
   // console.log(parseInt(monthMail));
@@ -1268,8 +1268,13 @@ function dateFormat(mailDate, mode) {
     if (currentYear == yearMail && currentMonth == monthMail && currentDay == dayMail){
       if(currentHour == hourMail){
         // console.log("entra al primer if, mismo dia y hora");
-        mailDateFormatted = parseInt(currentMinutes) - parseInt(minutesMail);
+        mailDateFormatted = (currentMinutes) - (minutesMail);
         mailDateFormatted = mailDateFormatted + " minutes ago";
+      }
+      else if(((currentHour)-(hourMail)) == 1 && currentMinutes+(60-minutesMail) < 60){
+
+
+        mailDateFormatted = currentMinutes+(60-minutesMail) + " minutes ago";
       }
       else{
         
