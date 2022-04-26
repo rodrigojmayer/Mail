@@ -423,7 +423,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
         // console.log("----------**********----------");
         // emails_parsed = JSON.parse(emails.emails_json);
 
-        // console.log(emails_parsed);
+        console.log(emails_parsed);
         // for (var data_email of emails_parsed) {
         //   console.log(data_email);
         // }
@@ -440,9 +440,12 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
           // console.log("datetimee: ");
           // console.log(content.fields.timestamp);
 
-          var cont = content.fields.recipients[0];
+          var cont = content.fields.recipients;
           var user_log = document.getElementById("testiduser").value;
           // console.log(document.querySelector("#testiduser").value);
+          console.log(cont);
+          console.log(user_log);
+          console.log(cont.includes(parseInt(user_log)));
           // alert(user_log);
           // // // // // // content.recipients.forEach((cont) => {------------------------------------
           // console.log(
@@ -450,7 +453,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
           // );
           // console.log("el cont es esto: " + cont);
           // console.log("mientras que el userlog es esto: " + user_log);
-          if (cont == user_log) {
+          if (cont.includes(parseInt(user_log))) {
             const post = document.createElement("div");
             post.id = "email";
             post.className = "email";

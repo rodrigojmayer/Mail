@@ -123,7 +123,7 @@ def mailbox(request, mailbox, actual_page,  jump_page, data_search):
 
     id_users_array = []
     id_users_senders_search_array = []
-    # print(emails)
+    print(emails)
     for s in emails:
       # print(s.sender.id)
       # print(s.sender)
