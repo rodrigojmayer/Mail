@@ -170,6 +170,7 @@ function compose_email(reply_data) {
   document.querySelector("#archived-view").style.display = "none";
   document.querySelector("#emails-view").style.display = "none";
 
+  document.querySelector(".pagination").style.display = "none";
   // document.querySelector("#menu1").style.display = "none";
   // document.querySelector("#menu2").style.display = "none";
   // document.querySelector("#menu3").style.display = "none";

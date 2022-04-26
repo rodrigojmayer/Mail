@@ -761,6 +761,18 @@ select:-webkit-autofill:focus { */
   grid-column-end: 4;
 }
 
+
+/* ********************* COMPOSE VIEW ************************* */
+
+#compose-view{
+  
+  height: 90vh;
+  margin-top: var(--header-height);
+}
+#compose-form{
+  padding: 1rem;
+}
+
 @media screen and (min-width: 768px) {
 }
 
