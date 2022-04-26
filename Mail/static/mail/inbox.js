@@ -788,10 +788,11 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
                               </div>
                               <div id="time-and-archive">
                                 <div id="third_column">${timestampFormatted}</div>
-                                <svg  class="archive_svg" value="${content.pk}"  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path class="archive_svg" value="${content.pk}" d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
-                              </div>`;
-
+                                
+                                </div>`;
+                                // <svg  class="archive_svg" value="${content.pk}"  width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                // <path class="archive_svg" value="${content.pk}" d="M14.9999 1.66675H4.99992C4.08075 1.66675 3.33325 2.41425 3.33325 3.33341V18.3334L9.99992 14.5234L16.6666 18.3334V3.33341C16.6666 2.41425 15.9191 1.66675 14.9999 1.66675ZM14.9999 15.4609L9.99992 12.6042L4.99992 15.4609V3.33341H14.9999V15.4609Z" fill="#001A83"/></svg>
+                             
             //  post.innerHTML = `<p><b>Recipients:</b> ${content.recipients}<br/><b>Subject:</b> ${content.subject}<br/><b>Body:</b> ${content.body}<br/><b>Date:</b> ${content.timestamp}</p>`;
             //    if(content.read){
             //        post.style.backgroundColor = "LightGray";
