@@ -34,12 +34,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // document.querySelector("#menu").style.display = "none";
     // console.log("reloco");
-    // console.log(event);
+    console.log(event);
     //  console.log(element.classList[0]);
     // console.log(element.dataset);
     // console.log(element.dataset.class);
     // console.log(element.getAttribute("class"));
-    // console.log(element.getAttribute("value"));
+     console.log(element);
+     console.log(element.id);
+    //  console.log(element.getAttribute("value"));
     if (element.getAttribute("class") == "archive_svg") {
       //  alert("kacepapa archive");
       fetch(`/emails/${element.getAttribute("value")}`, {
@@ -133,6 +135,45 @@ document.addEventListener("DOMContentLoaded", function () {
       // alert("chucaro4")
       load_mailbox(actual_view, actual_page, 2, datos_buscados);
     }
+
+    // document.querySelector("#compose-form").onsubmit = () => {
+    if(element.id == "send_email"){
+      console.log("entrando");
+      alert("entrando");
+      // document.getElementById("compose-form").submit();
+
+      
+      alert(document.querySelector("#compose-recipients").value);
+      alert(document.querySelector("#compose-subject").value);
+      alert(document.querySelector("#compose-body").value);
+
+      var rec = document.querySelector("#compose-recipients").value;
+      var sub = document.querySelector("#compose-subject").value;
+      var bod = document.querySelector("#compose-body").value;
+
+      fetch("/emails", {
+        method: "POST",
+        body: JSON.stringify({
+          recipients: rec,
+          subject: sub,
+          body: bod,
+        }),
+      })
+        .then((response) => response.json())
+        .then((result) => {
+          // Print result
+          //console.log(result);
+          // alert("Alerta roja");
+          load_mailbox("sent", 1, 0, datos_buscados);
+        });
+
+      return false;
+    // });
+
+
+    }
+
+
   });
 
   document.querySelector(".logo-user").addEventListener("click", () => {
@@ -256,10 +297,16 @@ ${reply_data.body}`;
   //   alert(document.querySelector('#compose-recipients').value);
   // });
 
+  // document.querySelector("#send_email").submit()
   document.querySelector("#compose-form").onsubmit = () => {
-    // alert(document.querySelector("#compose-recipients").value);
-    // alert(document.querySelector("#compose-subject").value);
-    // alert(document.querySelector("#compose-body").value);
+  // document.querySelector("#send_email").onsubmit = () => {
+  // document.addEventListener("click", (event) => {
+    // const element = event.target;
+    // console.log(element.id);
+
+     alert(document.querySelector("#compose-recipients").value);
+     alert(document.querySelector("#compose-subject").value);
+     alert(document.querySelector("#compose-body").value);
 
     var rec = document.querySelector("#compose-recipients").value;
     var sub = document.querySelector("#compose-subject").value;
@@ -282,6 +329,7 @@ ${reply_data.body}`;
       });
 
     return false;
+  // });
   };
 }
 /*
