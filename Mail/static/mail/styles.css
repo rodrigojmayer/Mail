@@ -715,9 +715,9 @@ select:-webkit-autofill:focus { */
   height: 90vh;
   margin-top: calc(var(--header-height) + 1rem);
 }
-.email_view{
+/* .email_view{ */
   /* padding-top: var(--header-height); */
-}
+/* } */
 .btn-svg{
   /* margin:1rem .5rem 0 0 !important; */
   margin:0 .5rem 0 0 !important;
@@ -731,15 +731,16 @@ select:-webkit-autofill:focus { */
   
 }
 .btn svg{
-  height: 1.2rem;
-  width: 1.2rem;
+  height: 1.7rem;
+  width: 1.7rem;
+
   /* margin-bottom: 15rem; */
 }
-.btns a{
+/* .btns a{ */
   /* font-size: 1.3rem; */
   /* margin: auto 0; */
   /* margin: auto 0; */
-}
+/* } */
 
 .email-details {
   display: grid;
@@ -777,10 +778,22 @@ select:-webkit-autofill:focus { */
   height: 90vh;
   margin-top: calc(var(--header-height) + 1rem);
 }
-#compose-form{
-  /* padding: 1rem; */
-}
 
+/* .btns #send_email{
+  margin:0 .5rem 0 0 !important;
+  height: 3rem;
+  width: 8rem;
+  display: flex;
+  /* justify-content: space-evenly; */
+  /* justify-content: space-around; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+/* }  */
+
+/* #send_email svg{
+  height: 2rem;
+  width: 2rem;
+} */
 
 .compose-details {
   display: grid;
