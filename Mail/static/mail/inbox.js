@@ -138,14 +138,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // document.querySelector("#compose-form").onsubmit = () => {
     if(element.id == "send_email"){
-      console.log("entrando");
-      alert("entrando");
+      // console.log("entrando");
+      // alert("entrando");
       // document.getElementById("compose-form").submit();
 
       
-      alert(document.querySelector("#compose-recipients").value);
-      alert(document.querySelector("#compose-subject").value);
-      alert(document.querySelector("#compose-body").value);
+      // alert(document.querySelector("#compose-recipients").value);
+      // alert(document.querySelector("#compose-subject").value);
+      // alert(document.querySelector("#compose-body").value);
 
       var rec = document.querySelector("#compose-recipients").value;
       var sub = document.querySelector("#compose-subject").value;
@@ -298,7 +298,7 @@ ${reply_data.body}`;
   // });
 
   // document.querySelector("#send_email").submit()
-  document.querySelector("#compose-form").onsubmit = () => {
+/*  document.querySelector("#compose-form").onsubmit = () => {
   // document.querySelector("#send_email").onsubmit = () => {
   // document.addEventListener("click", (event) => {
     // const element = event.target;
@@ -330,7 +330,7 @@ ${reply_data.body}`;
 
     return false;
   // });
-  };
+  };*/
 }
 /*
 function get_senmails(content){

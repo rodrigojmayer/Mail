@@ -773,6 +773,34 @@ select:-webkit-autofill:focus { */
   padding: 1rem;
 }
 
+
+.compose-details {
+  display: grid;
+  /* margin-bottom: 3rem; */
+  margin: 0;
+  grid-template-columns: 5rem 90%;
+  grid-auto-rows: 4rem;
+  /* column-gap: 2rem; */
+}
+
+.compose-details .b-small {
+  color: var(--first-color);
+  text-align: right;
+  font-weight: bold;
+  margin:auto 0;
+}
+
+.compose-details div {
+  margin:auto 1rem;
+}
+
+
+.compose-details #compose-body{
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+
 @media screen and (min-width: 768px) {
 }
 
