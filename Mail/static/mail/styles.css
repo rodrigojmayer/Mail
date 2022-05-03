@@ -841,7 +841,9 @@ select:-webkit-autofill:focus { */
   border-radius: 1rem;
   border-width: 0;
   padding: .7rem; 
-  font: var(--font);
+  font-family: var(--font);
+  line-height: 1.6rem;
+  font-size: 1.3rem;
 }
 
 

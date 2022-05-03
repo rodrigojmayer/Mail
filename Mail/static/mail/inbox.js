@@ -212,6 +212,7 @@ function compose_email(reply_data) {
   document.querySelector("#emails-view").style.display = "none";
 
   document.querySelector(".pagination").style.display = "none";
+  document.querySelector("#lookup-form").style.display = "none";
   // document.querySelector("#menu1").style.display = "none";
   // document.querySelector("#menu2").style.display = "none";
   // document.querySelector("#menu3").style.display = "none";
@@ -424,6 +425,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#compose2").style.display = "none";
 
     document.querySelector(".pagination").style.display = "block";
+    document.querySelector("#lookup-form").style.display = "block";
     // document.querySelector("#lookup-form").style.display = "block";
     // document.querySelector("#menu11").style.display = "block";
     // document.querySelector("#menu22").style.display = "none";
@@ -610,6 +612,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#emails-view").style.display = "none";
 
     document.querySelector(".pagination").style.display = "block";
+    document.querySelector("#lookup-form").style.display = "block";
     // document.querySelector("#menu1").style.display = "none";
     // document.querySelector("#menu2").style.display = "none";
     // document.querySelector("#menu3").style.display = "block";
@@ -877,6 +880,8 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     document.querySelector("#emails-view").style.display = "none";
 
     document.querySelector(".pagination").style.display = "block";
+    document.querySelector("#lookup-form").style.display = "block";
+    // document.querySelector(".search").style.display = "fixed";
     // document.querySelector("#lookup-form").style.display = "block";
     // document.querySelector("#menu1").style.display = "none";
     // document.querySelector("#menu2").style.display = "block";
@@ -1096,6 +1101,7 @@ function load_mailbox(mailbox, a_page, j_page,  d_search) {
     // document.querySelector("#menu4").style.display = "none";
 
     document.querySelector(".pagination").style.display = "none";
+    document.querySelector("#lookup-form").style.display = "none";
     // document.querySelector("#lookup-form").style.display = "none";
 
 
