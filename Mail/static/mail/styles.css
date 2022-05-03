@@ -776,7 +776,8 @@ select:-webkit-autofill:focus { */
 #compose-view{
   
   height: 90vh;
-  margin-top: calc(var(--header-height) + 1rem);
+  /* margin-top: calc(var(--header-height) + 1rem); */
+  margin-top: 1rem;
 }
 
 /* .btns #send_email{
@@ -1083,6 +1084,9 @@ select:-webkit-autofill:focus { */
     margin-right: 10px;
   }
 
+  #compose-view{
+    margin-top: calc(var(--header-height) + 1rem);
+  }
   .search {
     position: fixed;
     margin-left: 20vw;
