@@ -715,8 +715,10 @@ select:-webkit-autofill:focus { */
 
 .email_view{
   height: 90vh;
-  margin-top: calc(var(--header-height) + 1rem);
+  /* margin-top: calc(var(--header-height) + 1rem); */  
+  margin-top: 1rem;
 }
+
 /* .email_view{ */
   /* padding-top: var(--header-height); */
 /* } */
@@ -1063,6 +1065,9 @@ select:-webkit-autofill:focus { */
     width: 2.5rem;
   }
 
+  .email_view{
+    margin-top: calc(var(--header-height) + 1rem);
+  }
   #first_column {
     width: 40%;
     font-size: 1.2rem;
